@@ -24,4 +24,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.placeholder("PLACEHOLDER"))
   }
 
+  def classifications() = Action {
+    Ok(views.html.classifications("Movie Classifications"))
+  }
+
 }

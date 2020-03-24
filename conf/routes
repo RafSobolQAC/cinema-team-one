@@ -19,4 +19,5 @@ GET         /assets/*file        controllers.Assets.versioned(path="/public", fi
 
 GET     /PLACEHOLDER                    controllers.HomeController.placeholder
 
-      
+GET     /classifications            controllers.HomeController.classifications
+
