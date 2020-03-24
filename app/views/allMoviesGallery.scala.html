@@ -1,0 +1,17 @@
+
+@(movieList: List[Movie])
+
+@main("QA Cinema") {
+    <h1>All Movie DB</h1>
+
+    <div class="film-flex-container">
+    @for(movie <- movieList) {
+        <a href='/moviedetails/@(movie.getId)' class="film-panel">
+            <h3>@movie.getTitle()</h3>
+            <img width="150" height="200" src="@movie.getPosterUrl()"/>
+            <h5>@movie.getDescription()</h5>
+        </a>
+    }
+    </div>
+    </br> </br>
+}
