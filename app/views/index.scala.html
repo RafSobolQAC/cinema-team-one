@@ -1,20 +1,26 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
 @(message: String)
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
-
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @welcome(message, style = "scala")
-
+@main("Home") {
+    <div class="row">
+        <div class="col-sm-12">
+            <center>
+                <img src="http://vignette4.wikia.nocookie.net/treasure-planet/images/6/61/Full_image_placeholder.jpg/revision/latest?cb=20130709151342" class="img" alt="Logo">
+            </center>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Currently Showing</h1>
+            <a href="PLACEHOLDER">
+            <img style="width: 100%" src="https://pixy.org/images/placeholder.png" alt="Currently Showing">
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <h1>Upcoming Releases</h1>
+            <a href="PLACEHOLDER">
+            <img style="width: 100%" src="https://pixy.org/images/placeholder.png" alt="Upcoming Releases">
+            </a>
+        </div>
+    </div>
 }
