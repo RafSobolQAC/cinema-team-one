@@ -17,14 +17,6 @@ class MoviesGallery @Inject()(
 
 
 
-
-
-
-
-
-
-
-
   def allMovies = Action {
 
     Ok(views.html.allMoviesGallery(movieDatabase.allFilmsList))
