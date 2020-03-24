@@ -1,28 +1,95 @@
 @(message: String)
-@main("Movie Classifications"){
+@main("Movie Classifications") {
 
     <style>
             body {
                 background-color: #264653;
             }
 
+            h1 {
+                color: #000000;
+                top: 20%;
+                margin-left: 15px;
+                font-size: 40px;
+            }
+            h2 {
+                color: #000000;
+                top: 20%;
+                margin-left: 15px;
+                font-size: 20px;
+            }
             div {
-                color: #ffca95;
+                color: #000000;
                 margin-left: 100px;
             }
 
             .color-box {
-                background-color: white;
+                background-color: #ffeecd;
                 position: absolute;
                 height: 80%;
                 left: 10%;
                 top: 20%;
-                right:20%;
+                right: 20%;
+            }
+            table{
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                border: 1px solid black;
+                /*left: 30%;*/
+                top: 20%;
+                /*right: 20%;*/
+            }
+            th, td {
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                border: 3px solid black;
+
+            }
+            img {
+                width: 100px;
+                height: 100px;
+                alignment: left;
             }
     </style>
 
-    <div class="color-box" ></div>
+    <div class="color-box" align="center" >
+
+        <h1 align="left"> Film Classifications</h1>
+        <h2 align="left"> Our film classifications are based on the british Bored of Film Classification</h2>
+       <br>
+
+        <table style="width: 80%" align="center" >
+            <tr lign="left">
+            <th><img src="image.jpg"></th>
+            <th>The film is suitable for everyone aged four and over. </th>
+            </tr>
+            <tr>
+                <th><img src="image.jpg"></th>
+                <th>TeThe film is suitable for everyone however some scenes might be
+                    unsuitable for young children.Children over the age of 8 shouldn’t
+                    be unsettle by this film.xt</th>
+            </tr>
+            <tr>
+                <th><img src="image.jpg"></th>
+                <th>The film is unsuitable for children under the age of 12. Children
+                    under the age 12 cab still watch the film as long as they are accompanying
+                    by an adult (age 18 and over). Adults should consider whether the film is
+                    suitable for that child.</th>
+            </tr>
+            <tr>
+                <th><img src="image.jpg"></th>
+                <th>The film is unsuitable for children under the age of 18. Proof of age is
+                    required</th>
+            </tr>
+            <tr>
+                <th><img src="image.jpg"></th>
+                <th>This film hasn’t been  certified yet. Ticket purchased before the film
+                    is certified can be refunded</th>
+            </tr>
 
 
+        </table>
+
+    </div>
 
 }
