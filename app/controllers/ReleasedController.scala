@@ -1,7 +1,6 @@
 package controllers
 
 import javax.inject.Inject
-import models.Movie
 import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Request}
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import services.{BookingServices, ReleasedServices}
@@ -22,7 +21,6 @@ class ReleasedController @Inject()(
       Ok(movies.toString())
     }
   }
-
 
 
 
