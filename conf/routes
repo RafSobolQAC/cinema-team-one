@@ -27,3 +27,5 @@ GET     /classifications            controllers.ClassificationController.classif
 GET     /screens                    controllers.ScreensController.screens
 
 
+
+GET     /contact                    controllers.ContactController.contact

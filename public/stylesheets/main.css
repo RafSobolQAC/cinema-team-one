@@ -125,3 +125,8 @@ form dl{padding:10px 0;}
 dd.info{color:#888;font-size:12px;}
 dd.error{color:#c00;}
 aside a[href^="http"]:after,.doc a[href^="http"]:after{content:url(/assets/images/external.png);vertical-align:middle;margin-left:5px;}
+
+.dimGreybg{
+    background-color: dimgrey;
+    color: white;
+}
