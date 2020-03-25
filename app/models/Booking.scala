@@ -22,28 +22,3 @@ object Booking {
     )(Booking.apply)(Booking.unapply)
   ).fill(Booking("",LocalDateTime.now(), "", List(0,0,0)))
 }
-
-object JsonFormats {
-  import play.api.libs.json._
-
-//  implicit val localDateTimeRead: Reads[LocalDateTime] =
-//    (JsPath \ "$date").read[Long].map { dateTime =>
-//      new LocalDateTime(dateTime, DateTimeZone.UTC)
-//    }
-//
-//
-//  implicit val localDateTimeWrite: Writes[LocalDateTime] = new Writes[LocalDateTime] {
-//    def writes(dateTime: LocalDateTime): JsValue = Json.obj(
-//      "$date" -> dateTime.toDateTime(DateTimeZone.UTC).getMillis
-//    )
-//  }
-
-//  implicit val LocalDateFormat: OFormat[LocalDateTime] =
-//    new OFormat[LocalDateTime]() {
-//      override def writes(o: LocalDateTime): JsObject = Json.format[LocalDateTime].writes(o).as[JsObject]
-//
-//      override def reads(json: JsValue): JsResult[LocalDateTime] = Json.format[LocalDateTime].reads(json)
-//    }
-
-  implicit val bookingFormat: OFormat[Booking] = Json.format[Booking]
-}

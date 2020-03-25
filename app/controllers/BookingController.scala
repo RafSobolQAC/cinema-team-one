@@ -7,7 +7,7 @@ import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMo
 import models.JsonFormats._
 import play.api.libs.json.{JsValue, Json}
 import reactivemongo.play.json.collection.JSONCollection
-import services.BookingServices
+import services.{BookingServices, ReleasedServices}
 
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.duration.Duration
@@ -17,7 +17,8 @@ import scala.io.Source
 class BookingController @Inject()(
                                  components: ControllerComponents,
                                  val reactiveMongoApi: ReactiveMongoApi,
-                                 val bookingServices: BookingServices
+                                 val bookingServices: BookingServices,
+                                 val releasedServices: ReleasedServices
                                ) extends AbstractController(components)
   with MongoController with ReactiveMongoComponents with play.api.i18n.I18nSupport {
 
