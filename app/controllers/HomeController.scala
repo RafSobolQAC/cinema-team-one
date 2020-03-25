@@ -19,9 +19,4 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
   }
-
-  def classifications() = Action {
-    Ok(views.html.classifications("Movie Classifications"))
-  }
-
 }
