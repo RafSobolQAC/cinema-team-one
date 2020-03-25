@@ -1,0 +1,100 @@
+@(message: String)
+@main("Movie Classifications") {
+
+    <style>
+            body {
+                background-color: #264653;
+            }
+
+            h1 {
+                color: #000000;
+                top: 20%;
+                margin-left: 15px;
+                font-size: 40px;
+            }
+            h2 {
+                color: #000000;
+                top: 20%;
+                margin-left: 15px;
+                font-size: 20px;
+            }
+            h3{
+                text-align: left;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            div {
+                color: #000000;
+                margin-left: 100px;
+            }
+
+            .color-box {
+                background-color: #ffeecd;
+                position: absolute;
+                height: 90%;
+                left: 10%;
+                top: 20%;
+                right: 20%;
+            }
+            table{
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                border: 1px solid black;
+                /*left: 30%;*/
+                top: 20%;
+                /*right: 20%;*/
+            }
+            th, td {
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                border: 3px solid black;
+
+            }
+            img {
+                width: 100px;
+                height: 100px;
+                alignment: left;
+            }
+    </style>
+
+    <div class="color-box" align="center" >
+
+        <h1 align="left"> Film Classifications</h1>
+        <br>
+        <h2 align="left"> Our film classifications are based on the British Board of Film Classification.</h2>
+       <br>
+
+        <table style="width: 70%" align="center" >
+            <tr lign="left">
+            <th><img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/BBFC_U_2019.svg"></th>
+                <th> <h3 align="left">The film is suitable for everyone aged four and over.</h3> </th>
+            </tr>
+            <tr>
+                <th><img src="https://vignette.wikia.nocookie.net/rating-system/images/b/b5/BBFC_PG.svg/revision/latest/scale-to-width-down/340?cb=20191126211432"></th>
+                <th><h3>The film is suitable for everyone however some scenes might
+                    be unsuitable for young children.Children over the age of 8 shouldn’t
+                    be unsettle by this film.xt</h3></th>
+            </tr>
+            <tr>
+                <th><img src="https://vignette.wikia.nocookie.net/rating-system/images/8/84/BBFC_12.svg/revision/latest/scale-to-width-down/340?cb=20191126211533"></th>
+                <th><h3>The film is unsuitable for children under the age of 12. Children
+                    under the age 12 cab still watch the film as long as they are accompanying
+                    by an adult (age 18 and over). Adults should consider whether the film is
+                    suitable for that child.</h3></th>
+            </tr>
+            <tr>
+                <th><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/BBFC_18_2019.svg/1200px-BBFC_18_2019.svg.png"></th>
+                <th><h3>The film is unsuitable for children under the age of 18. Proof of age is
+                    required</h3></th>
+            </tr>
+            <tr>
+                <th><img src="https://cdn.pixabay.com/photo/2019/09/26/19/08/hourglass-4506807_960_720.png"></th>
+                <th><h3>This film hasn’t been  certified yet. Ticket purchased before the film
+                    is certified can be refunded</h3></th>
+            </tr>
+
+
+        </table>
+
+    </div>
+
+}

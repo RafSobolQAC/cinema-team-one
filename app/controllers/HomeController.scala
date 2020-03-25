@@ -23,5 +23,4 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def placeholder = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.placeholder("PLACEHOLDER"))
   }
-
 }
