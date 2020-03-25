@@ -17,8 +17,13 @@ POST        /bookit              controllers.BookingController.submitForm
 GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
 
 
+GET     /payment                    controllers.PaymentController.index
+
+
 GET     /PLACEHOLDER                    controllers.HomeController.placeholder
 
 GET     /classifications            controllers.ClassificationController.classifications
 
 GET     /screens                    controllers.ScreensController.screens
+
+
