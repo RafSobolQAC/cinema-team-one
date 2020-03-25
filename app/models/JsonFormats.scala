@@ -13,10 +13,7 @@ object JsonFormats {
 
 
 
-  implicit val customDateFormat: Format[LocalDateTime] = Format(
-    Reads(js => JsSuccess(Instant.parse(js.as[String]).atZone(ZoneOffset.UTC).toLocalDateTime)),
-    Writes(d => JsString(d.atZone(ZoneOffset.UTC).toInstant.toString))
-  )
+  implicit val dateTimeFormat: OFormat[DateTime] = Json.format[DateTime]
 
   implicit val movieFormat: OFormat[Movie] = Json.format[Movie]
   implicit val movieWithIDFormatOld: OFormat[MovieWithID] = Json.format[MovieWithID]
