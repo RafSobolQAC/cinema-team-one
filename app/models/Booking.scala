@@ -3,12 +3,8 @@ package models
 
 import java.time.LocalDateTime
 
-import akka.http.scaladsl.model.DateTime
-import play.api.libs.json.{Format, JsObject, JsResult, JsValue, Json, OFormat, Reads}
-import play.api.data.{Form, format}
+import play.api.data.Form
 import play.api.data.Forms._
-import reactivemongo.bson.BSONObjectID
-import org.joda.time.DateTimeZone
 case class Booking(film: String, screening: LocalDateTime, name: String, seats: List[Int])
 
 object Booking {
