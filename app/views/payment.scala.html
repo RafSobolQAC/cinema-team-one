@@ -1,14 +1,11 @@
 @*
-* This template takes a single argument, a String containing a
-* message to display.
+* email:    sb-4jqvb1247840@personal.example.com
+* password: 2b>j"B7l
 *@
-@()
+@(ticketCost:Float)
 
-@*
-* Call the `main` template with two arguments. The first
-* argument is a `String` with the title of the page, the second
-* argument is an `Html` object containing the body of the page.
-*@
+
+
 @main("Wome laelcyto P") {
 
 <!DOCTYPE html>
@@ -34,22 +31,18 @@
 @*                paypal.Buttons().render('#paypal-button-container');*@
 @*                // This function displays Smart Payment Buttons on your web page.*@
 @*        </script>*@
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="N53S57EF2JHT4">
-            <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-        </form>
+
 
 
         <script>
                 paypal.Buttons({
                     createOrder: function(data, actions) {
                         // This function sets up the details of the transaction, including the amount and line item details.
+                        alert("created order")
                         return actions.order.create({
                             purchase_units: [{
                                 amount: {
-                                    value: '0.01'
+                                    value: '69.00'
                                 }
                             }]
                         });

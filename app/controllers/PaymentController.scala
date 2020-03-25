@@ -48,12 +48,15 @@ class PaymentController @Inject()(ws:WSClient,cc: ControllerComponents) extends 
       post(jsonn)
       request//this should be removed
   }
+  def lol: Unit ={
+    val request=ws.url("https://api.sandbox.paypal.com/v2/payments/authorizations/")
+  }
 
   def index = Action {
    // Ok(views.html.index(getAccessToken()))
     Ok(createOrder().toString)
    //Ok(getAccessToken())
-    //Ok(views.html.payment())
+    Ok(views.html.payment())
   }
 
 }
