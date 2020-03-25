@@ -23,9 +23,4 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def placeholder = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.placeholder("PLACEHOLDER"))
   }
-
-  def classifications() = Action {
-    Ok(views.html.classifications("Movie Classifications"))
-  }
-
 }
