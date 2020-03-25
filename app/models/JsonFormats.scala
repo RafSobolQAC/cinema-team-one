@@ -4,12 +4,12 @@ import java.time.format.DateTimeFormatter
 import java.time.{Instant, LocalDateTime, LocalTime, ZoneOffset}
 import java.util.Date
 
+import reactivemongo.bson.{BSONObjectID, BSONDateTime}
+import play.api.libs.json.{Json, _}
+import reactivemongo.play.json.BSONFormats._
 
 object JsonFormats {
 
-  import reactivemongo.bson.{BSONObjectID, BSONDateTime}
-  import play.api.libs.json.{Json, _}
-  import reactivemongo.play.json.BSONFormats._
 
 
 
