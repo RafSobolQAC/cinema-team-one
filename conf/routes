@@ -15,4 +15,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET        /allMovies           controllers.MoviesGallery.allMovies
 
+GET        /movieInfo/:id     controllers.MovieInfo.movieInfo(id)
+
       
