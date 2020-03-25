@@ -14,4 +14,8 @@ GET     /message                    controllers.AsyncController.message
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 GET     /payment                    controllers.PaymentController.index
+
+GET     /PLACEHOLDER                    controllers.HomeController.placeholder
+
+
       
