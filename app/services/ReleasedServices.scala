@@ -1,7 +1,7 @@
 package services
 
 import javax.inject.Inject
-import models.Movie
+import models.{Movie, MovieWithID}
 import reactivemongo.play.json.collection.JSONCollection
 import reactivemongo.play.json._
 import collection._
@@ -19,14 +19,14 @@ class ReleasedServices @Inject()(
   def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("releasedfilms"))
 
   def getMovies = {
-    val cursor: Future[Cursor[Movie]] = collection.map {
+    val cursor: Future[Cursor[MovieWithID]] = collection.map {
       _.find(Json.obj())
-        .cursor[Movie]()
+        .cursor[MovieWithID]()
     }
     cursor.flatMap(
       _.collect[List] (
         -1,
-        Cursor.FailOnError[List[Movie]]()
+        Cursor.FailOnError[List[MovieWithID]]()
       )
     )
   }

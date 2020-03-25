@@ -9,8 +9,8 @@ GET         /                    controllers.HomeController.index
 GET         /count               controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET         /message             controllers.AsyncController.message
-
-GET /bookit controllers.BookingController.showForm
+GET         /allmovies           controllers.ReleasedController.getMovies
+GET         /bookit              controllers.BookingController.showForm
 POST        /bookit              controllers.BookingController.submitForm
 
 # Map static resources from the /public folder to the /assets URL path
