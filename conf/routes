@@ -21,3 +21,4 @@ GET     /PLACEHOLDER                    controllers.HomeController.placeholder
 
 GET     /classifications            controllers.ClassificationController.classifications
 
+GET     /screens                    controllers.ScreensController.screens
