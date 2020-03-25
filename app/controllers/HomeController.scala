@@ -17,7 +17,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
    * a path of `/`.
    */
   def index = Action {
-    Ok(views.html.index("home"))
+    Ok(views.html.index("Home"))
   }
 
+  def placeholder = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.placeholder("PLACEHOLDER"))
+  }
 }
