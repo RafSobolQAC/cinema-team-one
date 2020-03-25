@@ -29,10 +29,13 @@ class BookingController @Inject()(
 
   def submitForm = Action.async {implicit request: Request[AnyContent] =>
     Booking.createBookingForm.bindFromRequest.fold({formWithErrors =>
+      println("This is the form with errors!")
+      println(formWithErrors)
       Future.successful(BadRequest(views.html.booking(formWithErrors)))
     }, {booking =>
       bookingServices.createBooking(booking).map(_ => {
-        Ok("Created booking!")
+        Redirect(routes.BookingController.showForm).flashing("success" -> "Successfully created!")
+//        Ok(views.html.booking(Booking.createBookingForm)).flashing("success" -> "Created booking!")
       })
     })
   }

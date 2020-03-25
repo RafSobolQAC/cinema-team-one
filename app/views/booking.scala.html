@@ -1,16 +1,17 @@
 @import models.Booking
 
-@(form: Form[Booking])(implicit messagesProvider: MessagesProvider)
+@(form: Form[Booking])(implicit messagesProvider: MessagesProvider, flash: Flash)
 
-@main("Booking!") {
-@helper.form(routes.BookingController.submitForm) {
-    @helper.inputText(form("film"), '_label -> "Film")
-    @helper.inputDate(form("screening"), '_label -> "Screening")
-    @helper.inputText(form("name"), '_label -> "Name")
-    @helper.repeat(form("seats"), min = 3) { tagField =>
-      @helper.inputText(tagField, '_label -> "Adult/child/concession")
+    @main("Booking!") {
+        @flash.get("success").getOrElse("Create!")
+        @helper.form(routes.BookingController.submitForm) {
+            @helper.inputText(form("film"), '_label -> "Film")
+            @helper.inputText(form("screening"), 'type -> "datetime-local")
+            @helper.inputText(form("name"), '_label -> "Name")
+            @helper.repeat(form("seats"), min = 3) { tagField =>
+                @helper.inputText(tagField, '_label -> "Adult/child/concession")
+            }
+            <button class="btn btn-info" type="submit">Book now</button>
+        }
     }
-    <button class="btn btn-info" type="submit">Book now</button>
-}
-}
 
