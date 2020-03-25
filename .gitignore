@@ -5,6 +5,7 @@ target
 tmp
 .history
 dist
+/conf
 /.idea
 /*.iml
 /out
@@ -13,5 +14,3 @@ dist
 /.project
 /RUNNING_PID
 /.settings
-
-application.conf
