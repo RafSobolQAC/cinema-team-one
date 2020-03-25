@@ -1,6 +1,5 @@
 package models
 
-
 import java.time.LocalDateTime
 
 import play.api.data.Form
@@ -11,7 +10,7 @@ object Booking {
   val createBookingForm: Form[Booking] = Form(
     mapping(
       "film" -> nonEmptyText,
-      "screening" -> localDateTime("yyyy-MM-dd'T'HH:mm"),
+      "screening" -> localDateTime,
       "name" -> nonEmptyText,
       "seats" -> list(number)
 
