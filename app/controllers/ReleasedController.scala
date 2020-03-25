@@ -23,9 +23,6 @@ class ReleasedController @Inject()(
     }
   }
 
-  def getScreeningsForMovie(movie: Movie) = Action.async {implicit request: Request[AnyContent] =>
-
-  }
 
 
 
