@@ -12,6 +12,9 @@ scalaVersion := "2.12.2"
 
 libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice )
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
+unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
 
-      
+libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice,
+  "org.reactivemongo" %% "play2-reactivemongo" % "0.20.3-play28",
+  "org.slf4j" % "slf4j-api" % "1.7.25"
+)
