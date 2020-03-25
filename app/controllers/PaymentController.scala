@@ -27,7 +27,7 @@ class PaymentController @Inject()(ws:WSClient,cc: ControllerComponents) extends 
 
   def createOrder() ={
 
-    val jsonn: JsValue = Json.parse("""
+    val json: JsValue = Json.parse("""
   {
     "intent": "CAPTURE",
     "purchase_units": [
@@ -45,7 +45,7 @@ class PaymentController @Inject()(ws:WSClient,cc: ControllerComponents) extends 
     val request=ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").
       addHttpHeaders("Content-Type"->"application/json").
       addHttpHeaders("Authorization"->token).
-      post(jsonn)
+      post(json)
       request//this should be removed
   }
   def lol: Unit ={
@@ -56,7 +56,7 @@ class PaymentController @Inject()(ws:WSClient,cc: ControllerComponents) extends 
    // Ok(views.html.index(getAccessToken()))
     Ok(createOrder().toString)
    //Ok(getAccessToken())
-    Ok(views.html.payment())
+    Ok(views.html.payment(69.00f))
   }
 
 }
