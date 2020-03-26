@@ -4,17 +4,36 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET         /                    controllers.HomeController.index
 # An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
+GET         /count               controllers.CountController.count
 # An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+GET         /message             controllers.AsyncController.message
+GET         /gallerymovies           controllers.ReleasedController.getMovies
+GET         /upcomingmovies         controllers.UpcomingController.getMovies
+
+GET         /bookit              controllers.BookingController.showForm
+POST        /bookit              controllers.BookingController.submitForm
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
 
-GET        /allMovies           controllers.MoviesGallery.allMovies
 
-GET        /movieInfo/:id     controllers.MovieInfo.movieInfo(id)
+GET     /payment                    controllers.PaymentController.index
 
-GET         /getMovies          controllers.HomeController.showRecords()
+
+GET     /PLACEHOLDER                    controllers.HomeController.placeholder
+
+GET     /classifications            controllers.ClassificationController.classifications
+
+GET     /screens                    controllers.ScreensController.screens
+
+
+
+GET     /contact                    controllers.ContactController.contact
+
+#GET        /allMovies           services.ReleasedServices.getMovies
+
+#GET        /movieInfo/:id     controllers.MovieInfo.movieInfo(id)
+
+#GET         /getMovies          controllers.HomeController.showRecords()

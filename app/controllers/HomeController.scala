@@ -1,16 +1,15 @@
 package controllers
 
-import services._
 import javax.inject._
 import play.api.mvc._
-import scala.concurrent.ExecutionContext.Implicits.global
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-//class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
-  class HomeController @Inject()(cc: ControllerComponents, val movieService: MovieServices) extends AbstractController(cc){
+class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+
   /**
    * Create an Action to render an HTML page with a welcome message.
    * The configuration in the `routes` file means that this method
@@ -18,13 +17,10 @@ import scala.concurrent.ExecutionContext.Implicits.global
    * a path of `/`.
    */
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok(views.html.index("Home"))
   }
 
-  def showRecords(): Action[AnyContent] = Action.async {
-    movieService.getMovies().map( listy =>
-      Ok(listy.toString())
-    )
+  def placeholder = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.placeholder("PLACEHOLDER"))
   }
-
 }

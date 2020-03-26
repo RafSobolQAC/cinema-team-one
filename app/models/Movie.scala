@@ -33,16 +33,16 @@ case class MovieWithID(
 
 
 
-{
-  def getId(): Int = _id
-  def getTitle(): String = title
-  def getDescription(): String = description
-  def getPosterUrl(): String = image
-  def getActors(): List[String] = actors
-  def getDirector(): String = director
-  def getScreenings():List[LocalDateTime] = screenings
-
-}
+//{
+//  def getId(): Int = _id
+//  def getTitle(): String = title
+//  def getDescription(): String = description
+//  def getPosterUrl(): String = image
+//  def getActors(): List[String] = actors
+//  def getDirector(): String = director
+//  def getScreenings():List[LocalDateTime] = screenings
+//
+//}
 
 
 
