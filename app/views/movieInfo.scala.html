@@ -1,0 +1,39 @@
+@(movie: MovieWithID)
+
+@main(movie.title) {
+   <div class="details container">
+        <div class="title-container row">
+            <div class="col-12">
+                <h1 class="title-tag">@movie.title</h1>
+            </div>
+        </div>
+        <div class="film-poster-description-container row">
+            <div class="col-4">
+                <img width="150" height="200" src="@movie.image">
+            </div>
+            <div class="col-8">
+                <p>@movie.description</p>
+            </div>
+        </div>
+        <div class="film-release-booking-container row">
+
+                <div>Release Times: @movie.screenings</div>
+                <br />
+                <p>Main Actors:</p>
+                <ul>
+                @for(actor <- movie.actors) {
+                    <li>@actor</li>
+                }
+                </ul>
+
+
+@*//            <div class="col-4 film-details-button-container">*@
+@*//                <button class="btn btn-primary">Book Now</button>*@
+@*//            </div>*@
+@*//            <div class="col-4 film-details-button-container">*@
+@*//                <button class="btn btn-primary">Add to my List</button>*@
+@*//            </div>*@
+        </div>
+
+   </div>
+}
