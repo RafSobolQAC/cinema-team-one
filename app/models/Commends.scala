@@ -3,23 +3,23 @@ package models
 import play.api.data.Form
 import play.api.data.Forms._
 
-case class MessageBoard(
+case class Commends(
                          name: String,
                          email: String,
                          movieName: String,
                          comment: String
                        )
 
-object MessageBoard {
-  val createMessage: Form[MessageBoard] = Form(
+object Commends {
+  val createCommend: Form[MessageBoard] = Form(
     mapping(
       "named" -> nonEmptyText,
       "email" -> email,
       "movieName" -> nonEmptyText,
       "comment" -> nonEmptyText,
 
-    )(MessageBoard.apply)(MessageBoard.unapply)
-  ).fill(MessageBoard("","","",""))
+    )(Commends.apply)(Commends.unapply)
+  ).fill(Commends("","","",""))
 
 
 
