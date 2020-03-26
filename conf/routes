@@ -17,4 +17,4 @@ GET        /allMovies           controllers.MoviesGallery.allMovies
 
 GET        /movieInfo/:id     controllers.MovieInfo.movieInfo(id)
 
-      
+GET         /getMovies          controllers.HomeController.showRecords()

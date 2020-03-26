@@ -14,7 +14,7 @@ class MovieInfo @Inject()(
 
   def movieInfo(id: String) = Action {
     Ok(views.html.movieInformation(movieDatabase.allFilmsList.find(_.getId() == id.toInt).getOrElse(new Movie(1,"error",
-      "error", "error",  List("error"), "error"))))
+      "error", "error", "error", List("error"), "error"))))
   }
 
 }
