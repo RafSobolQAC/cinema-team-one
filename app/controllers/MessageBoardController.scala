@@ -14,4 +14,5 @@ class MessageBoardController @Inject()(
 with MongoController with ReactiveMongoComponents with play.api.i18n.I18nSupport {
 
 
+
 }
