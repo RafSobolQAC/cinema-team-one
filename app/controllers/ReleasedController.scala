@@ -19,7 +19,8 @@ class ReleasedController @Inject()(
 
   def getMovies = Action.async { implicit request: Request[AnyContent] =>
     releasedServices.getMovies.map { movies =>
-      Ok(movies.toString())
+   Ok(movies.toString())
+
     }
   }
 

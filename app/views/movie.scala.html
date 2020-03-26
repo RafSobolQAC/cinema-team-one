@@ -1,0 +1,20 @@
+@(movieList: List[MovieWithID])
+
+@main("Team1 Cinema") {
+    <h1>All Movies shown </h1>
+
+    <div class="Movie-container">
+
+    @for(movie <- movieList) {
+        <a href='/upcomingmovies/@(movie._id)'>
+
+
+            <h3>@movie.title</h3>
+
+            <img width="150" height="200" src="@movie.image"/>
+            <h5>@movie.description</h5>
+        </a>
+    }
+    </div>
+    </br> </br>
+}

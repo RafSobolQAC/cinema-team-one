@@ -7,20 +7,21 @@ import play.api.libs.json.OFormat
 import reactivemongo.bson.BSONObjectID
 
 
-case class Movie(image: String,
-                 title: String,
-                 director: String,
-                 description: String,
-                 actors: List[String],
+case class Movie(
+                  var image: String,
+                  var title: String,
+                  var director: String,
+                  var description: String,
+                  var actors: List[String],
                  var screenings: List[DateTime])
 
 case class MovieWithID(
-                        _id: BSONObjectID,
-                        image: String,
-                        title: String,
-                        director: String,
-                        description: String,
-                        actors: List[String],
+                      var _id: BSONObjectID,
+                      var image: String,
+                      var title: String,
+                      var director: String,
+                      var description: String,
+                      var actors: List[String],
                         var screenings: List[DateTime]
                       )
 
