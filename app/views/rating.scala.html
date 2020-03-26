@@ -1,6 +1,6 @@
 @import models.Rating
 
-@(form: Form[Rating])(implicit messagesProvider:MessagesProvider, flash: Flash)
+@(form: Form[Rating])(implicit messagesProvider: MessagesProvider, flash: Flash)
 
     @main("Rating"){
         @flash.get("success").getOrElse("Create!")

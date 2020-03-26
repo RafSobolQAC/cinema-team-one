@@ -6,7 +6,7 @@ import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import services.ReleasedServices
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 class RatingController  @Inject()(
                                    components: ControllerComponents,
@@ -14,6 +14,8 @@ class RatingController  @Inject()(
                                    val releasedServices: ReleasedServices
                                  ) extends AbstractController(components)
   with MongoController with ReactiveMongoComponents with play.api.i18n.I18nSupport {
+
+  implicit def ec: ExecutionContext = components.executionContext
 
   def getRating = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.rating(Rating.createRating))
@@ -25,8 +27,8 @@ class RatingController  @Inject()(
       println(formWithErrors)
       Future.successful(BadRequest(views.html.rating(formWithErrors)))
     }, {rating =>
-      releasedServices.getMovies(rating).map(_ => {
-        Redirect(routes.RatingController.submitRating).flashing("success" -> "Successfully created!")
+      releasedServices.getMovies.map(_ => {
+        Redirect(routes.RatingController.getRating).flashing("success" -> "Successfully created!")
       })
     })
   }

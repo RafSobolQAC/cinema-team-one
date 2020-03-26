@@ -1,5 +1,7 @@
 package services
 
+
+import akka.http.scaladsl.model.HttpHeader.ParsingResult.Ok
 import javax.inject.Inject
 import models.{Movie, MovieWithID}
 import reactivemongo.play.json.collection.JSONCollection
@@ -7,6 +9,7 @@ import reactivemongo.play.json._
 import collection._
 import models.JsonFormats._
 import play.api.libs.json.Json
+import play.api.mvc.{Action, AnyContent}
 import reactivemongo.api.Cursor
 import play.modules.reactivemongo.{ReactiveMongoApi, ReactiveMongoComponents}
 
@@ -30,6 +33,26 @@ class ReleasedServices @Inject()(
       )
     )
   }
+
+  def getMovieByTitle(title: String): Action[AnyContent] = Action.async {
+    val cursor: Future[Cursor[MovieWithID]] = collection.map {
+      _.find(Json.obj("title" -> title)).
+        sort(Json.obj("created" -> -1)).
+        cursor[MovieWithID]()
+    }
+    val futureMoviesList: Future[List[MovieWithID]] =
+      cursor.flatMap(
+        _.collect[List](
+          -1,
+          Cursor.FailOnError[List[MovieWithID]]()
+        )
+      )
+
+    futureMoviesList.map { movies =>
+      Ok(movies.toString)
+    }
+  }
+
 
   //  def getFilms = Action.async {
   //    val cursor: Future[Cursor[Film]] = collection.map {
