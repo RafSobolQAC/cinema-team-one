@@ -1,18 +1,16 @@
 package models
 
 import play.api.data.Form
-import play.api.data.Forms.mapping
+import play.api.data.Forms._
 
 case class Rating(starOne: Boolean, starTwo: Boolean, starThree: Boolean)
 
 object Rating {
   val createRating: Form[Rating] = Form(
     mapping(
-      "starOne" -> Boolean,
-      "starTwo" -> Boolean,
-      "starThree" -> Boolean
-
+      "starOne" -> boolean,
+      "starTwo" -> boolean,
+      "starThree" -> boolean
     )(Rating.apply)(Rating.unapply)
-  )
-
+  ).fill(Rating(false,false,false))
 }
