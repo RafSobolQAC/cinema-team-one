@@ -35,15 +35,16 @@ class UpcomingController @Inject()(
 
 
       Ok(views.html.movieInfo(movies.filter(movie => id == movie._id.toString()).head))
-
+    }
+  }
 //        .getOrElse(new MovieWithID(
 //        BSONObjectID.generate(), "error",
 //        "error", "error", "error", List("error"), List()))))
 
-    }
 
 
-  }
+
+
 
 
 }
