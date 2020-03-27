@@ -133,6 +133,12 @@ aside a[href^="http"]:after,.doc a[href^="http"]:after{content:url(/assets/image
     display: flex;
     flex-wrap: wrap;
 }
+.Movie-container img:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+
 
 
 .dimGreybg{
