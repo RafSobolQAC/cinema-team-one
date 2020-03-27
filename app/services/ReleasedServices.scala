@@ -37,7 +37,7 @@ class ReleasedServices @Inject()(
   def getMovieByTitle(title: String): Action[AnyContent] = Action.async {
     val cursor: Future[Cursor[MovieWithID]] = collection.map {
       _.find(Json.obj("title" -> title)).
-        sort(Json.obj("created" -> -1)).
+        sort(Json.obj("title" -> -1)).
         cursor[MovieWithID]()
     }
     val futureMoviesList: Future[List[MovieWithID]] =

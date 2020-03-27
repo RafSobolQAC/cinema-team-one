@@ -27,7 +27,7 @@ class RatingController  @Inject()(
       println(formWithErrors)
       Future.successful(BadRequest(views.html.rating(formWithErrors)))
     }, {rating =>
-      releasedServices.getMovies.map(_ => {
+      releasedServices.getMovies(Rating).map(_ => {
         Redirect(routes.RatingController.getRating).flashing("success" -> "Successfully created!")
       })
     })

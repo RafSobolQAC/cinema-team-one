@@ -3,9 +3,7 @@
 @(form: Form[Rating])(implicit messagesProvider: MessagesProvider, flash: Flash)
 
     @main("Rating"){
-        @flash.get("success").getOrElse("Create!")
-        @helper.form(routes.RatingController.submitRating){
 
         }
-
+         <button class="btn btn-info" type="submit">Submit rating</button>
     }

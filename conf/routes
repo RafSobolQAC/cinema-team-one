@@ -30,7 +30,5 @@ GET     /screens                    controllers.ScreensController.screens
 
 GET     /contact                    controllers.ContactController.contact
 
-#GET    /messageform                 controllers.MessageBoardController.showMessageForm
-
 GET     /rating                     controllers.RatingController.getRating
 POST    /rating                     controllers.RatingController.submitRating
