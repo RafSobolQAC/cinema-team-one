@@ -11,8 +11,6 @@ import reactivemongo.play.json.BSONFormats._
 object JsonFormats {
 
 
-
-
   implicit val dateTimeFormat: OFormat[DateTime] = Json.format[DateTime]
 
 //  implicit val movieFormat: OFormat[Movie] = Json.format[Movie]
