@@ -1,7 +1,5 @@
 package models
 
-import java.time.LocalDateTime
-
 import reactivemongo.bson.BSONObjectID
 
 case class Movie(image: String,
@@ -9,7 +7,7 @@ case class Movie(image: String,
                  director: String,
                  description: String,
                  actors: List[String],
-                 var screenings: List[DateTime])
+                 var screenings: List[String])
 
 case class MovieWithID(
                         _id: BSONObjectID,
@@ -18,5 +16,5 @@ case class MovieWithID(
                         director: String,
                         description: String,
                         actors: List[String],
-                        var screenings: List[DateTime]
+                        var screenings: List[String]
                       )
