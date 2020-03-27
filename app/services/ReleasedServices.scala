@@ -16,10 +16,30 @@ import play.modules.reactivemongo.{ReactiveMongoApi, ReactiveMongoComponents}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
+
+/*
+  {
+  _id: BSONObjectId(`sdnjasgiu43r89wu`),
+  title: `titleoffilm`,
+     ...,
+     ratings: {
+      oneStar: 0,
+      twoStar: 0,
+      threeStar: 0
+     }
+ */
+
 class ReleasedServices @Inject()(
                                   val reactiveMongoApi: ReactiveMongoApi
                                 ) extends ReactiveMongoComponents {
   def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("releasedfilms"))
+
+  def updateMovie(id: String) = {
+    collection.flatMap(_.update(false).one(
+      Json.obj(),   //filter; e.g. Json.obj(`_id` -> theIdYouNeed)
+      Json.obj()
+    ))
+  }
 
   def getMovies = {
     val cursor: Future[Cursor[MovieWithID]] = collection.map {
@@ -33,26 +53,6 @@ class ReleasedServices @Inject()(
       )
     )
   }
-
-  def getMovieByTitle(title: String): Action[AnyContent] = Action.async {
-    val cursor: Future[Cursor[MovieWithID]] = collection.map {
-      _.find(Json.obj("title" -> title)).
-        sort(Json.obj("title" -> -1)).
-        cursor[MovieWithID]()
-    }
-    val futureMoviesList: Future[List[MovieWithID]] =
-      cursor.flatMap(
-        _.collect[List](
-          -1,
-          Cursor.FailOnError[List[MovieWithID]]()
-        )
-      )
-
-    futureMoviesList.map { movies =>
-      Ok(movies.toString)
-    }
-  }
-
 
   //  def getFilms = Action.async {
   //    val cursor: Future[Cursor[Film]] = collection.map {

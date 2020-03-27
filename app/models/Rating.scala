@@ -6,6 +6,11 @@ import play.api.data.Forms._
 case class Rating(starOne: Boolean, starTwo: Boolean, starThree: Boolean)
 
 object Rating {
+
+  object Stars extends Enumeration {
+    val OneStar, TwoStars, ThreeStars = Value
+  }
+
   val createRating: Form[Rating] = Form(
     mapping(
       "starOne" -> boolean,
@@ -14,3 +19,5 @@ object Rating {
     )(Rating.apply)(Rating.unapply)
   ).fill(Rating(false,false,false))
 }
+
+//in the view, make a helper form with 3 radio buttons; submit one true button

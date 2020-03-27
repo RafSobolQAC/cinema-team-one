@@ -21,16 +21,4 @@ class RatingController  @Inject()(
     Ok(views.html.rating(Rating.createRating))
   }
 
-  def submitRating = Action.async {implicit request: Request[AnyContent] =>
-    Rating.createRating.bindFromRequest.fold({formWithErrors =>
-      println("This is the form with errors")
-      println(formWithErrors)
-      Future.successful(BadRequest(views.html.rating(formWithErrors)))
-    }, {rating =>
-      releasedServices.getMovies(Rating).map(_ => {
-        Redirect(routes.RatingController.getRating).flashing("success" -> "Successfully created!")
-      })
-    })
-  }
-
 }
