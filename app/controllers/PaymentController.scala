@@ -3,8 +3,7 @@ import javax.inject._
 import play.api.libs.json.{JsValue, Json}
 import play.api.libs.ws._
 import play.api.mvc._
-import scala.concurrent._
-import ExecutionContext.Implicits.global
+
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 import scala.sys.process._
@@ -44,47 +43,28 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
   }
   """)
     val token="Bearer "+getAccessToken()
-    val request:String=((Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").
+    Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").
       addHttpHeaders("Content-Type"->"application/json").
       addHttpHeaders("Authorization"->token).
-      post(json).
-      map{response=>
-      (response.json \"links" )
-     },Duration(5,"seconds"))\
-      1).
-      result.
-      result.
-      result.
-      get\\
-      "href").last.
-      as[JsValue].
-      toString.
-      trim.
-      replace("\"", "")
-      request
+      post(json),Duration(5,"seconds")).json
+
+
+
+
 
   }
   def capturePayment(orderID:String)=Action{
-    val json: JsValue = Json.parse("""
-  {
-    "intent": "CAPTURE",
-    "purchase_units": [
-    {
-      "reference_id": "TICKET",
-      "amount": {
-        "currency_code": "GBP",
-        "value": "69.00"
-      }
-    }
-  ]
-  }
-  """)
     val token="Bearer "+getAccessToken()
-   val response=Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/authorize").
-      addHttpHeaders("Content-Type"->"application/json").
-      addHttpHeaders("Authorization"->token).get
-      ,Duration(5,"seconds"))
-    Ok(template(orderID))
+//   val response=Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/authorize").
+//      addHttpHeaders("Content-Type"->"application/json").
+//      addHttpHeaders("Authorization"->token).get
+//      ,Duration(5,"seconds"))
+    val response="curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID +"/capture -H \"Content-Type: application/json\" -H \"Authorization: "+token+"\""!!
+
+    Ok(response)
+
+
+
 
 
 
@@ -92,7 +72,10 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
 
   def index = Action {
     //Ok(createOrder().toString())
-    Ok(template(createOrder()))
+    val json=createOrder()
+    val url=(json\"links"\1\\"href").last.toString.replace("\"","")
+    val orderID=(json\"id").get.toString.replace("\"","")
+    Ok(template(url,orderID))
    // Redirect(createOrder())
 
   }
