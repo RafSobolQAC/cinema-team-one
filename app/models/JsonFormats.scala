@@ -20,5 +20,6 @@ object JsonFormats {
 
   implicit val bookingFormat: OFormat[Booking] = Json.format[Booking]
 
-  implicit val messageBoardFormat: OFormat[MessageBoard] = Json.format[MessageBoard]
+  implicit val commendsFormat: OFormat[Commends] = Json.format[Commends]
+
 }

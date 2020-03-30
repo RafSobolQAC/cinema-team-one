@@ -1,11 +1,14 @@
 @import models.Commends
-@(form: Form[Commends])(implicit commends: Commends)
+@(form: Form[Commends])(implicit flash: Flash, messagesProvider: MessagesProvider)
 
-    @main("Create Commends")(Commends){
-        @helper.form(routes.CommentSectionController.submitCommend) {
-            @helper.inputText(form("name"), '_label -> "Name")
-            @helper.inputText(form("email"),  '_label -> "Name")
-            @helper.inputText(form("movieName"), '_label -> "Name")
-            @helper.inputText(form("comment"), '_label -> "Name" ')
-            }
-    <button type="submit">Create recipe</button>
+@main("Create Commends!") {
+    @flash.get("success").getOrElse("Create!")
+    @helper.form(routes.CommendSectionController.submitForm) {
+        @helper.inputText(form("name"), '_label -> "Film")
+        @helper.inputText(form("email"), '_label -> "Email")
+        @helper.inputText(form("movieName"), '_label -> "Movie Name")
+        @helper.inputText(form("comment"), '_label -> "Comment")
+
+        <button lass="btn btn-info" type="submit">Add comment</button>
+    }
+}

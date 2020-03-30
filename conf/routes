@@ -32,6 +32,6 @@ GET     /contact                    controllers.ContactController.contact
 
 #GET    /messageform                 controllers.MessageBoardController.showMessageForm
 
-GET     /commend                     controllers.CommentSectionController.getComment
+GET     /commend                     controllers.CommendSectionController.getCommends
 
-POST    /commend                    controllers.CommentSectionController.submitCommend
+POST    /commend                    controllers.CommendSectionController.submitCommend

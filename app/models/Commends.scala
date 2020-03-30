@@ -11,13 +11,12 @@ case class Commends(
                        )
 
 object Commends {
-  val createCommend: Form[MessageBoard] = Form(
+  val createCommentForm: Form[Commends] = Form(
     mapping(
       "named" -> nonEmptyText,
       "email" -> email,
       "movieName" -> nonEmptyText,
       "comment" -> nonEmptyText,
-
     )(Commends.apply)(Commends.unapply)
   ).fill(Commends("","","",""))
 
