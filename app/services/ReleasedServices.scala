@@ -1,6 +1,7 @@
 package services
 
-import javax.inject.Inject
+import javax.inject.{Inject, Singleton}
+import models.MovieWithID
 import models.ReleasedMovieWithID
 import reactivemongo.play.json.collection.JSONCollection
 import reactivemongo.play.json._
@@ -11,12 +12,15 @@ import reactivemongo.api.Cursor
 import play.modules.reactivemongo.{ReactiveMongoApi, ReactiveMongoComponents}
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
 
 class ReleasedServices @Inject()(
                                   val reactiveMongoApi: ReactiveMongoApi
                                 ) extends ReactiveMongoComponents {
+
+  implicit val ec: ExecutionContextExecutor = ExecutionContext.global
+
   def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("releasedfilms"))
 
   def getMovies = {
