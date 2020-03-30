@@ -35,13 +35,14 @@ class ReleasedServices @Inject()(
                                 ) extends ReactiveMongoComponents {
   def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("releasedfilms"))
 
-  def updateMovieRating(title: String, rating: Rating) = {
+  def updateMovieRating(id: String, rating: Rating) = {
     collection.flatMap(_.update(false).one(
       Json.obj(
         {
-          "title" -> BSONObjectID.parse(title).get
+          "_id" -> BSONObjectID.parse(id).get
         }
-      ),    //filter; e.g. Json.obj(`_id` -> theIdYouNeed)
+      ),
+        "_rating" -> rating
         "_rating" -> rating
     ))
   }

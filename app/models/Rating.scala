@@ -8,7 +8,7 @@ case class Rating(starOne: Boolean, starTwo: Boolean, starThree: Boolean)
 object Rating {
 
   object Stars extends Enumeration {
-    val OneStar, TwoStars, ThreeStars = Value
+    val starOne, starTwo, starThree = Value
   }
 
   val createRatingForm: Form[Rating] = Form(
