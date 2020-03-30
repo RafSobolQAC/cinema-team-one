@@ -13,8 +13,7 @@ class ContactControllerTest extends PlaySpec with Results{
       val controller= new ContactController(Helpers.stubControllerComponents())
       val result: Future[Result] = controller.contact.apply(FakeRequest())
       contentType(result) mustBe Some("text/html")
-      contentAsString(result) must include("Opening Times")
-      contentAsString(result) must include("Visit Us")
+
     }
   }
 }
