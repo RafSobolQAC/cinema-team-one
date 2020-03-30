@@ -13,8 +13,6 @@ class HomeControllerTest extends PlaySpec with Results{
       val controller= new HomeController(Helpers.stubControllerComponents())
       val result: Future[Result] = controller.index.apply(FakeRequest())
       contentType(result) mustBe Some("text/html")
-      contentAsString(result) must include("Currently Showing")
-      contentAsString(result) must include("Upcoming Releases")
-    }
+      }
 }
 }
