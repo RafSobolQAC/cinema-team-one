@@ -3,7 +3,7 @@ package services
 
 import akka.http.scaladsl.model.HttpHeader.ParsingResult.Ok
 import javax.inject.Inject
-import models.{Movie, MovieWithID}
+import models.{Movie, MovieWithID, Rating}
 import reactivemongo.play.json.collection.JSONCollection
 import reactivemongo.play.json._
 import collection._
@@ -12,6 +12,7 @@ import play.api.libs.json.Json
 import play.api.mvc.{Action, AnyContent}
 import reactivemongo.api.Cursor
 import play.modules.reactivemongo.{ReactiveMongoApi, ReactiveMongoComponents}
+import reactivemongo.bson.BSONObjectID
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -34,10 +35,14 @@ class ReleasedServices @Inject()(
                                 ) extends ReactiveMongoComponents {
   def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("releasedfilms"))
 
-  def updateMovie(id: String) = {
+  def updateMovieRating(title: String, rating: Rating) = {
     collection.flatMap(_.update(false).one(
-      Json.obj(),   //filter; e.g. Json.obj(`_id` -> theIdYouNeed)
-      Json.obj()
+      Json.obj(
+        {
+          "title" -> BSONObjectID.parse(title).get
+        }
+      ),    //filter; e.g. Json.obj(`_id` -> theIdYouNeed)
+        "_rating" -> rating
     ))
   }
 

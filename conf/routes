@@ -26,8 +26,6 @@ GET     /classifications            controllers.ClassificationController.classif
 
 GET     /screens                    controllers.ScreensController.screens
 
-
-
 GET     /contact                    controllers.ContactController.contact
 
 GET     /rating                     controllers.RatingController.getRating

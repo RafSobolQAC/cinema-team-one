@@ -11,7 +11,7 @@ object Rating {
     val OneStar, TwoStars, ThreeStars = Value
   }
 
-  val createRating: Form[Rating] = Form(
+  val createRatingForm: Form[Rating] = Form(
     mapping(
       "starOne" -> boolean,
       "starTwo" -> boolean,
