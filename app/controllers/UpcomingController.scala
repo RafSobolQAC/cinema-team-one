@@ -29,7 +29,6 @@ class UpcomingController @Inject()(
 
 
 
-
   def MovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
     upcomingServices.getMovies.map { movies =>
 
