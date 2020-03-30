@@ -27,9 +27,11 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
     }
 
   def createOrder() ={//returns the order ID
-
     val json: JsValue = Json.parse("""
   {
+    "application_context":{
+        "return_url":"http://localhost:9099/capturePayment"
+    },
     "intent": "CAPTURE",
     "purchase_units": [
     {
@@ -48,12 +50,9 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
       addHttpHeaders("Authorization"->token).
       post(json),Duration(5,"seconds")).json
 
-
-
-
-
   }
   def capturePayment(orderID:String)=Action{
+
     val token="Bearer "+getAccessToken()
 //   val response=Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/authorize").
 //      addHttpHeaders("Content-Type"->"application/json").
@@ -73,7 +72,7 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
   def index = Action {
     //Ok(createOrder().toString())
     val json=createOrder()
-    val url=(json\"links"\1\\"href").last.toString.replace("\"","")
+    val url=(json\"links"\1\\"href").head.toString.replace("\"","")
     val orderID=(json\"id").get.toString.replace("\"","")
     Ok(template(url,orderID))
    // Redirect(createOrder())

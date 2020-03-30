@@ -27,7 +27,7 @@ GET         /assets/*file               controllers.Assets.versioned(path="/publ
 
 GET         /payment                    controllers.PaymentController.index
 
-GET         /capturePayment             controllers.PaymentController.capturePayment(orderID)
+GET         /capturePayment             controllers.PaymentController.capturePayment(token)
 
 
 
