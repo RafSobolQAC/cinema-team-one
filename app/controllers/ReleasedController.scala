@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject.Inject
-import models.Movie
+import models.ReleasedMovieWithID
 import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Request}
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import services.{BookingServices, ReleasedServices}
@@ -32,6 +32,4 @@ class ReleasedController @Inject()(
       Ok(views.html.movieInfo(movies.filter(movie => id == movie._id.toString()).head))
     }
   }
-
-
 }
