@@ -44,13 +44,17 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
   }
   """)
     val token="Bearer "+getAccessToken()
-    Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").
+      Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").
       addHttpHeaders("Content-Type"->"application/json").
       addHttpHeaders("Authorization"->token).
       post(json),Duration(5,"seconds")).json
 
 
+
+
   }
+
+
   def capturePayment(orderID:String)=Action{
     val token="Bearer "+getAccessToken()
 //   val response=Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/authorize").
@@ -66,6 +70,7 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
     //Ok(createOrder().toString())
     val json=createOrder()
     val url=(json\"links"\1\\"href").head.toString.replace("\"","")
+    println("2")
     val orderID=(json\"id").get.toString.replace("\"","")
     Ok(template(url,orderID))
    // Redirect(createOrder())
