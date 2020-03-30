@@ -1,7 +1,6 @@
 package controllers
 
 import javax.inject.Inject
-import models.Movie
 import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import services.{BookingServices, ReleasedServices}

@@ -33,7 +33,11 @@ class BookingController @Inject()(
   def submitSelectFilmForm(title: String) = Action.async { implicit request: Request[AnyContent] =>
     titlesAndScreenings.map { titles =>
 
-      Ok(views.html.booking(Booking.createBookingForm, title, titles.filter(thing => thing._1 == title).head._2))
+      Ok(views.html.booking(Booking.createBookingForm,
+        title,
+        titles.filter(thing =>
+          thing._1 == title)
+          .head._2))
     }
   }
 
