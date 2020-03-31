@@ -1,7 +1,7 @@
 package services
 
 import javax.inject.Inject
-import models.{Movie, UpcomingMovieWithID}
+import models.UpcomingMovieWithID
 import reactivemongo.play.json.collection.JSONCollection
 import reactivemongo.play.json._
 import collection._

@@ -13,6 +13,6 @@ case class UpcomingMovieWithID(
                       var director: String,
                       var description: String,
                       var actors: List[String],
-                      var screenings: List[DateTime],
-                      var ratings: Object
-                      )
+                      var screenings: List[String],
+                      var releaseDate: String,
+                              )

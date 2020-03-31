@@ -5,6 +5,7 @@ import models.ReleasedMovieWithID
 import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Request}
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import services.{BookingServices, ReleasedServices}
+import views.html.releasedmovie
 
 import scala.concurrent.ExecutionContext
 
@@ -20,16 +21,16 @@ class ReleasedController @Inject()(
   def getMovies = Action.async { implicit request: Request[AnyContent] =>
     releasedServices.getMovies.map { movies =>
 //   Ok(movies.toString())
-      Ok(views.html.movie(movies))
+      Ok(views.html.releasedmovie(movies))
 
     }
   }
 
-  def ReleasedMovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
+  def releasedMovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
     releasedServices.getMovies.map { movies =>
 
 
-      Ok(views.html.movieInfo(movies.filter(movie => id == movie._id.toString()).head))
+      Ok(views.html.releasedmovieInfo(movies.filter(movie => id == movie._id.toString()).head))
     }
   }
 }

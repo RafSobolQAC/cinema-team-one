@@ -6,7 +6,6 @@ import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Reque
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import reactivemongo.bson.BSONObjectID
 import services.UpcomingServices
-
 import scala.concurrent.ExecutionContext
 
 class UpcomingController @Inject()(
@@ -25,9 +24,9 @@ class UpcomingController @Inject()(
     }
   }
 
-  def MovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
+  def upcomingMovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
     upcomingServices.getMovies.map { movies =>
-      Ok(views.html.movieInfo(movies.filter(movie => id == movie._id.toString()).head))
+      Ok(views.html.upcomingmovieInfo(movies.filter(movie => id == movie._id.toString()).head))
     }
   }
 }

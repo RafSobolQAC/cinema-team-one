@@ -11,10 +11,10 @@ GET         /count                      controllers.CountController.count
 GET         /message                    controllers.AsyncController.message
 
 GET         /gallerymovies              controllers.ReleasedController.getMovies
-GET         /gallerymovies/:_id         controllers.ReleasedController.ReleasedMovieInfo(_id)
+GET         /gallerymovies/:_id         controllers.ReleasedController.releasedMovieInfo(_id)
 
 GET         /upcomingmovies             controllers.UpcomingController.getMovies
-GET         /upcomingmovies/:_id        controllers.UpcomingController.MovieInfo(_id)
+GET         /upcomingmovies/:_id        controllers.UpcomingController.upcomingMovieInfo(_id)
 
 
 
