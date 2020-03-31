@@ -14,5 +14,5 @@ case class ReleasedMovieWithID(
                       var description: String,
                       var actors: List[String],
                       var screenings: List[String],
-                      var ratings: Object[Int]
+                      var ratings: List[Int]
                       )
