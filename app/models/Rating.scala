@@ -1,3 +1,4 @@
+/*
 package models
 
 import play.api.data.Form
@@ -15,3 +16,4 @@ object Rating {
   )
 
 }
+*/

@@ -1,11 +1,16 @@
 package controllers
 
+import java.awt.Cursor
+
 import javax.inject.Inject
 import models.Commends
 import models.JsonFormats._
+import play.api.libs.json.Json
 import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
-import reactivemongo.play.json.collection.JSONCollection
+import reactivemongo.api.Cursor
+import reactivemongo.play.json._
+import reactivemongo.play.json.collection.{JSONCollection, _}
 import services.ReleasedServices
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -20,9 +25,10 @@ class CommendSectionController @Inject()(
 
   def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("comment"))
 
+  implicit var commentsList: List[Commends] = List()
 
   def getCommends = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.commends(Commends.createCommentForm))
+    Ok(views.html.commends(Commends.createCommentForm,commentsList))
   }
 
 
@@ -32,21 +38,23 @@ class CommendSectionController @Inject()(
 
   def submitCommend = Action.async { implicit request: Request[AnyContent] =>
     Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
-      println(formWithErrors)
-      Future.successful(BadRequest(views.html.commends(formWithErrors)))
+      //println(formWithErrors)
+      Future.successful(BadRequest(views.html.commends(formWithErrors,commentsList)))
     }, {commends =>
-      serviceSubmitComment(commends).map(result =>
-        Ok("Well done! Comment created!")
-      )
+      serviceSubmitComment(commends).map(_ =>
+        Ok(views.html.MessageBoard(Commends.createCommentForm, commentsList)))
     }
     )
   }
 
   //todo show the right comment on each movie
-//  def CommentsListing(movieName:String) = Action.async {request: Request[AnyContent] =>
-//    ReleasedController.findbyName(title).map(movieName =>
-//      Ok(views.html.MessageBoard(Commends.createCommentForm)))
-//
-//  }
+//def showComments
+
 
 }
+  //  def showComments(movieName:String) = Action.async {request: Request[AnyContent] =>
+//    ReleasedController.findbyName(title).map(movieName =>
+//          Ok(views.html.MessageBoard(Commends.createCommentForm)))
+//  }
+
+
