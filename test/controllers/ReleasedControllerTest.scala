@@ -58,7 +58,7 @@ class ReleasedControllerTest extends PlaySpec with Results with MockitoSugar {
       filmList.map{
         value =>
           {
-            if (value.nonEmpty) contentAsString(result) must not contain value.head.description
+            contentAsString(result) must not contain value.headOption.getOrElse(MovieWithID(BSONObjectID.generate(), "animage", "atitle", "adirector", "description2", List(), List())).description
           }
       }
 
