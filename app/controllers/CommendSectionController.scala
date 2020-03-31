@@ -1,18 +1,14 @@
 package controllers
 
-import akka.http.scaladsl.model.headers.LinkParams.title
 import javax.inject.Inject
 import models.Commends
+import models.JsonFormats._
 import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
-import services.ReleasedServices
-import views.html.commends
-import models.JsonFormats._
 import reactivemongo.play.json.collection.JSONCollection
-import services.CommentSectionSerivces
-import controllers.ReleasedController
+import services.ReleasedServices
+
 import scala.concurrent.{ExecutionContext, Future}
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class CommendSectionController @Inject()(
                                           components: ControllerComponents,
