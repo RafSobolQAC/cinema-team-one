@@ -26,6 +26,8 @@ class ReleasedController @Inject()(
     }
   }
 
+
+
   def getOnlyMoviesAndScreenings: Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     releasedServices.getMovies.map { movies =>
       movies.map(movie => movie.title -> movie.screenings)
@@ -33,6 +35,8 @@ class ReleasedController @Inject()(
       Ok(movies.toString())
     }
   }
+
+
   def releasedMovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
     releasedServices.getMovies.map { movies =>
       Ok(views.html.releasedmovieInfo(movies.filter(movie => id == movie._id.toString()).head))

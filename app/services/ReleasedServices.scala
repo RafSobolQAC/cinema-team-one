@@ -35,16 +35,4 @@ class ReleasedServices @Inject()(
     )
   }
 
-//  def getMovies = {
-//    val cursor: Future[Cursor[ReleasedMovieWithID]] = collection.map {
-//      _.find(Json.obj())
-//        .cursor[ReleasedMovieWithID]()
-//    }
-//    cursor.flatMap(
-//      _.collect[List](
-//        -1,
-//        Cursor.FailOnError[List[ReleasedMovieWithID]]()
-//      )
-//    )
-//  }
 }
