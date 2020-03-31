@@ -25,6 +25,7 @@ class CommendSectionController @Inject()(
     Ok(views.html.commends(Commends.createCommentForm))
   }
 
+
   def serviceSubmitComment(comment: Commends) = {
     collection.flatMap(_.insert.one(comment))
   }
