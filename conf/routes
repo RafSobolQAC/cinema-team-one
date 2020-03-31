@@ -41,3 +41,8 @@ GET         /screens                    controllers.ScreensController.screens
 
 GET         /contact                    controllers.ContactController.contact
 
+#GET    /messageform                 controllers.MessageBoardController.showMessageForm
+
+GET     /commend                     controllers.CommendSectionController.getCommends
+
+POST    /commend                    controllers.CommendSectionController.submitCommend
