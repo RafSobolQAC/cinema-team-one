@@ -41,7 +41,7 @@ class BookingController @Inject()(
           film,
 //          films.find(movie =>
 //            movie._1 == film).getOrElse(("None", List()))._2))
-          films.find { case ((titleOfFilm, _))  =>
+          films.find { case ((titleOfFilm, screenings))  =>
             titleOfFilm == film}
             .getOrElse(("None", List()))._2))
       }
