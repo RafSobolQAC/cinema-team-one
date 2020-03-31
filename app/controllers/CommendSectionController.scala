@@ -68,6 +68,7 @@ class CommendSectionController @Inject()(
       //println(formWithErrors)
       Future.successful(BadRequest(views.html.commends(formWithErrors, commentsList)))
     }, { commends =>
+
       serviceSubmitComment(commends).map(_ =>
         Ok(views.html.MessageBoard(Commends.createCommentForm, commentsList)))
     }
