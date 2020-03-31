@@ -1,5 +1,5 @@
-package controllers
-
-class MessageBoardController {
-
-}
+//package controllers
+//
+//class MessageBoardController {
+//
+//}

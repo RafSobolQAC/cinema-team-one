@@ -1,5 +1,7 @@
 package services
 
+import javax.inject.{Inject, Singleton}
+import models.ReleasedMovieWithID
 
 import akka.http.scaladsl.model.HttpHeader.ParsingResult.Ok
 import javax.inject.Inject
@@ -15,24 +17,15 @@ import play.modules.reactivemongo.{ReactiveMongoApi, ReactiveMongoComponents}
 import reactivemongo.bson.BSONObjectID
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
-
-/*
-  {
-  _id: BSONObjectId(`sdnjasgiu43r89wu`),
-  title: `titleoffilm`,
-     ...,
-     ratings: {
-      oneStar: 0,
-      twoStar: 0,
-      threeStar: 0
-     }
- */
 
 class ReleasedServices @Inject()(
                                   val reactiveMongoApi: ReactiveMongoApi
                                 ) extends ReactiveMongoComponents {
+
+  implicit val ec: ExecutionContextExecutor = ExecutionContext.global
+
   def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("releasedfilms"))
 
   def updateMovieRating(id: String, rating: Rating) = {
@@ -47,28 +40,16 @@ class ReleasedServices @Inject()(
   }
 
   def getMovies = {
-    val cursor: Future[Cursor[MovieWithID]] = collection.map {
+    val cursor: Future[Cursor[ReleasedMovieWithID]] = collection.map {
       _.find(Json.obj())
-        .cursor[MovieWithID]()
+        .cursor[ReleasedMovieWithID]()
     }
     cursor.flatMap(
       _.collect[List] (
         -1,
-        Cursor.FailOnError[List[MovieWithID]]()
+        Cursor.FailOnError[List[ReleasedMovieWithID]]()
       )
     )
   }
-
-  //  def getFilms = Action.async {
-  //    val cursor: Future[Cursor[Film]] = collection.map {
-  //      _.find(filter)
-  //        .cursor[Film]()
-  //    }
-  //    cursor.flatMap(
-  //      _.collect[List](
-  //        -1,
-  //        Cursor.FailOnError[List[Film]]()
-  //      ))
-  //  }
 
 }

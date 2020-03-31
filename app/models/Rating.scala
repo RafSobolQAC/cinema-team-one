@@ -17,5 +17,6 @@ object Rating {
       "two" -> boolean,
       "three" -> boolean
     )(Rating.apply)(Rating.unapply)
-  ).fill(Rating(false,false,false))
+  )
+
 }
