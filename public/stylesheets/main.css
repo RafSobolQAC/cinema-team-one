@@ -150,3 +150,8 @@ aside a[href^="http"]:after,.doc a[href^="http"]:after{content:url(/assets/image
     filter: blur(0px);
     -webkit-filter: blur(0px);
 }
+
+.columnpic {
+    float: left;
+    width: 25%;
+}

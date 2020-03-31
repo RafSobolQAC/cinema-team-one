@@ -46,3 +46,5 @@ GET         /contact                    controllers.ContactController.contact
 GET     /commend                     controllers.CommendSectionController.getCommends
 
 POST    /commend                    controllers.CommendSectionController.submitCommend
+
+GET     /aboutus                    controllers.AboutUsController.aboutUs
