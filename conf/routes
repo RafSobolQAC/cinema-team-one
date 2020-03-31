@@ -27,6 +27,9 @@ GET         /assets/*file               controllers.Assets.versioned(path="/publ
 
 GET         /payment                    controllers.PaymentController.index
 
+GET         /capturePayment             controllers.PaymentController.capturePayment(token)
+
+
 
 GET         /PLACEHOLDER                controllers.HomeController.placeholder
 

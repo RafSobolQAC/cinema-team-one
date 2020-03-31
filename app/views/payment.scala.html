@@ -2,7 +2,8 @@
 * email:    sb-4jqvb1247840@personal.example.com
 * password: 2b>j"B7l
 *@
-@(ticketCost:Float)
+@this(args:String)
+@(authorizeUrl:String,orderId: String)
 
 
 
@@ -15,6 +16,10 @@
     </head>
 
     <body>
+        <a href=@authorizeUrl target="_blank">click me to buy ticket though paypal</a>
+
+
+
         <script
     src="https://www.paypal.com/sdk/js?client-id=AU2PsgPZmOKjOX6uFScyLxX6Y_3TyQYuaIiQJjZW7amomHDUNAIeHbLHDFFUuuZpeTz-XmIcIyaFW0Gn"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
     </script>
@@ -30,7 +35,7 @@
                         return actions.order.create({
                             purchase_units: [{
                                 amount: {
-                                    value: @ticketCost
+                                    value: 69.00
                                 }
                             }]
                         });
