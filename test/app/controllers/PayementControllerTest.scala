@@ -29,7 +29,6 @@ class PayementControllerTest extends PlaySpec with MockitoSugar {
 
   "create Order" should {
     "create an order" in new WithApplication() with Injecting {
-      val Action = inject[WSClient]
 
 
 

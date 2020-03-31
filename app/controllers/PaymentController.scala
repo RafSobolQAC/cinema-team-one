@@ -31,15 +31,12 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
   }
   def capturePayment(orderID:String)=Action{
     val token="Bearer "+getAccessToken()
-//   val response=Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/authorize").
-//      addHttpHeaders("Content-Type"->"application/json").
-//      addHttpHeaders("Authorization"->token).get
-//      ,Duration(5,"seconds"))
     val response="curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID +"/capture -H \"Content-Type: application/json\" -H \"Authorization: "+token+"\""!!
 
     Ok(response)
   }
   def index = Action {
+    //the redirect port needs to be configured
     val json2: JsValue = Json.parse("""
   {
     "application_context":{
