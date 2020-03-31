@@ -72,7 +72,7 @@ class BookingControllerTest extends PlaySpec with Results with MockitoSugar {
       val request = FakeRequest(routes.BookingController.submitSelectFilmFormSubmit())
         .withFormUrlEncodedBody("bad" -> "bad")
       val result = controller.submitSelectFilmFormSubmit.apply(request)
-      status(result) must be(Status(400))
+      Status(status(result)) mustBe Status(400)
     }
   }
 
