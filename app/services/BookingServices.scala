@@ -19,6 +19,4 @@ class BookingServices @Inject()(
     collection.flatMap(_.insert.one(booking))
   }
 
-
-
 }

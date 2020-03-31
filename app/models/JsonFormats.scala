@@ -20,4 +20,7 @@ object JsonFormats {
   implicit val releasedMovieWithIDFormatOld: OFormat[ReleasedMovieWithID] = Json.format[ReleasedMovieWithID]
 
   implicit val bookingFormat: OFormat[Booking] = Json.format[Booking]
+
+  implicit val commendsFormat: OFormat[Commends] = Json.format[Commends]
+
 }
