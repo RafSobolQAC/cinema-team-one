@@ -25,8 +25,22 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
       val accessToken: String = (json \ "access_token").as[String]
       accessToken
     }
-  def createOrder() ={
-    val json: JsValue = Json.parse("""
+  def createOrder(json:JsValue) ={
+    val token:String="Bearer "+getAccessToken()
+      Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").addHttpHeaders("Content-Type"->"application/json").addHttpHeaders("Authorization"->token).post(json),Duration(5,"seconds")).json
+  }
+  def capturePayment(orderID:String)=Action{
+    val token="Bearer "+getAccessToken()
+//   val response=Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/authorize").
+//      addHttpHeaders("Content-Type"->"application/json").
+//      addHttpHeaders("Authorization"->token).get
+//      ,Duration(5,"seconds"))
+    val response="curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID +"/capture -H \"Content-Type: application/json\" -H \"Authorization: "+token+"\""!!
+
+    Ok(response)
+  }
+  def index = Action {
+    val json2: JsValue = Json.parse("""
   {
     "application_context":{
         "return_url":"http://localhost:9099/capturePayment"
@@ -43,38 +57,10 @@ class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: Co
   ]
   }
   """)
-    val token="Bearer "+getAccessToken()
-      Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").
-      addHttpHeaders("Content-Type"->"application/json").
-      addHttpHeaders("Authorization"->token).
-      post(json),Duration(5,"seconds")).json
-
-
-
-
-  }
-
-
-  def capturePayment(orderID:String)=Action{
-    val token="Bearer "+getAccessToken()
-//   val response=Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/authorize").
-//      addHttpHeaders("Content-Type"->"application/json").
-//      addHttpHeaders("Authorization"->token).get
-//      ,Duration(5,"seconds"))
-    val response="curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID +"/capture -H \"Content-Type: application/json\" -H \"Authorization: "+token+"\""!!
-
-    Ok(response)
-  }
-
-  def index = Action {
-    //Ok(createOrder().toString())
-    val json=createOrder()
-    val url=(json\"links"\1\\"href").head.toString.replace("\"","")
-    println("2")
+    val json=createOrder(json2)
+    val url=(json\"links"\1\\"href")(0).toString.replace("\"","")
     val orderID=(json\"id").get.toString.replace("\"","")
     Ok(template(url,orderID))
-   // Redirect(createOrder())
-   //   Ok("Hello world")
   }
 
 

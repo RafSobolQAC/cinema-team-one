@@ -1,47 +1,51 @@
 package controllers
-
 import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.play._
-import play.api.libs.ws.WSClient
-import play.api.mvc._
-import play.api.test.Helpers
-import play.api.libs.json._
-import play.api.mvc._
-import play.api.routing.sird._
-import play.core.server.Server
+import play.api.libs.ws.{WSClient, WSResponse}
+import play.api.test.{Helpers, Injecting, WithApplication}
+class PayementControllerTest extends PlaySpec with MockitoSugar {
 
-class PayementControllerTest extends PlaySpec with MockitoSugar  with Results {
-
-  val template=mock[views.html.payment]
-  val ws=mock[WSClient]
-  val controller:PaymentController=new PaymentController(template,ws,Helpers.stubControllerComponents())
-
-
+  val template = mock[views.html.payment]
+  val wsr = mock[WSResponse]
+  val ws = mock[WSClient]
+  val controller: PaymentController = new PaymentController(template, ws, Helpers.stubControllerComponents())
   "Payment" should {
     "get access token" in {
-     // val result:Future[Result]=controller.index().apply(FakeRequest())
-      val token=controller.getAccessToken()
+      val token = controller.getAccessToken().getBytes()
+
+      println(controller.getAccessToken())
       token must not be empty
+      token.toString must be mustEqual("ResultOfBeWordForAny(\"A21AAE2ID7hn7COosFr_WCMVGq8wqozqkKhPrcj2V4ijXeufe1A_aczwKvR3Bf4QZsjYmKN9vFW196FH26lTiAPVYg9AzyE0w\", true)")
 
     }
   }
-
-  "create Order" should{
-    "create an order" in{//i will be mocking the wsclient to make sure the requests are working correctly
-
-      Server.withRouterFromComponents() { components =>
-        import Results._
-        import components.{ defaultActionBuilder => Action }
-        {
-          case GET(p"/repositories") =>
-            Action {
-              Ok(Json.arr(Json.obj("full_name" -> "octocat/Hello-World")))
-            }
-        }
-
-
+  "capture payment" should{
+    "capture the current payment" in{
+      val result=controller.capturePayment("this is an order ID XD")
+      result.toString() must not be empty
     }
   }
 
 
-}
+  "create Order" should {
+    "create an order" in new WithApplication() with Injecting {
+      val Action = inject[WSClient]
+
+
+
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
