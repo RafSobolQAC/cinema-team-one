@@ -38,9 +38,8 @@ class BookingController @Inject()(
       titlesAndScreenings.map { films =>
         Ok(views.html.booking(Booking.createBookingForm,
           film,
-          films.filter(movie =>
-            movie._1 == film)
-            .head._2))
+          films.find(movie =>
+            movie._1 == film).getOrElse(("None", List()))._2))
       }
       //      Future.successful(Redirect(routes.BookingController.submitSelectFilmForm(film)))
       //      Ok(viwes.html.booking(Booking.createBookingForm, ))
