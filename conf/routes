@@ -4,31 +4,39 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                    controllers.HomeController.index
+GET         /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection
-GET         /count               controllers.CountController.count
+GET         /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
-GET         /message             controllers.AsyncController.message
-GET         /allmovies           controllers.ReleasedController.getMovies
-GET         /bookit              controllers.BookingController.showForm
-POST        /bookit              controllers.BookingController.submitForm
+GET         /message                    controllers.AsyncController.message
+
+GET         /gallerymovies              controllers.ReleasedController.getMovies
+GET         /gallerymovies/:_id         controllers.ReleasedController.ReleasedMovieInfo(_id)
+
+GET         /upcomingmovies             controllers.UpcomingController.getMovies
+GET         /upcomingmovies/:_id        controllers.UpcomingController.MovieInfo(_id)
+
+
+
+GET         /bookit                     controllers.BookingController.showForm
+POST        /bookit                     controllers.BookingController.submitForm
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
-GET     /payment                    controllers.PaymentController.index
+GET         /payment                    controllers.PaymentController.index
 
 
-GET     /PLACEHOLDER                    controllers.HomeController.placeholder
+GET         /PLACEHOLDER                controllers.HomeController.placeholder
 
-GET     /classifications            controllers.ClassificationController.classifications
+GET         /classifications            controllers.ClassificationController.classifications
 
-GET     /screens                    controllers.ScreensController.screens
+GET         /screens                    controllers.ScreensController.screens
 
 
 
-GET     /contact                    controllers.ContactController.contact
+GET         /contact                    controllers.ContactController.contact
 
 #GET    /messageform                 controllers.MessageBoardController.showMessageForm
 

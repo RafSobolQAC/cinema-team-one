@@ -19,11 +19,19 @@ class ReleasedController @Inject()(
 
   def getMovies = Action.async { implicit request: Request[AnyContent] =>
     releasedServices.getMovies.map { movies =>
-      Ok(movies.toString())
+//   Ok(movies.toString())
+      Ok(views.html.movie(movies))
+
     }
   }
 
+  def ReleasedMovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
+    releasedServices.getMovies.map { movies =>
 
+
+      Ok(views.html.movieInfo(movies.filter(movie => id == movie._id.toString()).head))
+    }
+  }
 
 
 }
