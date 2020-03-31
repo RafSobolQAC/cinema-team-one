@@ -12,9 +12,6 @@ GET         /message                  controllers.AsyncController.message
 GET         /allmovies                controllers.ReleasedController.getMovies
 
 GET         /makebooking              controllers.BookingController.submitSelectFilmFormSubmit
-GET         /bookit                   controllers.BookingController.showForm
-POST        /bookit                   controllers.BookingController.submitForm
-GET         /bookit/:filmtitle        controllers.BookingController.submitSelectFilmForm(filmtitle: String)
 
 GET         /gallerymovies              controllers.ReleasedController.getMovies
 GET         /gallerymovies/:_id         controllers.ReleasedController.releasedMovieInfo(_id)

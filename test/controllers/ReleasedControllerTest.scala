@@ -58,7 +58,7 @@ class ReleasedControllerTest extends PlaySpec with Results with MockitoSugar {
       filmList.map{
         value =>
           {
-            contentAsString(result) must not contain value.head.description
+            if (value.nonEmpty) contentAsString(result) must not contain value.head.description
           }
       }
 
