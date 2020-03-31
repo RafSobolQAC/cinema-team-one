@@ -2,7 +2,7 @@ package controllers
 
 import akka.actor.ActorRefFactory
 import akka.stream.ActorMaterializer
-import models.MovieWithID
+import models.{MovieWithID, ReleasedMovieWithID}
 import org.scalatestplus.play._
 import play.api.mvc._
 import play.api.test._
@@ -26,14 +26,14 @@ class ReleasedControllerTest extends PlaySpec with Results with MockitoSugar {
       val releasedService = mock[ReleasedServices]
       val controller = new ReleasedController(Helpers.stubControllerComponents(),mockedMongo,releasedService)
       val filmList = Future {
-        List[MovieWithID](
-          MovieWithID(BSONObjectID.generate(), "image", "title", "director", "desc", List("act1", "act2"), List("morning", "evening")),
-          MovieWithID(BSONObjectID.generate(), "image2", "title3", "director", "descaaa", List("act3", "act2"), List("morning", "evening"))
+        List[ReleasedMovieWithID](
+          ReleasedMovieWithID(BSONObjectID.generate(), "image", "title", "director", "desc", List("act1", "act2"), List("morning", "evening"),List(1,2,3)),
+          ReleasedMovieWithID(BSONObjectID.generate(), "image2", "title3", "director", "descaaa", List("act3", "act2"), List("morning", "evening"),List(1,2,3))
         )
       }
       when(releasedService.getMovies).thenReturn(filmList)
       val result: Future[Result] = controller.getMovies.apply(FakeRequest())
-      contentType(result) mustBe Some("text/plain")
+      contentType(result) mustBe Some("text/html")
       filmList.map{
         value => contentAsString(result) must contain("descaaa")
       }
@@ -47,9 +47,9 @@ class ReleasedControllerTest extends PlaySpec with Results with MockitoSugar {
       val releasedService = mock[ReleasedServices]
       val controller = new ReleasedController(Helpers.stubControllerComponents(),mockedMongo,releasedService)
       val filmList = Future {
-        List[MovieWithID](
-          MovieWithID(BSONObjectID.generate(), "image", "title", "director", "desc", List("act1", "act2"), List("morning", "evening")),
-          MovieWithID(BSONObjectID.generate(), "image2", "title3", "director", "descaaa", List("act3", "act2"), List("morning", "evening"))
+        List[ReleasedMovieWithID](
+          ReleasedMovieWithID(BSONObjectID.generate(), "image", "title", "director", "desc", List("act1", "act2"), List("morning", "evening"),List(1,2,3)),
+          ReleasedMovieWithID(BSONObjectID.generate(), "image2", "title3", "director", "descaaa", List("act3", "act2"), List("morning", "evening"),List(1,2,3))
         )
       }
       when(releasedService.getMovies).thenReturn(filmList)
@@ -58,7 +58,7 @@ class ReleasedControllerTest extends PlaySpec with Results with MockitoSugar {
       filmList.map{
         value =>
           {
-            contentAsString(result) must not contain value.headOption.getOrElse(MovieWithID(BSONObjectID.generate(), "animage", "atitle", "adirector", "description2", List(), List())).description
+            contentAsString(result) must not contain value.headOption.getOrElse(ReleasedMovieWithID(BSONObjectID.generate(), "animage", "atitle", "adirector", "description2", List(), List(),List())).description
           }
       }
 
