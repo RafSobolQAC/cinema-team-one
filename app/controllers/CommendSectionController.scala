@@ -1,5 +1,6 @@
 package controllers
 
+import akka.http.scaladsl.model.headers.LinkParams.title
 import javax.inject.Inject
 import models.Commends
 import play.api.mvc._
@@ -8,7 +9,8 @@ import services.ReleasedServices
 import views.html.commends
 import models.JsonFormats._
 import reactivemongo.play.json.collection.JSONCollection
-
+import services.CommentSectionSerivces
+import controllers.ReleasedController
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -42,5 +44,12 @@ class CommendSectionController @Inject()(
     }
     )
   }
+
+  //todo show the right comment on each movie
+//  def CommentsListing(movieName:String) = Action.async {request: Request[AnyContent] =>
+//    ReleasedController.findbyName(title).map(movieName =>
+//      Ok(views.html.MessageBoard(Commends.createCommentForm)))
+//
+//  }
 
 }
