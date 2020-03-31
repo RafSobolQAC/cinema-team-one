@@ -30,22 +30,20 @@ class BookingController @Inject()(
     }
   }
 
-  def submitSelectFilmForm(title: String) = Action.async { implicit request: Request[AnyContent] =>
-    titlesAndScreenings.map { titles =>
-
-      Ok(views.html.booking(Booking.createBookingForm,
-        title,
-        titles.filter(thing =>
-          thing._1 == title)
-          .head._2))
-    }
-  }
 
   def submitSelectFilmFormSubmit = Action.async { implicit request: Request[AnyContent] =>
     Booking.getTitleForm.bindFromRequest.fold({ formWithErrors =>
       Future.successful(BadRequest(views.html.bookingfilm(formWithErrors, List())))
     }, { film =>
-      Future.successful(Redirect(routes.BookingController.submitSelectFilmForm(film)))
+      titlesAndScreenings.map { films =>
+        Ok(views.html.booking(Booking.createBookingForm,
+          film,
+          films.filter(movie =>
+            movie._1 == film)
+            .head._2))
+      }
+      //      Future.successful(Redirect(routes.BookingController.submitSelectFilmForm(film)))
+      //      Ok(viwes.html.booking(Booking.createBookingForm, ))
     })
   }
 

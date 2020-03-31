@@ -22,8 +22,8 @@ class ReleasedServicesTest extends PlaySpec with Results with MockitoSugar {
   val mockedMongo: ReactiveMongoApi = mock[ReactiveMongoApi]
   val mockFutureJSONColl: Future[JSONCollection] = mock[Future[JSONCollection]]
   //      doReturn(mockFutureJSONColl).when(mockedMongo).database
-  var bookService: BookingServices = mock[BookingServices]
-  var releasedService: ReleasedServices = mock[ReleasedServices]
+  val bookService: BookingServices = mock[BookingServices]
+  val releasedService: ReleasedServices = mock[ReleasedServices]
 
 
   "The get-movies function" should {

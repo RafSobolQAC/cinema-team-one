@@ -23,8 +23,8 @@ class BookingServicesTest extends PlaySpec with Results with MockitoSugar {
       val mockedMongo = mock[ReactiveMongoApi]
       val mockFutureJSONColl = mock[Future[JSONCollection]]
 //      doReturn(mockFutureJSONColl).when(mockedMongo).database
-      var service = new BookingServices(mockedMongo)
-      var spyService = mock[BookingServices]
+      val service = new BookingServices(mockedMongo)
+      val spyService = mock[BookingServices]
       when(spyService.collection).thenReturn(mockFutureJSONColl)
       when(spyService.createBooking(Booking("a","b","c",List()))).thenCallRealMethod()
       spyService.createBooking(Booking("a","b","c",List()))
