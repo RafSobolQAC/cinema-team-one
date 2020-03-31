@@ -2,7 +2,6 @@ package controllers
 
 import javax.inject.Inject
 import models.ReleasedMovieWithID
-import models.Movie
 import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import services.{BookingServices, ReleasedServices}
@@ -36,8 +35,6 @@ class ReleasedController @Inject()(
   }
   def releasedMovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
     releasedServices.getMovies.map { movies =>
-
-
       Ok(views.html.releasedmovieInfo(movies.filter(movie => id == movie._id.toString()).head))
     }
   }

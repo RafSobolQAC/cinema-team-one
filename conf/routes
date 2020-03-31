@@ -4,20 +4,20 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                         controllers.HomeController.index
+GET         /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection
-GET         /count                    controllers.CountController.count
+GET         /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
-GET         /message                  controllers.AsyncController.message
-GET         /allmovies                controllers.ReleasedController.getMovies
+GET         /message                    controllers.AsyncController.message
+GET         /allmovies                  controllers.ReleasedController.getMovies
 
-GET         /makebooking              controllers.BookingController.submitSelectFilmFormSubmit
+GET         /makebooking                controllers.BookingController.submitSelectFilmFormSubmit
 
 GET         /gallerymovies              controllers.ReleasedController.getMovies
-GET         /gallerymovies/:_id         controllers.ReleasedController.releasedMovieInfo(_id)
+GET         /gallerymovies/:_id         controllers.ReleasedController.releasedMovieInfo(_id: String)
 
 GET         /upcomingmovies             controllers.UpcomingController.getMovies
-GET         /upcomingmovies/:_id        controllers.UpcomingController.upcomingMovieInfo(_id)
+GET         /upcomingmovies/:_id        controllers.UpcomingController.upcomingMovieInfo(_id: String)
 
 
 
@@ -25,7 +25,7 @@ GET         /bookit                     controllers.BookingController.showForm
 POST        /bookit                     controllers.BookingController.submitForm
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
 GET         /payment                    controllers.PaymentController.index
@@ -34,11 +34,11 @@ GET         /capturePayment             controllers.PaymentController.capturePay
 
 
 
-GET         /PLACEHOLDER              controllers.HomeController.placeholder
+GET         /PLACEHOLDER                controllers.HomeController.placeholder
 
-GET         /classifications          controllers.ClassificationController.classifications
+GET         /classifications            controllers.ClassificationController.classifications
 
-GET         /screens                  controllers.ScreensController.screens
+GET         /screens                    controllers.ScreensController.screens
 
 
 
@@ -46,6 +46,6 @@ GET         /contact                    controllers.ContactController.contact
 
 #GET    /messageform                 controllers.MessageBoardController.showMessageForm
 
-GET     /commend                     controllers.CommendSectionController.getCommends
+GET         /commend                    controllers.CommendSectionController.getCommends
 
-POST    /commend                    controllers.CommendSectionController.submitCommend
+POST        /commend                    controllers.CommendSectionController.submitCommend

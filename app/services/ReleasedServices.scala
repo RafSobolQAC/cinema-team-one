@@ -1,7 +1,6 @@
 package services
 
 import javax.inject.{Inject, Singleton}
-import models.MovieWithID
 import models.ReleasedMovieWithID
 import reactivemongo.play.json.collection.JSONCollection
 import reactivemongo.play.json._
