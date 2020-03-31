@@ -137,11 +137,16 @@ aside a[href^="http"]:after,.doc a[href^="http"]:after{content:url(/assets/image
     opacity: 0.8;
     cursor: pointer;
 }
-
-
-
-
 .dimGreybg{
     background-color: dimgrey;
     color: white;
+}
+.blurred-img {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    width: 100%;
+}
+.blurred-img:hover {
+    filter: blur(0px);
+    -webkit-filter: blur(0px);
 }
