@@ -14,11 +14,26 @@ GET         /allmovies                controllers.ReleasedController.getMovies
 GET         /makebooking              controllers.BookingController.submitSelectFilmFormSubmit
 GET         /bookit                   controllers.BookingController.showForm
 POST        /bookit                   controllers.BookingController.submitForm
+
+GET         /gallerymovies              controllers.ReleasedController.getMovies
+GET         /gallerymovies/:_id         controllers.ReleasedController.ReleasedMovieInfo(_id)
+
+GET         /upcomingmovies             controllers.UpcomingController.getMovies
+GET         /upcomingmovies/:_id        controllers.UpcomingController.MovieInfo(_id)
+
+
+
+GET         /bookit                     controllers.BookingController.showForm
+POST        /bookit                     controllers.BookingController.submitForm
+
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
 GET         /payment                  controllers.PaymentController.index
+
+GET         /capturePayment             controllers.PaymentController.capturePayment(token)
+
 
 
 GET         /PLACEHOLDER              controllers.HomeController.placeholder
@@ -28,3 +43,11 @@ GET         /classifications          controllers.ClassificationController.class
 GET         /screens                  controllers.ScreensController.screens
 
 
+
+GET         /contact                    controllers.ContactController.contact
+
+#GET    /messageform                 controllers.MessageBoardController.showMessageForm
+
+GET     /commend                     controllers.CommendSectionController.getCommends
+
+POST    /commend                    controllers.CommendSectionController.submitCommend

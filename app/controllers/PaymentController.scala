@@ -4,14 +4,15 @@ import play.api.libs.json.{JsValue, Json}
 import play.api.libs.ws._
 import play.api.mvc._
 
+import scala.concurrent.Await
+import scala.concurrent.duration.Duration
 import scala.sys.process._
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class PaymentController @Inject()(ws:WSClient,cc: ControllerComponents) extends AbstractController(cc) {
-
+class PaymentController @Inject()(template:views.html.payment,ws:WSClient,cc: ControllerComponents) extends AbstractController(cc) {
   /**
    * Create an Action to render an HTML page with a welcome message.
    * The configuration in the `routes` file means that this method
@@ -24,39 +25,40 @@ class PaymentController @Inject()(ws:WSClient,cc: ControllerComponents) extends 
       val accessToken: String = (json \ "access_token").as[String]
       accessToken
     }
+  def createOrder(json:JsValue) ={
+    val token:String="Bearer "+getAccessToken()
+      Await.result(ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").addHttpHeaders("Content-Type"->"application/json").addHttpHeaders("Authorization"->token).post(json),Duration(5,"seconds")).json
+  }
+  def capturePayment(orderID:String)=Action{
+    val token="Bearer "+getAccessToken()
+    val response="curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID +"/capture -H \"Content-Type: application/json\" -H \"Authorization: "+token+"\""!!
 
-  def createOrder() ={
-
-    val json: JsValue = Json.parse("""
+    Ok(response)
+  }
+  def index = Action {
+    //the redirect port needs to be configured
+    val json2: JsValue = Json.parse("""
   {
+    "application_context":{
+        "return_url":"http://localhost:9099/capturePayment"
+    },
     "intent": "CAPTURE",
     "purchase_units": [
     {
       "reference_id": "TICKET",
       "amount": {
         "currency_code": "GBP",
-        "value": "240.00"
+        "value": "69.00"
       }
     }
   ]
   }
   """)
-    val token="Bearer "+getAccessToken()
-    val request=ws.url("https://api.sandbox.paypal.com/v2/checkout/orders").
-      addHttpHeaders("Content-Type"->"application/json").
-      addHttpHeaders("Authorization"->token).
-      post(json)
-      request//this should be removed
-  }
-  def lol: Unit ={
-    val request=ws.url("https://api.sandbox.paypal.com/v2/payments/authorizations/")
+    val json=createOrder(json2)
+    val url=(json\"links"\1\\"href")(0).toString.replace("\"","")
+    val orderID=(json\"id").get.toString.replace("\"","")
+    Ok(template(url,orderID))
   }
 
-  def index = Action {
-   // Ok(views.html.index(getAccessToken()))
-    Ok(createOrder().toString)
-   //Ok(getAccessToken())
-    Ok(views.html.payment(69.00f))
-  }
 
 }
