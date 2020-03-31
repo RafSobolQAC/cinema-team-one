@@ -1,0 +1,33 @@
+@(movie: Movie)
+
+@main(movie.getTitle()) {
+    <div class="film-details-main container">
+        <div class="film-title-container row">
+            <div class="col-12">
+                <h1 class="film-details-title-tag">@movie.getTitle()</h1>
+            </div>
+        </div>
+        <div class="film-poster-description-container row">
+            <div class="col-4">
+                <img width="150" height="200" src="@movie.getPosterUrl()">
+            </div>
+            <div class="col-8">
+                <p>@movie.getDescription()</p>
+            </div>
+        </div>
+        <div class="film-release-credits-booking-container row">
+            <div class="col-4">
+                <div>Director: @movie.getDirector()</div>
+                <br />
+                <p>Main Actor protagonists:</p>
+                <ul>
+                @for(actor <- movie.getActors()) {
+                    <li>@actor</li>
+                }
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+}

@@ -1,0 +1,21 @@
+
+@(movieList: List[Movie])
+
+@main("CINEMA HD") {
+    <h1>TEAM 1 MOVIES</h1>
+
+    <div class="film-flex-container">
+    @for(movie <- movieList) {
+        <a href='/movieInfo/@(movie.getId)' class="film-panel">
+            <div class="row">
+            <h3>@movie.getTitle()</h3>
+
+            <img width="150" height="200" src="@movie.getPosterUrl()"/>
+
+            <h5>@movie.getDescription()</h5>
+            </div>
+        </a>
+    }
+    </div>
+    </br> </br>
+}
