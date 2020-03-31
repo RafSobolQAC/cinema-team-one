@@ -36,14 +36,17 @@ class BookingController @Inject()(
       Future.successful(BadRequest(views.html.bookingfilm(formWithErrors, List())))
     }, { film =>
       titlesAndScreenings.map { films =>
-
+        val innerFilms = films.find { case ((titleOfFilm, screenings))  =>
+          titleOfFilm == film}
+          .getOrElse(("None", List()))
+        val filmFromInner = innerFilms match {
+          case (_, screenings) => screenings
+        }
         Ok(views.html.booking(Booking.createBookingForm,
-          film,
+          film, filmFromInner
 //          films.find(movie =>
 //            movie._1 == film).getOrElse(("None", List()))._2))
-          films.find { case ((titleOfFilm, screenings))  =>
-            titleOfFilm == film}
-            .getOrElse(("None", List()))._2))
+          ))
       }
       //      Future.successful(Redirect(routes.BookingController.submitSelectFilmForm(film)))
       //      Ok(viwes.html.booking(Booking.createBookingForm, ))
