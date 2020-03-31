@@ -28,15 +28,32 @@ class ReleasedServices @Inject()(
 
   def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("releasedfilms"))
 
+  def getMovieByID(id: String): Future[List[ReleasedMovieWithID]] =  {
+    val cursor: Future[Cursor[ReleasedMovieWithID]] = collection.map {
+      _.find(Json.obj("_id" -> id)).
+        cursor[ReleasedMovieWithID]()
+    }
+
+    val moviesList: Future[List[ReleasedMovieWithID]] =
+      cursor.flatMap(
+        _.collect[List](
+          -1,
+          Cursor.FailOnError[List[ReleasedMovieWithID]]()
+        )
+      )
+
+    moviesList
+  }
+
   def updateMovieRating(id: String, rating: Rating) = {
-    collection.flatMap(_.update(false).one(
-      Json.obj(
-        {
-          "_id" -> BSONObjectID.parse(id).get
-        }
-      ),
-        "_rating" -> rating
-    ))
+    getMovieByID(id).map{a =>
+      collection.map(_.update(false).one(
+        Json.obj(
+          "rating" -> rating
+        ),
+        rating
+      ))
+    }
   }
 
   def getMovies = {
