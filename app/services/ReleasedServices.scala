@@ -43,7 +43,6 @@ class ReleasedServices @Inject()(
         }
       ),
         "_rating" -> rating
-        "_rating" -> rating
     ))
   }
 

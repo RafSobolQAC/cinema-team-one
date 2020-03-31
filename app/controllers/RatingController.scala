@@ -29,7 +29,7 @@ class RatingController  @Inject()(
       Future.successful(BadRequest(views.html.rating(formWithErrors)))
     }, {rating =>
       releasedServices.updateMovieRating(id, rating).map(_ => {
-        Ok(views.html.rating(Rating.createRatingForm))
+        Ok("Rating submitted successfully")
       })
     })
 

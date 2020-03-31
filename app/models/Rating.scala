@@ -8,16 +8,14 @@ case class Rating(starOne: Boolean, starTwo: Boolean, starThree: Boolean)
 object Rating {
 
   object Stars extends Enumeration {
-    val starOne, starTwo, starThree = Value
+    val one, two, three = Value
   }
 
   val createRatingForm: Form[Rating] = Form(
     mapping(
-      "starOne" -> boolean,
-      "starTwo" -> boolean,
-      "starThree" -> boolean
+      "one" -> boolean,
+      "two" -> boolean,
+      "three" -> boolean
     )(Rating.apply)(Rating.unapply)
   ).fill(Rating(false,false,false))
 }
-
-//in the view, make a helper form with 3 radio buttons; submit one true button
