@@ -6,14 +6,10 @@ import play.api.data.Form
 import play.api.data.Forms._
 
 case class Booking(film: String, screening: String, name: String, seats: List[Int])
-case class FiveIntsString(string: String)
 object Booking {
   val createBookingForm: Form[Booking] = Form(
     mapping(
       "film" -> nonEmptyText,
-      //      "screening" -> mapping(
-      //        "datetime" -> text
-      //      )(DateTime.apply)(DateTime.unapply),
       "screening" -> text,
       "name" -> nonEmptyText,
       "seats" -> list(number)

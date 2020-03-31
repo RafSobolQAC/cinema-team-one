@@ -7,6 +7,8 @@ import org.scalatestplus.play._
 import play.api.mvc._
 import play.api.test._
 import play.api.test.Helpers._
+import play.api.http.Status
+import org.scalatest.concurrent.ScalaFutures
 
 import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 import org.mockito.Mockito._
@@ -60,6 +62,18 @@ class BookingControllerTest extends PlaySpec with Results with MockitoSugar {
     }
 
   }
+  "The submit select film form submit" should {
+    "give a bad request if bad form is provided" in {
+      val mockedMongo = mock[ReactiveMongoApi]
+      val releasedService = mock[ReleasedServices]
+      val bookingService = mock[BookingServices]
 
+      val controller = new BookingController(Helpers.stubControllerComponents(), mockedMongo, bookingService, releasedService)
+      val request = FakeRequest(routes.BookingController.submitSelectFilmFormSubmit())
+        .withFormUrlEncodedBody("bad" -> "bad")
+      val result = controller.submitSelectFilmFormSubmit.apply(request)
+      status(result) must be(Status(400))
+    }
+  }
 
 }
