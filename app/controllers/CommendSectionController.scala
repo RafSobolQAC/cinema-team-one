@@ -33,8 +33,8 @@ class CommendSectionController @Inject()(
     Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
       println(formWithErrors)
       Future.successful(BadRequest(views.html.commends(formWithErrors)))
-    }, {Commends =>
-      serviceSubmitComment(Commends).map(result =>
+    }, {commends =>
+      serviceSubmitComment(commends).map(result =>
         Ok("Well done! Comment created!")
       )
     }
