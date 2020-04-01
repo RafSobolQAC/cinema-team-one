@@ -11,6 +11,7 @@
     <head>
         @* Here's where we render the page title `String`. *@
         <title>@title</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
@@ -19,6 +20,23 @@
     <body>
         @* And here's where we render the `Html` object containing
          * the page content. *@
+
+
+    <div class="w3-sidebar w3-bar-block w3-dark-grey w3-animate-left" style="display:none" id="mySidebar">
+        <button class="w3-bar-item w3-button w3-large"
+        onclick="sideClose()">Close &times;</button>
+        <a href="/" class="w3-bar-item w3-button">Home</a>
+        <a href="/gallerymovies" class="w3-bar-item w3-button">Released Movies</a>
+        <a href="/upcomingmovies" class="w3-bar-item w3-button">Upcoming Movies</a>
+        <a href="/aboutus" class="w3-bar-item w3-button">About Us</a>
+        <a href="/contact" class="w3-bar-item w3-button">Contact Us</a>
+    </div>
+
+    <div>
+        <button class="w3-button w3-white w3-xxlarge" onclick="sideOpen()">&#9776;</button>
+    </div>
+
+
         @content
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
