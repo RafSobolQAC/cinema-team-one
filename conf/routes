@@ -34,7 +34,6 @@ GET         /capturePayment             controllers.PaymentController.capturePay
 
 
 
-GET         /PLACEHOLDER                controllers.HomeController.placeholder
 
 GET         /classifications            controllers.ClassificationController.classifications
 
