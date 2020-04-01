@@ -8,19 +8,18 @@ import play.api.mvc._
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
-
+class EmailController @Inject()( cc: ControllerComponents) extends AbstractController(cc) {
   /**
    * Create an Action to render an HTML page with a welcome message.
    * The configuration in the `routes` file means that this method
    * will be called when the application receives a `GET` request with
-   * a path of `/`.
+   * a path of `/`,.
    */
-  def index = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index("Home"))
+
+  def index = Action {//does it all
+
+    Ok(views.html.email())
   }
 
-  def placeholder = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.placeholder("PLACEHOLDER"))
-  }
+
 }

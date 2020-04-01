@@ -1,20 +1,25 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@(title: String)
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
+@main(title) {
+    <div class="row">
+        <div class="col-sm-12">
+            <center>
+                <img style="width: 50%" src="https://cdn.pixabay.com/photo/2015/07/30/11/04/film-867234_1280.png" alt="Logo">
+            </center>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+            <div class="col-sm-6 ">
+                <a href="/gallerymovies">
+                    <button style="width: 100%"><h2>Released Movies</h2></button>
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <a href="/upcoming">
+                    <button style="width: 100%"><h2>Upcoming Movies</h2></button>
+                </a>
+            </div>
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @welcome(message, style = "scala")
-
+    </div>
 }

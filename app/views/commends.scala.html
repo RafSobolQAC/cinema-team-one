@@ -1,0 +1,15 @@
+@import models.Commends
+@(form: Form[Commends])(implicit flash: Flash, messagesProvider: MessagesProvider)
+
+@*todo fix this form *@
+@main("Create Commends!") {
+    @flash.get("success").getOrElse("Create!")
+    @helper.form(routes.CommendSectionController.submitCommend) {
+        @helper.inputText(form("name"), '_label -> "Film")
+        @helper.inputText(form("email"), '_label -> "Email")
+        @helper.inputText(form("movieName"), '_label -> "Movie Name")
+        @helper.inputText(form("comment"), '_label -> "Comment")
+
+        <button lass="btn btn-info" type="submit">Add comment</button>
+    }
+}

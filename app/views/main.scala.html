@@ -1,23 +1,52 @@
 @*
- * This template is called from the `index` template. This template
- * handles the rendering of the page header and body tags. It takes
- * two arguments, a `String` for the title of the page and an `Html`
- * object to insert into the body of the page.
- *@
+* This template is called from the `index` template. This template
+* handles the rendering of the page header and body tags. It takes
+* two arguments, a `String` for the title of the page and an `Html`
+* object to insert into the body of the page.
+*@
 @(title: String)(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         @* Here's where we render the page title `String`. *@
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
-        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+    <title>@title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
     </head>
     <body>
         @* And here's where we render the `Html` object containing
-         * the page content. *@
+        * the page content. *@
+    <div class="w3-sidebar w3-bar-block w3-dark-grey w3-animate-left" style="display:none" id="mySidebar">
+        <button class="w3-bar-item w3-button w3-large"
+        onclick="sideClose()">Close &times;</button>
+        <a href="/" class="w3-bar-item w3-button">Home</a>
+        <a href="/gallerymovies" class="w3-bar-item w3-button">Released Movies</a>
+        <a href="/upcomingmovies" class="w3-bar-item w3-button">Upcoming Movies</a>
+        <a href="/makebooking" class="w3-bar-item w3-button">Booking</a>
+        <a href="/screens" class="w3-bar-item w3-button">Screens</a>
+
+        <a href="/aboutus" class="w3-bar-item w3-button">About Us</a>
+        <a href="/contact" class="w3-bar-item w3-button">Contact Us</a>
+        <a href="/classifications" class="w3-bar-item w3-button">Classifications</a>
+
+    </div>
+
+    <div>
+        <button class="w3-button w3-white w3-xxlarge" onclick="sideOpen()">&#9776;</button>
+    </div>
+
+
         @content
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
     </body>
 </html>
