@@ -4,9 +4,6 @@ import javax.inject.{Inject, _}
 import models.{Booking, DateTime}
 import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
-import models.JsonFormats._
-import play.api.libs.json.{JsValue, Json}
-import reactivemongo.play.json.collection.JSONCollection
 import services.{BookingServices, ReleasedServices}
 
 import scala.collection.mutable.ListBuffer
@@ -23,6 +20,7 @@ class BookingController @Inject()(
                                  ) extends AbstractController(components)
   with MongoController with ReactiveMongoComponents with play.api.i18n.I18nSupport {
 
+  val pay=paymentController.createOrder(5,"http://localhost:9099/capturePayment")
   implicit def ec: ExecutionContext = components.executionContext
 
   def showForm = Action.async { implicit request: Request[AnyContent] =>
@@ -56,13 +54,19 @@ class BookingController @Inject()(
   }
 
 
+
   def submitForm /*()(implicit titles: List[(String, List[DateTime])])*/ = Action.async { implicit request: Request[AnyContent] =>
 
-    Booking.createBookingForm.bindFromRequest.fold({ formWithErrors =>
+//    if(paymentController.capturePayment(pay._2)==Ok("Order completed")){
+//        Ok("what happens when purchase is verified")
+//    }else{
+//      Ok("pay the moni")
+//    }
+    Booking.createBookingForm.bindFromRequest.fold({formWithErrors =>
       println("This is the form with errors!")
       println(formWithErrors)
-      Future.successful(BadRequest("Bad!"))
-    }, { booking =>
+      Future.successful(BadRequest(views.html.booking(formWithErrors,null)))
+    }, {booking =>
       bookingServices.createBooking(booking).map(_ => {
         Redirect(routes.HomeController.index()).flashing("success" -> "Made a booking!")
         //        Redirect(routes.BookingController.showForm).flashing("success" -> "Successfully created!")

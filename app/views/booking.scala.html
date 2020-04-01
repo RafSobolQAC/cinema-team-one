@@ -2,7 +2,7 @@
 
 
 
-@(form: Form[Booking], title: String, screenings: List[String])(authorizeUrl: String, orderId: String)(implicit messagesProvider: MessagesProvider, flash: Flash)
+@(form: Form[Booking], title: String, screenings: List[String])(url: String)(implicit messagesProvider: MessagesProvider, flash: Flash)
 
 
 @main("Booking!") {
@@ -15,9 +15,8 @@
             @helper.inputText(tagField, '_label -> "Adult/child/concession")
         }
         <button class="btn btn-info" type="submit">Book now</button>
+        <a href=@url target="/capturePayment">click me to buy ticket though paypal</a>
+
     }
-    @payment(authorizeUrl, orderId)
 }
 
-<script>
-</script>
