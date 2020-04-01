@@ -10,6 +10,7 @@ import scala.concurrent.Future
 
 class PayementControllerTest extends PlaySpec with MockitoSugar with Results{
 
+  val port=9099//change me when testing
   val wsr = mock[WSResponse]
   val ws = mock[WSClient]
   val controller: PaymentController = new PaymentController( ws, Helpers.stubControllerComponents())
