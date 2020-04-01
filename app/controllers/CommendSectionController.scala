@@ -69,10 +69,16 @@ class CommendSectionController @Inject()(
   }
 
   def formValidation(form:Form[Commends]): Boolean = {
-    val source = Source.fromFile("/Desktop/badwords.txt")
-    val lines = source.getLines().toList
-    val comment = form("comment").value.toList
-    comment.containsSlice(lines)
+    val source = Source.fromFile("C:\\Users\\evini\\Documents\\QA training\\Scala\\badwords.txt").getLines().toSet
+    //val lines = source.getLines().
+    val comment = form("comment").value.getOrElse("")
+    var hasSwearWord = true
+    val splitWodsComments = comment.split(" ")
+    splitWodsComments.foreach(word => if (source.contains(word)) {
+      hasSwearWord=false
+    })
+    hasSwearWord
+
   }
 
   //todo fix the error with the valitation
@@ -163,7 +169,6 @@ class CommendSectionController @Inject()(
 
 
 }
-
 
 
 
