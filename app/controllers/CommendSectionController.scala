@@ -3,6 +3,7 @@ package controllers
 import javax.inject.Inject
 import models.Commends
 import models.JsonFormats._
+import play.api.data.Form
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, _}
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
@@ -13,6 +14,9 @@ import reactivemongo.play.json.collection.{JSONCollection, _}
 import services.ReleasedServices
 
 import scala.concurrent.{ExecutionContext, Future}
+import scala.io.Source
+
+
 
 class CommendSectionController @Inject()(
                                           components: ControllerComponents,
@@ -63,14 +67,24 @@ class CommendSectionController @Inject()(
     collection.flatMap(_.insert.one(comment))
   }
 
+  def formValidation(form:Form[Commends]): Boolean = {
+    val source = Source.fromFile("/Desktop/badwords.txt")
+    val lines = source.getLines().toList
+    val comment = form("comment").value.toList
+    comment.containsSlice(lines)
+  }
+
   def submitCommend = Action.async { implicit request: Request[AnyContent] =>
     Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
       //println(formWithErrors)
       Future.successful(BadRequest(views.html.commends(formWithErrors, commentsList)))
     }, { commends =>
-
-      serviceSubmitComment(commends).map(_ =>
-        Ok(views.html.MessageBoard(Commends.createCommentForm, commentsList)))
+      if (formValidation(Commends.createCommentForm)) {
+        BadRequest("Inappropriate Language")}
+      else {
+        serviceSubmitComment(commends).map(_ =>
+          Ok(views.html.MessageBoard(Commends.createCommentForm, commentsList)))
+      }
     }
     )
   }
@@ -96,7 +110,5 @@ class CommendSectionController @Inject()(
   }
 }
 
-  //  def showComments {
-  //  }
 
 
