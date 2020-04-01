@@ -2,21 +2,20 @@
 
 
 
-@(form: Form[Booking], title: String, screenings: List[String])(implicit messagesProvider: MessagesProvider, flash: Flash)
+@(form: Form[Booking], title: String, screenings: List[String])(url: String = "http://localhost:9099/capturePayment")(implicit messagesProvider: MessagesProvider, flash: Flash)
 
 
-@main("Booking!") {
-    @flash.get("success").getOrElse("Create!")
-    @helper.form(routes.BookingController.submitForm) {
-        @helper.select(form("film"), Seq(title->title))
-        @helper.select(form("screening"), screenings.map(screening => screening.toString -> screening.toString))
-        @helper.inputText(form("name"), '_label -> "Name")
-        @helper.repeat(form("seats"), min = 3) { tagField =>
-            @helper.inputText(tagField, '_label -> "Adult/child/concession")
-        }
-        <button class="btn btn-info" type="submit">Book now</button>
+@flash.get("success").getOrElse("Create!")
+
+@helper.form(routes.BookingController.submitForm) {
+    <div style="display:none">@helper.select(form("film"), Seq(title -> title))</div>
+    @helper.select(form("screening"), screenings.map(screening =>  screening.toString -> DisplayFormats.screeningDisplay(screening)))
+    @helper.inputText(form("name"), '_label -> "Name")
+    @helper.repeat(form("seats"), min = 3) { tagField =>
+        @helper.inputText(tagField, '_label -> "Adult/child/concession")
     }
+    <button class="btn btn-info" type="submit">Book now</button>
+    <a href="@routes.PaymentController.index">click me to buy ticket though paypal</a>
+
 }
 
-<script>
-</script>
