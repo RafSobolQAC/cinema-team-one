@@ -1,8 +1,8 @@
 @import models.Commends
-@(form: Form[Commends], comments: List[Commends])(implicit flash: Flash, messagesProvider: MessagesProvider)
+@(form: Form[Commends], title: String, comments: List[Commends])(implicit flash: Flash, messagesProvider: MessagesProvider)
 
 @main("Create Comments!") {
-    <h2> title-goes-here review </h2>
+    <h2> @title review </h2>
     @flash.get("Success").getOrElse("Leave a Comment!")
     @helper.form(routes.CommendSectionController.submitCommend) {
         @helper.inputText(form("name"), '_label -> "Nameresources")

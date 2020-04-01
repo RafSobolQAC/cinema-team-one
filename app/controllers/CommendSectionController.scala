@@ -47,9 +47,9 @@ class CommendSectionController @Inject()(
     }
   }
 
-  def createCommends(comment: Commends) = Action { implicit request: Request[AnyContent] =>
+  def createCommends(comment: Commends, title: String) = Action { implicit request: Request[AnyContent] =>
     val futureResult = collection.flatMap(_.insert.one(comment))
-    Ok(views.html.commends(Commends.createCommentForm, commentsList))
+    Ok(views.html.commends(Commends.createCommentForm, title, commentsList))
   }
 
   def createFromJson: Action[JsValue] = Action.async(parse.json) { request =>
@@ -106,13 +106,13 @@ class CommendSectionController @Inject()(
         Future.successful(BadRequest("Inappropriate Language"))}
       else {
         serviceSubmitComment(commends).map(_ =>
-          Redirect(routes.HomeController.index()).flashing("success" -> "Made a comment!"))
+          Ok(views.html.MessageBoard(Commends.createCommentForm,commentsList)))
       }
     }
     )
   }
 
-  def findAllComments(filter: Option[(String, Json.JsValueWrapper)] = None): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
+  def findAllComments(title: String, filter: Option[(String, Json.JsValueWrapper)] = None): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     val cursor: Future[Cursor[Commends]] = collection.map {
       _.find(getOrNothing(filter))
         .cursor[Commends]()
@@ -124,7 +124,7 @@ class CommendSectionController @Inject()(
       )
     ).map { comment =>
       commentsList = comment
-      Ok(views.html.commends(Commends.createCommentForm, commentsList))
+      Ok(views.html.commends(Commends.createCommentForm, title, commentsList))
     }
   }
 
@@ -152,13 +152,13 @@ class CommendSectionController @Inject()(
       Future.successful(BadRequest(views.html.commendsfilm(formWithErrors, List())))
     },{ film =>
       movieTitleAndScreening.map { films =>
-        val innerFilms = films.find { case (titleOfFilm) =>
-        titleOfFilm == film}
+        val innerFilms = films.find { case (titleOfFilm, screenings) =>
+          titleOfFilm == film}
           .getOrElse(("None",List()))
         val filmFromInner = innerFilms match {
           case (_, screenings) => screenings
         }
-        Ok(views.html.commends(Commends.createCommentForm, commentsList)
+        Ok(views.html.commends(Commends.createCommentForm, film, commentsList)
         )
       }
 
@@ -166,6 +166,27 @@ class CommendSectionController @Inject()(
 
   }
 
+//def submitSelectFilmFormSubmit = Action.async { implicit request: Request[AnyContent] =>
+//  Commends.createMovieToRateForm.bindFromRequest.fold({ formWithErrors =>
+//    Future.successful(BadRequest(views.html.bookingfilm(formWithErrors, List())))
+//  }, { film =>
+//    movieTitleAndScreening.map { films =>
+//      val innerFilms = films.find { case ((titleOfFilm, screenings))  =>
+//        titleOfFilm == film}
+//        .getOrElse(("None", List()))
+//      val filmFromInner = innerFilms match {
+//        case (_, screenings) => screenings
+//      }
+//      Ok(views.html.commends(Commends.createCommentForm,
+//        film, filmFromInner
+//        //          films.find(movie =>
+//        //            movie._1 == film).getOrElse(("None", List()))._2))
+//      ))
+//    }
+//    //      Future.successful(Redirect(routes.BookingController.submitSelectFilmForm(film)))
+//    //      Ok(viwes.html.booking(Booking.createBookingForm, ))
+//  })
+//}
 
 
 }
