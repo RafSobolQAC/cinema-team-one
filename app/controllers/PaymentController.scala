@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import play.api.libs.json.{JsValue, Json}
+import play.api.libs.json.{JsResultException, JsValue, Json}
 import play.api.libs.ws._
 import play.api.mvc._
 
@@ -58,9 +58,13 @@ class PaymentController @Inject()(ws: WSClient, cc: ControllerComponents) extend
     }
   }
 
-  def checkCapture(capturePaymentResponse: String) = { //returns true if the capture payment response was successful (payment taken)
-    (Json.parse(capturePaymentResponse) \ "status").as[String] == "COMPLETED"
-  }
+
+  def checkCapture(capturePaymentResponse:String) ={//returns true if the capture payment response was successful (payment taken)
+    try {
+      (Json.parse(capturePaymentResponse) \ "status").as[String] == "COMPLETED"
+    } catch {
+      case e:JsResultException =>  false
+    }
 
   def index = Action { //does it all
     val json3: JsValue = Json.obj("application_context" -> Json.obj("return_url" -> "http://localhost:9000/capturePayment"), "intent" -> "capture", "purchase_units" -> Json.obj("reference_id" -> "TICKET", "amount" -> Json.obj("currency_code" -> "GBP", "value" -> 69)))
