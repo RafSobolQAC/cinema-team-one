@@ -19,7 +19,7 @@ class UpcomingController @Inject()(
 
   def getMovies = Action.async { implicit request: Request[AnyContent] =>
     upcomingServices.getMovies.map { movies =>
-      Ok(views.html.movie(movies))
+      Ok(views.html.upcomingmovie(movies))
     }
   }
 
