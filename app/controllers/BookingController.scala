@@ -18,7 +18,8 @@ class BookingController @Inject()(
                                    components: ControllerComponents,
                                    val reactiveMongoApi: ReactiveMongoApi,
                                    val bookingServices: BookingServices,
-                                   val releasedServices: ReleasedServices
+                                   val releasedServices: ReleasedServices,
+                                   val paymentController: PaymentController
                                  ) extends AbstractController(components)
   with MongoController with ReactiveMongoComponents with play.api.i18n.I18nSupport {
 
@@ -42,8 +43,9 @@ class BookingController @Inject()(
         val filmFromInner = innerFilms match {
           case (_, screenings) => screenings
         }
+        val urlAndOrdId = paymentController.makeIndex
         Ok(views.html.booking(Booking.createBookingForm,
-          film, filmFromInner
+          film, filmFromInner)(urlAndOrdId._1, urlAndOrdId._2
 //          films.find(movie =>
 //            movie._1 == film).getOrElse(("None", List()))._2))
           ))

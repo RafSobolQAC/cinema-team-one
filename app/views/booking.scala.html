@@ -2,7 +2,7 @@
 
 
 
-@(form: Form[Booking], title: String, screenings: List[String])(implicit messagesProvider: MessagesProvider, flash: Flash)
+@(form: Form[Booking], title: String, screenings: List[String])(authorizeUrl: String, orderId: String)(implicit messagesProvider: MessagesProvider, flash: Flash)
 
 
 @main("Booking!") {
@@ -16,6 +16,7 @@
         }
         <button class="btn btn-info" type="submit">Book now</button>
     }
+    @payment(authorizeUrl, orderId)
 }
 
 <script>
