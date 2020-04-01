@@ -74,6 +74,7 @@ class CommendSectionController @Inject()(
     comment.containsSlice(lines)
   }
 
+  //todo fix the error with the valitation
   def submitCommend = Action.async { implicit request: Request[AnyContent] =>
     Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
       //println(formWithErrors)
