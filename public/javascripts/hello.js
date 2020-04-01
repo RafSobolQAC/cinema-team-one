@@ -3,9 +3,9 @@ if (window.console) {
 }
 
 
-function w3_open() {
+function sideOpen() {
   document.getElementById("mySidebar").style.display = "block";
 }
-function w3_close() {
+function sideClose() {
   document.getElementById("mySidebar").style.display = "none";
 }
