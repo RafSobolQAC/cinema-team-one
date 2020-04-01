@@ -1,11 +1,2 @@
-@import models.Rating
+@import models.{Rating, ReleasedMovieWithID}
 
-@(form: Form[Rating])(implicit messagesProvider: MessagesProvider, flash: Flash)
-
-@main("Rating") {
-    <h1> Rating (one, two or three star?): </h1>
-    @helper.form(routes.RatingController.submitRating) {
-        @helper.inputRadioGroup(form("Stars: "), Rating.Stars.values.toSeq.map(star => star.toString -> star.toString))
-        <button class="btn btn-info" type="submit">Submit rating</button>
-    }
-}

@@ -45,16 +45,16 @@ class ReleasedServices @Inject()(
     moviesList
   }
 
-  def updateMovieRating(id: String, rating: Rating) = {
-    getMovieByID(id).map{a =>
-      collection.map(_.update(false).one(
-        Json.obj(
-          "rating" -> rating
-        ),
-        rating
-      ))
-    }
-  }
+//  def updateMovieRating(id: String, rating: Rating) = {
+//    getMovieByID(id).map{_ =>
+//      collection.map(_.update(false).one(
+//        Json.obj(
+//          "rating" -> rating
+//        ),
+//        rating
+//      ))
+//    }
+//  }
 
   def getMovies = {
     val cursor: Future[Cursor[ReleasedMovieWithID]] = collection.map {

@@ -7,7 +7,8 @@ case class Commends(
                          name: String,
                          email: String,
                          movieName: String,
-                         comment: String
+                         comment: String,
+                         rating: String,
                        )
 
 object Commends {
@@ -17,8 +18,9 @@ object Commends {
       "email" -> email,
       "movieName" -> nonEmptyText,
       "comment" -> nonEmptyText,
+      "rating" -> nonEmptyText
     )(Commends.apply)(Commends.unapply)
-  ).fill(Commends("","","",""))
+  ).fill(Commends("","","","",""))
 
 
 
