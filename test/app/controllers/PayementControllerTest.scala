@@ -21,8 +21,21 @@ class PayementControllerTest extends PlaySpec with MockitoSugar {
   }
   "capture payment" should{
     "capture the current payment" in{
-      val result=controller.capturePayment("this is an order ID XD")
-      result.toString() must not be empty
+      //val result=controller.capturePayment("3333333w")
+      val testID="heheLOLxDJAJAJ"
+      val result:Future[Result] = controller.capturePayment(testID).apply(FakeRequest())
+      status(result) mustEqual(200)
+
+    //  contentType(result) mustBe null
+    }
+  }
+
+  "capturePayments" should {
+    "be reachable" in new WithServer {
+      val response = (ws.url("http://localhost:" + port+"/capturePayment?token=penis")) //1
+
+      // response.status must equalTo(OK) //2
+      // response.body must contain("").wait //3
     }
   }
 
