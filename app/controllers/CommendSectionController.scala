@@ -69,7 +69,7 @@ class CommendSectionController @Inject()(
   }
 
   def formValidation(form:Form[Commends]): Boolean = {
-    val source = Source.fromFile("C:\\Users\\evini\\Documents\\QA training\\Scala\\badwords.txt").getLines().toSet
+    val source = Source.fromResource("resources/badwords.txt").getLines().toSet
     //val lines = source.getLines().
     val comment = form("comment").value.getOrElse("")
     var hasSwearWord = true
