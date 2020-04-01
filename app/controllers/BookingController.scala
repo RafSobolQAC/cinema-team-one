@@ -30,28 +30,25 @@ class BookingController @Inject()(
   }
 
 
-  def submitSelectFilmFormSubmit = Action.async { implicit request: Request[AnyContent] =>
-    Booking.getTitleForm.bindFromRequest.fold({ formWithErrors =>
-      Future.successful(BadRequest(views.html.bookingfilm(formWithErrors, List())))
-    }, { film =>
-      titlesAndScreenings.map { films =>
-        val innerFilms = films.find { case ((titleOfFilm, screenings))  =>
-          titleOfFilm == film}
-          .getOrElse(("None", List()))
-        val filmFromInner = innerFilms match {
-          case (_, screenings) => screenings
-        }
-        val urlAndOrdId = paymentController.makeIndex
-        Ok(views.html.booking(Booking.createBookingForm,
-          film, filmFromInner)(urlAndOrdId._1, urlAndOrdId._2
-//          films.find(movie =>
-//            movie._1 == film).getOrElse(("None", List()))._2))
-          ))
-      }
-      //      Future.successful(Redirect(routes.BookingController.submitSelectFilmForm(film)))
-      //      Ok(viwes.html.booking(Booking.createBookingForm, ))
-    })
-  }
+//  def submitSelectFilmFormSubmit = Action.async { implicit request: Request[AnyContent] =>
+//    Booking.getTitleForm.bindFromRequest.fold({ formWithErrors =>
+//      Future.successful(BadRequest(views.html.bookingfilm(formWithErrors, List())))
+//    }, { film =>
+//      titlesAndScreenings.map { films =>
+//        val innerFilms = films.find { case ((titleOfFilm, _))  =>
+//          titleOfFilm == film}
+//          .getOrElse(("None", List()))
+//        val filmFromInner = innerFilms match {
+//          case (_, screenings) => screenings
+//        }
+//        Ok(views.html.booking(Booking.createBookingForm,
+//          film, filmFromInner
+////          films.find(movie =>
+////            movie._1 == film).getOrElse(("None", List()))._2))
+//          ))
+//      }
+//    })
+//  }
 
 
 
@@ -65,7 +62,7 @@ class BookingController @Inject()(
     Booking.createBookingForm.bindFromRequest.fold({formWithErrors =>
       println("This is the form with errors!")
       println(formWithErrors)
-      Future.successful(BadRequest(views.html.booking(formWithErrors,null)))
+      Future.successful(BadRequest(views.html.booking(formWithErrors,"nonono",List("Never"))()))
     }, {booking =>
       bookingServices.createBooking(booking).map(_ => {
         Redirect(routes.HomeController.index()).flashing("success" -> "Made a booking!")

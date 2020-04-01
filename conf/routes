@@ -11,7 +11,7 @@ GET         /count                      controllers.CountController.count
 GET         /message                    controllers.AsyncController.message
 GET         /allmovies                  controllers.ReleasedController.getMovies
 
-GET         /makebooking                controllers.BookingController.submitSelectFilmFormSubmit
+# GET         /makebooking                controllers.BookingController.submitSelectFilmFormSubmit
 
 GET         /gallerymovies              controllers.ReleasedController.getMovies
 GET         /gallerymovies/:_id         controllers.ReleasedController.releasedMovieInfo(_id: String)

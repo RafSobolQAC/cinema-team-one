@@ -66,7 +66,7 @@ class PaymentController @Inject()(ws:WSClient,cc: ControllerComponents) extends 
     val url=tuple._1
     val orderID=tuple._2
     capturePayment(orderID)
-    Ok(views.html.payment(url))
+    Ok(views.html.payment(url, orderID))
   }
 
 

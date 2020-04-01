@@ -1,7 +1,7 @@
-@(movie: ReleasedMovieWithID)
+@(movie: ReleasedMovieWithID)(implicit messagesProvider: MessagesProvider, flash: Flash)
 
 @main(movie.title) {
-   <div class="details container">
+    <div class="details container">
         <div class="title container">
             <div class="col-12">
                 <h1 class="title-tag">@movie.title</h1>
@@ -17,23 +17,35 @@
         </div>
         <div class="film-release-booking-container row">
 
-                <div>Release Times: @movie.screenings</div>
-                <br />
-                <p>Main Actors:</p>
-                <ul>
-                @for(actor <- movie.actors) {
-                    <li>@actor</li>
-                }
-                </ul>
+            <div>Screening Times: @{movie.screenings.map(scr => DisplayFormats.screeningDisplay(scr)+" ")}</div>
+            <br />
+            <p>Main Actors:</p>
+            <ul>
+            @for(actor <- movie.actors) {
+                <li>@actor</li>
+            }
+            </ul>
 
 
-@*//            <div class="col-4 film-details-button-container">*@
-@*//                <button class="btn btn-primary">Book Now</button>*@
-@*//            </div>*@
-@*//            <div class="col-4 film-details-button-container">*@
-@*//                <button class="btn btn-primary">Add to my List</button>*@
-@*//            </div>*@
+            <div class="col-4 film-details-button-container">
+                <button class="btn btn-primary" onclick="showBooking()">Book Now</button>
+            </div>
+            <div id="bookingDiv" style="display: none">
+                @booking(Booking.createBookingForm, movie.title, movie.screenings)()
+            </div>
         </div>
 
-   </div>
+    </div>
+
 }
+
+<script>
+        function showBooking() {
+            var x = document.getElementById("bookingDiv");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+</script>
