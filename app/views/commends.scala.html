@@ -4,7 +4,7 @@
 @main("Create Comments!") {
     @flash.get("Success").getOrElse("Leave a Comment!")
     @helper.form(routes.CommendSectionController.submitCommend) {
-        @helper.inputText(form("name"), '_label -> "Name")
+        @helper.inputText(form("name"), '_label -> "Nameresources")
         @helper.inputText(form("email"), '_label -> "Email")
         @helper.inputText(form("movieName"), '_label -> "Movie Name")
         @helper.inputText(form("comment"), '_label -> "Comment")
