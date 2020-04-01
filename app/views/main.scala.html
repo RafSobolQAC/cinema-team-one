@@ -20,17 +20,19 @@
     <body>
         @* And here's where we render the `Html` object containing
         * the page content. *@
-
-
     <div class="w3-sidebar w3-bar-block w3-dark-grey w3-animate-left" style="display:none" id="mySidebar">
         <button class="w3-bar-item w3-button w3-large"
         onclick="sideClose()">Close &times;</button>
         <a href="/" class="w3-bar-item w3-button">Home</a>
         <a href="/gallerymovies" class="w3-bar-item w3-button">Released Movies</a>
         <a href="/upcomingmovies" class="w3-bar-item w3-button">Upcoming Movies</a>
-        <a href="/classifications" class="w3-bar-item w3-button">Classifications</a>
+        <a href="/makebooking" class="w3-bar-item w3-button">Booking</a>
+        <a href="/screens" class="w3-bar-item w3-button">Screens</a>
+
         <a href="/aboutus" class="w3-bar-item w3-button">About Us</a>
         <a href="/contact" class="w3-bar-item w3-button">Contact Us</a>
+        <a href="/classifications" class="w3-bar-item w3-button">Classifications</a>
+
     </div>
 
     <div>
@@ -39,6 +41,7 @@
 
 
         @content
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>

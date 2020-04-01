@@ -127,8 +127,8 @@ dd.error{color:#c00;}
 aside a[href^="http"]:after,.doc a[href^="http"]:after{content:url(/assets/images/external.png);vertical-align:middle;margin-left:5px;}
 
 body{
-    background-color: bisque;
-    color: saddlebrown;
+    background-color: #222222;
+    color: white;
 }
 
 .Movie-container {
@@ -142,23 +142,22 @@ body{
     cursor: pointer;
 }
 .dimGreybg{
-    background-color: dimgrey;
-    color: white;
+    background-color: white;
+    color: black;
 }
-
-.bgImg{
-    background-image: url("http://getwallpapers.com/wallpaper/full/5/a/f/476518.jpg");
-    backdrop-filter: blur(10px);
-    height: 100px;
-    width: 50%;
-}
-
-.bgImg:hover{
-    background-image: url("http://getwallpapers.com/wallpaper/full/5/a/f/476518.jpg");
-    backdrop-filter: blur(0px);
-}
-
 
 .selective-img:hover {
-    filter: drop-shadow(0px 0px 10px #264653);
+    filter: drop-shadow(0px 0px 10px grey);
+}
+
+button{
+    border-style: none;
+    background-color:whitesmoke;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+button:hover{
+    background-color: grey;
+
 }
