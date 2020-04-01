@@ -43,9 +43,8 @@ GET         /screens                    controllers.ScreensController.screens
 
 GET         /contact                    controllers.ContactController.contact
 
-#GET         /rating/:_id                controllers.RatingController.getRating(_id: String)
-#POST        /rating/:_id                controllers.RatingController.submitRating(_id: String)
+#GET    /messageform                 controllers.MessageBoardController.showMessageForm
 
-GET         /commend                    controllers.CommendSectionController.getCommends
+GET     /comment                     controllers.CommendSectionController.showCommentForm
 
-POST        /commend                    controllers.CommendSectionController.submitCommend
+POST    /comment                    controllers.CommendSectionController.submitCommend

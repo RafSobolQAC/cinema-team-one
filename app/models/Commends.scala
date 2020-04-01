@@ -14,7 +14,7 @@ case class Commends(
 object Commends {
   val createCommentForm: Form[Commends] = Form(
     mapping(
-      "named" -> nonEmptyText,
+      "name" -> nonEmptyText,
       "email" -> email,
       "movieName" -> nonEmptyText,
       "comment" -> nonEmptyText,
