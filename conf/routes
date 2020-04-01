@@ -45,6 +45,8 @@ GET         /contact                    controllers.ContactController.contact
 
 #GET    /messageform                 controllers.MessageBoardController.showMessageForm
 
+GET     /makecomment                 controllers.CommendSectionController.submitSelectFilmForm
 GET     /comment                     controllers.CommendSectionController.showCommentForm
 
 POST    /comment                    controllers.CommendSectionController.submitCommend
+

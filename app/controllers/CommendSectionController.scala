@@ -21,6 +21,7 @@ import scala.io.Source
 class CommendSectionController @Inject()(
                                           components: ControllerComponents,
                                           val reactiveMongoApi: ReactiveMongoApi,
+                                          val releasedServices: ReleasedServices,
                                         ) extends AbstractController(components)
   with MongoController with ReactiveMongoComponents with play.api.i18n.I18nSupport {
 
@@ -58,10 +59,10 @@ class CommendSectionController @Inject()(
     }.getOrElse(Future.successful(BadRequest("Invalid Json format!")))
   }
 
-  def showCommentForm = Action { implicit request: Request[AnyContent] =>
-    makeComments
-    Ok(views.html.commends(Commends.createCommentForm, commentsList))
-  }
+  //  def showCommentForm = Action { implicit request: Request[AnyContent] =>
+  //    makeComments
+  //    Ok(views.html.commends(Commends.createCommentForm, commentsList))
+  //  }
 
   def serviceSubmitComment(comment: Commends) = {
     collection.flatMap(_.insert.one(comment))
@@ -75,16 +76,31 @@ class CommendSectionController @Inject()(
   }
 
   //todo fix the error with the valitation
+//  def submitCommend = Action.async { implicit request: Request[AnyContent] =>
+//  Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
+//    //println(formWithErrors)
+//  Future.successful(BadRequest(views.html.commends(formWithErrors, commentsList)))
+//  }, { commends =>
+//  if (formValidation(Commends.createCommentForm)) {
+//    Future.successful(BadRequest("Inappropriate Language"))}
+//  else {
+//    serviceSubmitComment(commends).map(_ =>
+//      Ok(views.html.MessageBoard(Commends.createCommentForm, commentsList)))
+//  }
+//    }
+//    )
+//  }
+
   def submitCommend = Action.async { implicit request: Request[AnyContent] =>
     Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
-      //println(formWithErrors)
-      Future.successful(BadRequest(views.html.commends(formWithErrors, commentsList)))
+      println(formWithErrors)
+      Future.successful(BadRequest("Bad request"))
     }, { commends =>
       if (formValidation(Commends.createCommentForm)) {
-        BadRequest("Inappropriate Language")}
+        Future.successful(BadRequest("Inappropriate Language"))}
       else {
         serviceSubmitComment(commends).map(_ =>
-          Ok(views.html.MessageBoard(Commends.createCommentForm, commentsList)))
+          Redirect(routes.HomeController.index()).flashing("success" -> "Made a comment!"))
       }
     }
     )
@@ -109,7 +125,45 @@ class CommendSectionController @Inject()(
   def getOrNothing(filter: Option[(String, Json.JsValueWrapper)]) = {
     if (filter.isDefined) Json.obj(filter.get) else Json.obj()
   }
+
+  def showCommentForm = Action.async { implicit request: Request[AnyContent] =>
+    makeComments
+    movieTitleAndScreening.map{ titles =>
+      Ok(views.html.commendsfilm(Commends.createMovieToRateForm, titles))
+    }
+  }
+
+  def movieTitleAndScreening = {
+    releasedServices.getMovies.map { movies =>
+      movies.map {
+        movie => movie.title -> movie.screenings
+      }
+    }
+  }
+
+  def submitSelectFilmForm = Action.async { implicit request: Request[AnyContent] =>
+    Commends.createMovieToRateForm.bindFromRequest.fold({ formWithErrors =>
+      Future.successful(BadRequest(views.html.commendsfilm(formWithErrors, List())))
+    },{ film =>
+      movieTitleAndScreening.map { films =>
+        val innerFilms = films.find { case (titleOfFilm) =>
+        titleOfFilm == film}
+          .getOrElse(("None",List()))
+        val filmFromInner = innerFilms match {
+          case (_, screenings) => screenings
+        }
+        Ok(views.html.commends(Commends.createCommentForm, commentsList)
+        )
+      }
+
+    })
+
+  }
+
+
+
 }
+
 
 
 

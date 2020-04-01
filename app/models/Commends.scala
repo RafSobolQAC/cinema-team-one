@@ -8,7 +8,7 @@ case class Commends(
                          email: String,
                          movieName: String,
                          comment: String,
-                         rating: String,
+                         rating: Int,
                        )
 
 object Commends {
@@ -18,9 +18,13 @@ object Commends {
       "email" -> email,
       "movieName" -> nonEmptyText,
       "comment" -> nonEmptyText,
-      "rating" -> nonEmptyText
+      "rating" -> number,
     )(Commends.apply)(Commends.unapply)
-  ).fill(Commends("","","","",""))
+  ).fill(Commends("","","","",0))
+
+  val createMovieToRateForm: Form[String] = Form(
+    "title" -> nonEmptyText
+  )
 
 
 
