@@ -11,8 +11,6 @@ import reactivemongo.api.Cursor
 import reactivemongo.api.Cursor.WithOps
 import reactivemongo.play.json._
 import reactivemongo.play.json.collection.{JSONCollection, _}
-import services.ReleasedServices
-
 import scala.concurrent.{ExecutionContext, Future}
 import scala.io.Source
 
@@ -68,20 +66,27 @@ class CommendSectionController @Inject()(
   }
 
   def formValidation(form:Form[Commends]): Boolean = {
-    val source = Source.fromFile("/Desktop/badwords.txt")
-    val lines = source.getLines().toList
-    val comment = form("comment").value.toList
-    comment.containsSlice(lines)
+    val source = Source.fromFile("C:\\Users\\evini\\Documents\\QA training\\Scala\\badwords.txt").getLines().toSet
+    //val lines = source.getLines().
+    val comment = form("comment").value.getOrElse("")
+    var hasSwearWord = true
+    val splitWodsComments = comment.split(" ")
+    splitWodsComments.foreach(word => if (source.contains(word)) {
+      hasSwearWord=false
+    })
+    hasSwearWord
+
   }
 
   //todo fix the error with the valitation
+
   def submitCommend = Action.async { implicit request: Request[AnyContent] =>
     Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
       //println(formWithErrors)
       Future.successful(BadRequest(views.html.commends(formWithErrors, commentsList)))
     }, { commends =>
       if (formValidation(Commends.createCommentForm)) {
-        BadRequest("Inappropriate Language")}
+        Future.successful(BadRequest("Inappropriate Language"))}
       else {
         serviceSubmitComment(commends).map(_ =>
           Ok(views.html.MessageBoard(Commends.createCommentForm, commentsList)))
