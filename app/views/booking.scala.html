@@ -1,6 +1,6 @@
 @import models.Booking
 
-@(form: Form[Booking])(implicit messagesProvider: MessagesProvider, flash: Flash)
+@(form: Form[Booking],url:String)(implicit messagesProvider: MessagesProvider, flash: Flash)
 
     @main("Booking!") {
         @flash.get("success").getOrElse("Create!")
@@ -12,6 +12,10 @@
                 @helper.inputText(tagField, '_label -> "Adult/child/concession")
             }
             <button class="btn btn-info" type="submit">Book now</button>
+            <a href=@url target="/capturePayment">click me to buy ticket though paypal</a>
+
+
+
         }
     }
 
