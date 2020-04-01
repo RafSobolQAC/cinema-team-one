@@ -40,7 +40,7 @@ GET         /classifications            controllers.ClassificationController.cla
 
 GET         /screens                    controllers.ScreensController.screens
 
-
+GET         /adminEmail                 controllers.EmailController.index
 
 GET         /contact                    controllers.ContactController.contact
 
