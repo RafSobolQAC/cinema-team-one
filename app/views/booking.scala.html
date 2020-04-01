@@ -1,21 +1,21 @@
 @import models.Booking
 
-@(form: Form[Booking],url:String)(implicit messagesProvider: MessagesProvider, flash: Flash)
-
-    @main("Booking!") {
-        @flash.get("success").getOrElse("Create!")
-        @helper.form(routes.BookingController.submitForm) {
-            @helper.inputText(form("film"), '_label -> "Film")
-            @helper.inputText(form("screening"), 'type -> "datetime-local")
-            @helper.inputText(form("name"), '_label -> "Name")
-            @helper.repeat(form("seats"), min = 3) { tagField =>
-                @helper.inputText(tagField, '_label -> "Adult/child/concession")
-            }
-            <button class="btn btn-info" type="submit">Book now</button>
-            <a href=@url target="/capturePayment">click me to buy ticket though paypal</a>
 
 
+@(form: Form[Booking], title: String, screenings: List[String])(url: String = "http://localhost:9099/capturePayment")(implicit messagesProvider: MessagesProvider, flash: Flash)
 
-        }
+
+@flash.get("success").getOrElse("Create!")
+
+@helper.form(routes.BookingController.submitForm) {
+    <div style="display:none">@helper.select(form("film"), Seq(title -> title))</div>
+    @helper.select(form("screening"), screenings.map(screening =>  screening.toString -> DisplayFormats.screeningDisplay(screening)))
+    @helper.inputText(form("name"), '_label -> "Name")
+    @helper.repeat(form("seats"), min = 3) { tagField =>
+        @helper.inputText(tagField, '_label -> "Adult/child/concession")
     }
+    <button class="btn btn-info" type="submit">Book now</button>
+    <a href="@routes.PaymentController.index">click me to buy ticket though paypal</a>
+
+}
 

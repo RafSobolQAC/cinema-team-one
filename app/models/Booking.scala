@@ -4,16 +4,34 @@ import java.time.LocalDateTime
 
 import play.api.data.Form
 import play.api.data.Forms._
-case class Booking(film: String, screening: LocalDateTime, name: String, seats: List[Int])
 
+case class Booking(film: String, screening: String, name: String, seats: List[Int])
 object Booking {
   val createBookingForm: Form[Booking] = Form(
     mapping(
       "film" -> nonEmptyText,
-      "screening" -> localDateTime,
+      "screening" -> text,
       "name" -> nonEmptyText,
       "seats" -> list(number)
 
     )(Booking.apply)(Booking.unapply)
-  ).fill(Booking("",LocalDateTime.now(), "", List(0,0,0)))
+  )
+
+  val getTitleForm: Form[String] = Form(
+    "title" -> nonEmptyText
+  )
+
+//  val bookingWithStringForm = Form(
+//    mapping(
+//      "film" -> nonEmptyText,
+//      "screening" -> mapping(
+//        "datetime" -> text
+//      )(DateTime.apply)(DateTime.unapply),
+//      "name" -> nonEmptyText,
+//      "seats" -> list(number)
+//
+//    )(Booking.apply)(Booking.unapply)
+//
+//  )
+
 }
