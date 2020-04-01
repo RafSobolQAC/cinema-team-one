@@ -4,7 +4,11 @@ if (window.console) {
 
 
 function sideOpen() {
-  document.getElementById("mySidebar").style.display = "block";
+  if (document.getElementById("mySidebar").style.display === "block") {
+    sideClose();
+  } else {
+    document.getElementById("mySidebar").style.display = "block";
+  }
 }
 function sideClose() {
   document.getElementById("mySidebar").style.display = "none";
