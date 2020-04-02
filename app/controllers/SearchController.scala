@@ -21,7 +21,7 @@ class SearchController @Inject()(
   implicit def ec: ExecutionContext = components.executionContext
 
   def allMovies = Future {
-    var movies = new ListBuffer[Movie]
+    val movies = new ListBuffer[Movie]
 
     releasedServices.getMovies.map(el =>
       movies ++= el
