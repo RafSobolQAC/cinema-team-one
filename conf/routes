@@ -43,7 +43,6 @@ GET         /screens                    controllers.ScreensController.screens
 
 GET         /contact                    controllers.ContactController.contact
 
-
 GET     /makecomment                 controllers.CommendSectionController.submitSelectFilmForm
 GET     /comment                     controllers.CommendSectionController.showCommentForm
 
