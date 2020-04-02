@@ -5,6 +5,7 @@ function sideClose() {
   document.getElementById("mySidebar").style.display = "none";
 }
 
+window.onscroll = function() {footerStick()};
 var footer = document.getElementById("myFooter");
 var sticky = footer.offsetHeight;
 function footerStick() {
@@ -14,4 +15,3 @@ function footerStick() {
     footer.classList.remove("sticky");
   }
 }
-window.onscroll = function() {footerStick()};
