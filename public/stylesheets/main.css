@@ -129,6 +129,7 @@ aside a[href^="http"]:after,.doc a[href^="http"]:after{content:url(/assets/image
 body{
     background-color: #222222;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .Movie-container {
@@ -200,7 +201,6 @@ h2 {
 }
 h3{
     text-align: left;
-    font-family: Arial, Helvetica, sans-serif;
 }
 p{
     color: white;
