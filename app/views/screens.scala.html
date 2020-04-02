@@ -1,19 +1,21 @@
 @(message: String)
 @main("Screens"){
 
-        <h1 align="left"> Our Screens</h1>
-        <br>
+        <h2 align="center"> Our Screens</h2>
+    <body align="center" >
+    <br>
+        <p align="center">
         <button onclick="screen1()">Screen 1</button>
         <button onclick="screen2()">Screen 2</button>
-        <button onclick="deluxeBox()">Deluxe Box</button>
+        <button onclick="deluxeBox()">Deluxe Box </button>
+
         <br>
         <br>
-        <div >
-            <img style="display:block;" id="cinema" src="https://cdn.pixabay.com/photo/2017/09/17/08/39/curtain-2757815_960_720.png" align="center" />
+            <img style="display:block;" id="cinema" src="https://cdn.pixabay.com/photo/2017/09/17/08/39/curtain-2757815_960_720.png"  />
             <img style="display:none;" id="screen1" src="https://p1.pxfuel.com/preview/503/160/2/cinema-hall-film-cinema-lovers-royalty-free-thumbnail.jpg" />
             <img style="display:none;" id="screen2" src="https://www.theelectric.co.uk/images/carousel/landing1.jpg" />
             <img style="display:none;" id="deluxeBox" src= "https://www.caterlyst.com/Caterlyst/Images/news/N21735.jpg" />
-        </div>
+
          <script>
             function screen1() {
                 var cin = document.getElementById("cinema")
@@ -67,4 +69,7 @@
                 }
             }
             </script>
+</div>
+        </p>
+    </body>
 }

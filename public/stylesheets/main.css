@@ -157,7 +157,28 @@ button{
     padding: 10px;
     border-radius: 5px;
 }
+
 button:hover{
     background-color: grey;
 
+}
+
+table{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid black;
+    /*left: 30%;*/
+    top: 20%;
+    /*right: 20%;*/
+}
+th, td {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 3px solid black;
+}
+
+.classic {
+    width: 100px;
+    height: 100px;
+    alignment: left;
 }
