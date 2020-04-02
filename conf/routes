@@ -46,3 +46,5 @@ GET     /comment                     controllers.CommendSectionController.showCo
 POST    /comment                    controllers.CommendSectionController.submitCommend
 
 GET         /aboutus                    controllers.AboutUsController.aboutUs
+
+GET /alalalal controllers.SearchController.getAllMovies

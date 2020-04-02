@@ -1,0 +1,28 @@
+@(movieList: List[Movie])
+
+@properRedirector(movie: Movie) = {
+  @{movie match {
+    case released: ReleasedMovieWithID => s"/releasedmovies/${released._id}"
+    case upcoming: UpcomingMovieWithID => s"/upcomingmovies/${upcoming._id}"
+  }}
+}
+
+@main("Team1 Cinema") {
+  <h1>All Movies shown </h1>
+
+  <div class="Movie-container">
+
+  @for(movie <- movieList) {
+    <a href=@properRedirector(movie)>
+
+
+      <h3>@movie.title</h3>
+
+      <img width=200" height="260" src="@movie.image" onclick="myFunction(this);"/>
+      <h5>@movie.description</h5>
+    </a>
+  }
+  </div>
+
+  </br> </br>
+}

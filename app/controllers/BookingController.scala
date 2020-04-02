@@ -52,8 +52,8 @@ class BookingController @Inject()(
     Booking.createBookingForm.bindFromRequest.fold({ formWithErrors =>
       println("This is the form with errors!")
       println(formWithErrors)
-      Future.successful(BadRequest(views.html.booking(formWithErrors, "nonono", List("Never"))()))
-    }, { booking =>
+      Future.successful(BadRequest(views.html.booking(formWithErrors,request.body.asFormUrlEncoded.get("title").toString(),request.body.asFormUrlEncoded.get("screenings").toList)(request.body.asFormUrlEncoded.get("url").toString())))
+    }, {booking =>
       bookingServices.createBooking(booking).map(_ => {
         Redirect(routes.HomeController.index()).flashing("success" -> "Made a booking!")
         //        Redirect(routes.BookingController.showForm).flashing("success" -> "Successfully created!")

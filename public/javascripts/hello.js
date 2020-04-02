@@ -1,9 +1,15 @@
-function sideOpen() {
-  document.getElementById("mySidebar").style.display = "block";
-}
 function sideClose() {
   document.getElementById("mySidebar").style.display = "none";
 }
+
+function sideOpen() {
+  if (document.getElementById("mySidebar").style.display === "block") {
+    sideClose();
+  } else {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+}
+
 
 window.onscroll = function() {footerStick()};
 var footer = document.getElementById("myFooter");
