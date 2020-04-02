@@ -17,7 +17,6 @@ class PayementControllerTest extends PlaySpec with MockitoSugar with Results{
   "Payment" should {
     "get access token" in {
       val token = controller.getAccessToken().getBytes()
-
       println(controller.getAccessToken())
       token must not be empty
 
@@ -30,12 +29,11 @@ class PayementControllerTest extends PlaySpec with MockitoSugar with Results{
       val result:Future[Result] = controller.capturePayment(testID).apply(FakeRequest())
       status(result) mustEqual(200)
 
-    //  contentType(result) mustBe null
     }
   }
   "Application" should {
     "be reachable" in new WithServer {
-      val response = await(ws.url("http://localhost:" + 9099+"/capturePayment?token=penis").get()) //1
+      val response = await(ws.url("http://localhost:" + port+"/capturePayment?token=penis").get()) //1
 
      // response.status must equalTo(OK) //2
       response.body must contain("") //3

@@ -1,12 +1,15 @@
 package controllers
-
 import javax.inject._
+import models.bought
 import play.api.libs.json.{JsResultException, JsValue, Json}
 import play.api.libs.ws._
 import play.api.mvc._
-
-import scala.concurrent.Await
+import play.modules.reactivemongo.{ReactiveMongoApi, ReactiveMongoComponents}
+import reactivemongo.play.json.collection.JSONCollection
+import reactivemongo.play.json.ImplicitBSONHandlers._
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
 import scala.sys.process._
 
 /**
@@ -14,7 +17,8 @@ import scala.sys.process._
  * application's home page.
  */
 @Singleton
-class PaymentController @Inject()(ws: WSClient, cc: ControllerComponents) extends AbstractController(cc) {
+class PaymentController @Inject()(val reactiveMongoApi: ReactiveMongoApi,ws: WSClient, cc: ControllerComponents) extends AbstractController(cc) with ReactiveMongoComponents{
+
   /**
    * Create an Action to render an HTML page with a welcome message.
    * The configuration in the `routes` file means that this method
@@ -47,15 +51,26 @@ class PaymentController @Inject()(ws: WSClient, cc: ControllerComponents) extend
     (url, orderID)
   }
 
-  def capturePayment(orderID: String) = Action { //after user has paid, this needs to happen so it can capture payment
+  def capturePayment(orderID: String) = Action { implicit request: Request[AnyContent] => //after user has paid, this needs to happen so it can capture payment
     val token = "Bearer " + getAccessToken()
     val response = "curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders/" + orderID + "/capture -H \"Content-Type: application/json\" -H \"Authorization: " + token + "\"" !!
 
+//add new document with orderID and purchased =true
+
     if (checkCapture(response)) {
+      //addPurchase(orderID)
       Ok("Order completed!")
+
     } else {
       Ok("something went HORRIBLY wrong")
     }
+  }
+
+
+  def addPurchase(orderID:String): Unit ={
+    val order= bought.apply(orderID, true)
+    def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("bought"))
+    collection.flatMap(_.insert.one(order))
   }
 
 
@@ -68,9 +83,6 @@ class PaymentController @Inject()(ws: WSClient, cc: ControllerComponents) extend
   }
 
   def index = Action { //does it all
-    val json3: JsValue = Json.obj("application_context" -> Json.obj("return_url" -> "http://localhost:9000/capturePayment"), "intent" -> "capture", "purchase_units" -> Json.obj("reference_id" -> "TICKET", "amount" -> Json.obj("currency_code" -> "GBP", "value" -> 69)))
-    //^^stupid piece of  s*&t doesnt work ://
-
     val tuple = createOrder(69f, "http://localhost:9000/capturePayment")
     val url = tuple._1
     val orderID = tuple._2
