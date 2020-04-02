@@ -1,8 +1,3 @@
-if (window.console) {
-  console.log("Welcome to your Play application's JavaScript!");
-}
-
-
 function sideOpen() {
   document.getElementById("mySidebar").style.display = "block";
 }
@@ -10,15 +5,13 @@ function sideClose() {
   document.getElementById("mySidebar").style.display = "none";
 }
 
-window.onscroll = function() {myFunction()};
-
-var header = document.getElementById("myHeader");
-var sticky = header.offsetHeight;
-
-function myFunction() {
+var footer = document.getElementById("myFooter");
+var sticky = footer.offsetHeight;
+function footerStick() {
   if (window.pageYOffset < sticky) {
-    header.classList.add("sticky");
+    footer.classList.add("sticky");
   } else {
-    header.classList.remove("sticky");
+    footer.classList.remove("sticky");
   }
 }
+window.onscroll = function() {footerStick()};
