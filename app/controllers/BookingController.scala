@@ -1,15 +1,12 @@
 package controllers
 
-import javax.inject.{Inject, _}
-import models.{Booking, DateTime}
+import javax.inject.Inject
+import models.Booking
 import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 import services.{BookingServices, ReleasedServices}
 
-import scala.collection.mutable.ListBuffer
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContext, Future}
-import scala.io.Source
+import scala.concurrent.{ExecutionContext, Future}
 
 class BookingController @Inject()(
                                    components: ControllerComponents,
@@ -59,10 +56,10 @@ class BookingController @Inject()(
 //    }else{
 //      Ok("pay the moni")
 //    }
-    Booking.createBookingForm.bindFromRequest.fold({formWithErrors =>
+  Booking.createBookingForm.bindFromRequest.fold({formWithErrors =>
       println("This is the form with errors!")
       println(formWithErrors)
-      Future.successful(BadRequest(views.html.booking(formWithErrors,"nonono",List("Never"))()))
+      Future.successful(BadRequest(views.html.booking(formWithErrors,"nonono",List("Never"))))
     }, {booking =>
       bookingServices.createBooking(booking).map(_ => {
         Redirect(routes.HomeController.index()).flashing("success" -> "Made a booking!")
