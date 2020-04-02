@@ -17,7 +17,6 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.io.Source
 
 
-
 class CommendSectionController @Inject()(
                                           components: ControllerComponents,
                                           val reactiveMongoApi: ReactiveMongoApi,
@@ -63,27 +62,14 @@ class CommendSectionController @Inject()(
     collection.flatMap(_.insert.one(comment))
   }
 
-  def formValidation(form:Form[Commends]): Boolean = {
-    val source = Source.fromResource("resources/badwords.txt").getLines().toSet
-    //val lines = source.getLines().
-    val comment = form("comment").value.getOrElse("")
-    var hasSwearWord = false
-    val splitWodsComments = comment.split(" ")
-    splitWodsComments.foreach(word => if (source.contains(word)) {
-      println("Word is "+word)
-      hasSwearWord=true
-    })
-    hasSwearWord
-
-  }
 
   def wordValid(comment: Commends) = {
     val source = Source.fromResource("resources/badwords.txt").getLines().toSet
     var hasSwearWord = false
-    val splitWodsComments=comment.comment.split(" ")
+    val splitWodsComments = comment.comment.split(" ")
     splitWodsComments.foreach(word => if (source.contains(word)) {
-      println("Word is "+word)
-      hasSwearWord=true
+      println("Word is " + word)
+      hasSwearWord = true
     })
     hasSwearWord
 
@@ -95,10 +81,13 @@ class CommendSectionController @Inject()(
       Future.successful(BadRequest("Bad request"))
     }, { commends =>
       if (wordValid(commends)) {
-        Future.successful(BadRequest("Inappropriate Language"))}
+        Future.successful(BadRequest("Inappropriate Language"))
+      }
       else {
-        serviceSubmitComment(commends).map(_ =>
-          Ok(views.html.MessageBoard(Commends.createCommentForm,commentsList)))
+        serviceSubmitComment(commends).map(_ => {
+          val prevUrl = request.body.asFormUrlEncoded.get("previousURL").headOption.getOrElse("")
+          Redirect(Call("GET", prevUrl))
+          })
       }
     }
     )
@@ -126,7 +115,7 @@ class CommendSectionController @Inject()(
 
   def showCommentForm = Action.async { implicit request: Request[AnyContent] =>
     makeComments
-    movieTitleAndScreening.map{ titles =>
+    movieTitleAndScreening.map { titles =>
       Ok(views.html.commendsfilm(Commends.createMovieToRateForm, titles))
     }
   }
@@ -138,20 +127,29 @@ class CommendSectionController @Inject()(
       }
     }
   }
+  def getCommentsForFilm(title: String) = {
+    val cursor: Future[WithOps[Commends]] = collection.map {
+      _.find(Json.obj("movieName" -> title))
+        .cursor[Commends]()
+    }
+
+    cursor.flatMap(
+      _.collect[List](
+        -1,
+        Cursor.FailOnError[List[Commends]]()
+      )
+    )
+
+  }
+
+
 
   def submitSelectFilmForm = Action.async { implicit request: Request[AnyContent] =>
     Commends.createMovieToRateForm.bindFromRequest.fold({ formWithErrors =>
       Future.successful(BadRequest(views.html.commendsfilm(formWithErrors, List())))
-    },{ film =>
-      movieTitleAndScreening.map { films =>
-        val innerFilms = films.find { case (titleOfFilm, screenings) =>
-          titleOfFilm == film}
-          .getOrElse(("None",List()))
-        val filmFromInner = innerFilms match {
-          case (_, screenings) => screenings
-        }
-        Ok(views.html.commends(Commends.createCommentForm, film, commentsList)
-        )
+    }, { film =>
+      getCommentsForFilm(film).map { comments =>
+        Ok(views.html.commends(Commends.createCommentForm, film, comments))
       }
 
     })
