@@ -4,8 +4,6 @@ import javax.inject.{Inject, Singleton}
 import models.ReleasedMovieWithID
 
 import akka.http.scaladsl.model.HttpHeader.ParsingResult.Ok
-import javax.inject.Inject
-import models.{Movie, MovieWithID, Rating}
 import reactivemongo.play.json.collection.JSONCollection
 import reactivemongo.play.json._
 import collection._
