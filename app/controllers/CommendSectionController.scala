@@ -71,10 +71,23 @@ class CommendSectionController @Inject()(
   def formValidation(form:Form[Commends]): Boolean = {
     val source = Source.fromResource("resources/badwords.txt").getLines().toSet
     //val lines = source.getLines().
-    val comment = form("comment").value.getOrElse("").toString
+    val comment = form("comment").value.getOrElse("")
     var hasSwearWord = false
     val splitWodsComments = comment.split(" ")
     splitWodsComments.foreach(word => if (source.contains(word)) {
+      println("Word is "+word)
+      hasSwearWord=true
+    })
+    hasSwearWord
+
+  }
+
+  def wordValid(comment: Commends) = {
+    val source = Source.fromResource("resources/badwords.txt").getLines().toSet
+    var hasSwearWord = false
+    val splitWodsComments=comment.comment.split(" ")
+    splitWodsComments.foreach(word => if (source.contains(word)) {
+      println("Word is "+word)
       hasSwearWord=true
     })
     hasSwearWord
@@ -102,7 +115,7 @@ class CommendSectionController @Inject()(
       println(formWithErrors)
       Future.successful(BadRequest("Bad request"))
     }, { commends =>
-      if (formValidation(Commends.createCommentForm)) {
+      if (wordValid(commends)) {
         Future.successful(BadRequest("Inappropriate Language"))}
       else {
         serviceSubmitComment(commends).map(_ =>
@@ -165,29 +178,6 @@ class CommendSectionController @Inject()(
     })
 
   }
-
-//def submitSelectFilmFormSubmit = Action.async { implicit request: Request[AnyContent] =>
-//  Commends.createMovieToRateForm.bindFromRequest.fold({ formWithErrors =>
-//    Future.successful(BadRequest(views.html.bookingfilm(formWithErrors, List())))
-//  }, { film =>
-//    movieTitleAndScreening.map { films =>
-//      val innerFilms = films.find { case ((titleOfFilm, screenings))  =>
-//        titleOfFilm == film}
-//        .getOrElse(("None", List()))
-//      val filmFromInner = innerFilms match {
-//        case (_, screenings) => screenings
-//      }
-//      Ok(views.html.commends(Commends.createCommentForm,
-//        film, filmFromInner
-//        //          films.find(movie =>
-//        //            movie._1 == film).getOrElse(("None", List()))._2))
-//      ))
-//    }
-//    //      Future.successful(Redirect(routes.BookingController.submitSelectFilmForm(film)))
-//    //      Ok(viwes.html.booking(Booking.createBookingForm, ))
-//  })
-//}
-
 
 }
 
