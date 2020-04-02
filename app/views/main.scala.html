@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
-    <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
     </head>
     <body>
         @* And here's where we render the `Html` object containing
@@ -34,11 +33,21 @@
     </div>
 
     <div>
-        <button class="w3-button w3-white w3-xxlarge" onclick="sideOpen()">&#9776;</button>
+        <button class="w3-button w3-white w3-large" onclick="sideOpen()">&#9776;</button>
+    </div>
+
+        @content
+
+    <div class="footer" id="myFooter">
+        <div class="row">
+            <div class="col-4 footer-style"><a href="/"><h2>Home</h2></a></div>
+            <div class="col-4 footer-style"><a href="/aboutus"><h2>About Us</h2></a></div>
+            <div class="col-4 footer-style"><a href="/contact"><h2>Contact Us</h2></a></div>
+        </div>
+
     </div>
 
 
-        @content
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -46,5 +55,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
+    <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+
     </body>
 </html>

@@ -1,16 +1,21 @@
 package views
 
-import org.scalatestplus.mockito.MockitoSugar
-import org.scalatestplus.play._
-import play.api.mvc._
-import play.api.test.Helpers._
 
-class HomeViewTest extends PlaySpec with Results with MockitoSugar {
-  "The Home view" should {
-    "render the home template" in {
-      val html =  views.html.index("home")
-      contentAsString(html) must include("Released Movies")
-      contentAsString(html) must include("Upcoming Movies")
+import controllers.HomeController
+import org.scalatestplus.play._
+import play.api.test.Helpers._
+import play.api.mvc._
+import play.api.test._
+
+import scala.concurrent.Future
+
+
+class HomeControllerTest extends PlaySpec with Results{
+  "HomeController" should {
+    "Show the about page" in {
+      val controller= new HomeController(Helpers.stubControllerComponents())
+      val result: Future[Result] = controller.index.apply(FakeRequest())
+      contentType(result) mustBe Some("text/html")
     }
   }
 }
