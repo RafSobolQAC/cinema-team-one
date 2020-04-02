@@ -1,0 +1,13 @@
+@import models.Commends
+@(form: Form[Commends],commentsList: List[Commends])(implicit flash: Flash, messagesProvider: MessagesProvider)
+
+@main("Well done! Comment created!") {
+    <div>
+        <ul>
+            @println(commentsList)
+            @for(i <- commentsList.indices) {
+                <li>@commentsList(i).toString</li>
+            }
+        </ul>
+    </div>
+}

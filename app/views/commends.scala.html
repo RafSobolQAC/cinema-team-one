@@ -1,15 +1,18 @@
 @import models.Commends
-@(form: Form[Commends])(implicit flash: Flash, messagesProvider: MessagesProvider)
+@(form: Form[Commends], title: String, comments: List[Commends])(implicit flash: Flash, messagesProvider: MessagesProvider)
 
-@*todo fix this form *@
-@main("Create Commends!") {
-    @flash.get("success").getOrElse("Create!")
+@main("Create Comments!") {
+    <h2> Your review of '@title' </h2>
+    @flash.get("Success").getOrElse("Leave a Comment!")
     @helper.form(routes.CommendSectionController.submitCommend) {
-        @helper.inputText(form("name"), '_label -> "Film")
+        @helper.inputText(form("name"), '_label -> "Your Name")
         @helper.inputText(form("email"), '_label -> "Email")
-        @helper.inputText(form("movieName"), '_label -> "Movie Name")
+        @helper.select(form("movieName"), Seq(title->title))
         @helper.inputText(form("comment"), '_label -> "Comment")
-
-        <button lass="btn btn-info" type="submit">Add comment</button>
+        @helper.inputRadioGroup(form("rating"),
+            Seq("1" -> "One Star", "2" -> "Two Stars", "3" -> "Three Stars"),
+            'label -> "Rating: "
+        )
+        <button class="btn btn-info" type="submit">Add comment</button>
     }
 }

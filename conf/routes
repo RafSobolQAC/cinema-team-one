@@ -27,7 +27,6 @@ POST        /bookit                     controllers.BookingController.submitForm
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-
 GET         /payment                    controllers.PaymentController.index
 
 GET         /capturePayment             controllers.PaymentController.capturePayment(token)
@@ -41,11 +40,10 @@ GET         /screens                    controllers.ScreensController.screens
 
 GET         /contact                    controllers.ContactController.contact
 
-#GET    /messageform                 controllers.MessageBoardController.showMessageForm
+GET     /makecomment                 controllers.CommendSectionController.submitSelectFilmForm
+GET     /comment                     controllers.CommendSectionController.showCommentForm
 
-GET         /commend                    controllers.CommendSectionController.getCommends
-
-POST        /commend                    controllers.CommendSectionController.submitCommend
+POST    /comment                    controllers.CommendSectionController.submitCommend
 
 GET         /aboutus                    controllers.AboutUsController.aboutUs
 

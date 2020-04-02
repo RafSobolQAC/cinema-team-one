@@ -1,20 +1,7 @@
 @(movieList: List[ReleasedMovieWithID])
 
-    @main("Team1 Cinema") {
-        <div style="text-align: center">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 80%;
-                margin: 0 auto;
-                padding: 20px;
-                ">
-                    <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    @for(index <- movieList.indices) {
-                        @if(index > 0) {
-                            <li data-target="#myCarousel" data-slide-to="@index"></li>
-                        }
-                    }
-                </ol>
+@main("Team1 Cinema") {
+    <h1>All Movies shown </h1>
 
                     <!-- Wrapper for slides -->
                 <div class="carousel-inner slides3" style="text-align: center">

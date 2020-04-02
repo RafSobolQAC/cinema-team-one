@@ -141,7 +141,7 @@ body{
     opacity: 0.8;
     cursor: pointer;
 }
-.dimGreybg{
+.white-bg{
     background-color: white;
     color: black;
 }
@@ -159,7 +159,55 @@ button{
 }
 button:hover{
     background-color: grey;
+}
 
+.footer {
+    color: black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #4c4742;
+
+}
+.footer-style:hover{
+    background-color: dimgrey;
+
+}
+
+.sticky {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+a{
+    color:white;
+}
+
+a:hover{
+    color:lightgray;
+}
+h1 {
+    /*top: 20%;*/
+    /*margin-left: 15px;*/
+    font-size: 40px;
+}
+h2 {
+    /*top: 20%;*/
+    /*margin-left: 15px;*/
+    font-size: 20px;
+}
+h3{
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+}
+p{
+    color: white;
+}
+.title-black{
+    color: black;
+    font-size: 40px;
 }
 .carousel-inner .carousel-item-right.active,
 .carousel-inner .carousel-item-next {
