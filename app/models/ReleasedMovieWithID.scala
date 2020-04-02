@@ -7,12 +7,12 @@ import play.api.libs.json.OFormat
 import reactivemongo.bson.BSONObjectID
 
 case class ReleasedMovieWithID(
-                      var _id: BSONObjectID,
-                      var image: String,
-                      var title: String,
-                      var director: String,
-                      var description: String,
-                      var actors: List[String],
-                      var screenings: List[String],
-                      var ratings: List[Int]
-                      )
+                                override val _id: BSONObjectID,
+                                override val image: String,
+                                override val title: String,
+                                override val director: String,
+                                override val description: String,
+                                override val actors: List[String],
+                                var screenings: List[String],
+                                var ratings: List[Int]
+                              ) extends Movie(_id, image, title, director, description, actors)

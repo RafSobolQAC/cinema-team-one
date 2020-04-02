@@ -1,4 +1,4 @@
-@(movie: ReleasedMovieWithID)(implicit messagesProvider: MessagesProvider, flash: Flash)
+@(movie: ReleasedMovieWithID)(url: String = "#")(implicit messagesProvider: MessagesProvider, flash: Flash)
 
 @functionIntoList(strings: List[String]) = {
 @strings.map { el =>
@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-6" style="background-color: #aaa">
                 <div class="row" style="height: 10%">
-                    <div class="col-12" style="background-color: #fff">
+                    <div class="col-12" style="background-color: #222222">
                         <h1 style="font-size: 3em" class="lead text-center ">@movie.title</h1>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                             <div class="col-8">
                                 <p class="p-3">@movie.description</p>
                             </div>
-                            <div class="col-4 film-details-button-container">
+                            <div class="col-4 film-details-button-container"><br>
                                 <button class="btn btn-primary" onclick="showBooking()">Book Now</button>
                             </div>
 
@@ -55,7 +55,7 @@
 
 
                             <div id="bookingDiv" style="display: none">
-                            @booking(Booking.createBookingForm, movie.title, movie.screenings)
+                            @booking(Booking.createBookingForm, movie.title, movie.screenings)(url)
                             </div>
                         </div>
                     </div>

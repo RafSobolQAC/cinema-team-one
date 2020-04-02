@@ -1,18 +1,11 @@
 package models
 
-import akka.http.scaladsl.model.DateTime
+import reactivemongo.bson.BSONObjectID
 
-class Movie(id: Int, title: String, description: String,posterUrl: String, actors: List[String], director: String
-//            ,screenings: List[DateTime]
-           ){
-  def getId(): Int = id
-  def getTitle(): String = title
-  def getDescription(): String = description
-  def getPosterUrl(): String = posterUrl
-  def getActors(): List[String] = actors
-  def getDirector(): String = director
-//  def getscreenings():List[DateTime] = screenings
-
-}
-
-
+abstract class Movie(val _id: BSONObjectID,
+                     val image: String,
+                     val title: String,
+                     val director: String,
+                     val description: String,
+                     val actors: List[String]
+                    )
