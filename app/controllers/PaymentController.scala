@@ -68,14 +68,12 @@ class PaymentController @Inject()(ws: WSClient, cc: ControllerComponents) extend
     }
   }
   def index = Action { //does it all
-    val json3: JsValue = Json.obj("application_context" -> Json.obj("return_url" -> "http://localhost:9000/capturePayment"), "intent" -> "capture", "purchase_units" -> Json.obj("reference_id" -> "TICKET", "amount" -> Json.obj("currency_code" -> "GBP", "value" -> 69)))
-    //^^stupid piece of  s*&t doesnt work ://
 
     val tuple = createOrder(69f, "http://localhost:9000/capturePayment")
     val url = tuple._1
     val orderID = tuple._2
-    capturePayment(orderID)
-    Ok(views.html.payment(url, orderID))
+    //capturePayment(orderID)
+    Ok(views.html.payment(url))
   }
 
 
