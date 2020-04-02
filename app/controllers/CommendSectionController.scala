@@ -71,11 +71,11 @@ class CommendSectionController @Inject()(
   def formValidation(form:Form[Commends]): Boolean = {
     val source = Source.fromResource("resources/badwords.txt").getLines().toSet
     //val lines = source.getLines().
-    val comment = form("comment").value.getOrElse("")
-    var hasSwearWord = true
+    val comment = form("comment").value.getOrElse("").toString
+    var hasSwearWord = false
     val splitWodsComments = comment.split(" ")
     splitWodsComments.foreach(word => if (source.contains(word)) {
-      hasSwearWord=false
+      hasSwearWord=true
     })
     hasSwearWord
 
