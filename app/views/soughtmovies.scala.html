@@ -1,8 +1,8 @@
-@(movieList: List[Movie])
+@(movieList: List[Movie])(implicit messagesProvider: MessagesProvider)
 
 @properRedirector(movie: Movie) = {
   @{movie match {
-    case released: ReleasedMovieWithID => s"/releasedmovies/${released._id}"
+    case released: ReleasedMovieWithID => s"/gallerymovies/${released._id}"
     case upcoming: UpcomingMovieWithID => s"/upcomingmovies/${upcoming._id}"
   }}
 }

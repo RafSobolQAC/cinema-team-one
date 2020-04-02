@@ -1,0 +1,5 @@
+@()(implicit messagesProvider: MessagesProvider)
+@helper.form(routes.SearchController.getSelectedFilm, 'class -> "form-inline") {
+  @helper.inputText(Movie.searchForFilm("title"), '_label -> "", 'type -> "search", 'class -> "form-control mr-sm-2", 'placeholder -> "Title...", 'style -> "float: right; width: 60%; right: 20px")
+  <button class="btn btn-outline-info" type="submit">Search!</button>
+}

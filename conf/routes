@@ -32,7 +32,7 @@ GET         /payment                    controllers.PaymentController.index
 GET         /capturePayment             controllers.PaymentController.capturePayment(token)
 
 
-
+POST        /select                     controllers.SearchController.getSelectedFilm
 
 GET         /classifications            controllers.ClassificationController.classifications
 
@@ -40,11 +40,11 @@ GET         /screens                    controllers.ScreensController.screens
 
 GET         /contact                    controllers.ContactController.contact
 
-GET     /makecomment                 controllers.CommendSectionController.submitSelectFilmForm
-GET     /comment                     controllers.CommendSectionController.showCommentForm
+GET         /makecomment                controllers.CommendSectionController.submitSelectFilmForm
+GET         /comment                    controllers.CommendSectionController.showCommentForm
 
-POST    /comment                    controllers.CommendSectionController.submitCommend
+POST        /comment                    controllers.CommendSectionController.submitCommend
 
 GET         /aboutus                    controllers.AboutUsController.aboutUs
 
-GET /alalalal controllers.SearchController.getAllMovies
+GET         /alalalal                   controllers.SearchController.getAllMovies

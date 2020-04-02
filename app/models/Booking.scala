@@ -1,6 +1,5 @@
 package models
 
-import java.time.LocalDateTime
 
 import play.api.data.Form
 import play.api.data.Forms._
