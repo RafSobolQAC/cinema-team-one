@@ -59,11 +59,6 @@ class CommendSectionController @Inject()(
     }.getOrElse(Future.successful(BadRequest("Invalid Json format!")))
   }
 
-  //  def showCommentForm = Action { implicit request: Request[AnyContent] =>
-  //    makeComments
-  //    Ok(views.html.commends(Commends.createCommentForm, commentsList))
-  //  }
-
   def serviceSubmitComment(comment: Commends) = {
     collection.flatMap(_.insert.one(comment))
   }
@@ -93,22 +88,6 @@ class CommendSectionController @Inject()(
     hasSwearWord
 
   }
-
-  //todo fix the error with the valitation
-//  def submitCommend = Action.async { implicit request: Request[AnyContent] =>
-//  Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
-//    //println(formWithErrors)
-//  Future.successful(BadRequest(views.html.commends(formWithErrors, commentsList)))
-//  }, { commends =>
-//  if (formValidation(Commends.createCommentForm)) {
-//    Future.successful(BadRequest("Inappropriate Language"))}
-//  else {
-//    serviceSubmitComment(commends).map(_ =>
-//      Ok(views.html.MessageBoard(Commends.createCommentForm, commentsList)))
-//  }
-//    }
-//    )
-//  }
 
   def submitCommend = Action.async { implicit request: Request[AnyContent] =>
     Commends.createCommentForm.bindFromRequest.fold({ formWithErrors =>
