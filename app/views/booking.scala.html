@@ -5,7 +5,7 @@
 @(form: Form[Booking], title: String, screenings: List[String])(url: String = "http://localhost:9099/capturePayment")(implicit messagesProvider: MessagesProvider, flash: Flash)
 
 
-@flash.get("success").getOrElse("Create!")
+@flash.get("success").getOrElse("")
 
 @helper.form(routes.BookingController.submitForm) {
     <div style="display:none">@helper.select(form("film"), Seq(title -> title))</div>

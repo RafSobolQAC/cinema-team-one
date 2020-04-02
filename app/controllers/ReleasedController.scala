@@ -39,7 +39,7 @@ class ReleasedController @Inject()(
 
   def releasedMovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] =>
     releasedServices.getMovies.map { movies =>
-      Ok(views.html.releasedmovieInfo(movies.filter(movie => id == movie._id.toString()).head))
+      Ok(views.html.releasedmovieInfo(movies.filter(movie => id == movie._id.stringify).head))
     }
   }
 }

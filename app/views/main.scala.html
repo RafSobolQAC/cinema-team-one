@@ -21,21 +21,23 @@
         @* And here's where we render the `Html` object containing
         * the page content. *@
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div>
-            <button class="w3-button w3-white w3-large" onclick="sideOpen()">&#9776;</button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="@routes.HomeController.index()">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="
+            width: 100%">
+            <div>
+                <button class="w3-button w3-white w3-large" onclick="sideOpen()">&#9776;</button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@routes.HomeController.index()">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
 
-        </div>
-    </nav>
-
-    <div class="w3-sidebar w3-bar-block w3-dark-grey w3-animate-left" style="display:none" id="mySidebar">
+            </div>
+        </nav>
+    </div>
+    <div class="w3-sidebar w3-bar-block w3-dark-grey w3-animate-left" style="display: none" id="mySidebar">
         <button class="w3-bar-item w3-button w3-large"
         onclick="sideClose()">Close &times;</button>
         <a href="/" class="w3-bar-item w3-button">Home</a>
@@ -49,11 +51,7 @@
 
     </div>
 
-
-
-
-        @content
-
+    @content
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
