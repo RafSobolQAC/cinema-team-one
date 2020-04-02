@@ -12,10 +12,3 @@ case class MovieWithID(
                         var screenings: List[String]
                       )
 
-abstract class Movie(val _id: BSONObjectID,
-                     val image: String,
-                     val title: String,
-                     val director: String,
-                     val description: String,
-                     val actors: List[String]
-                    )
