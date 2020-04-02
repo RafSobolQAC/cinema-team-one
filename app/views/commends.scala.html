@@ -10,9 +10,9 @@
         @helper.select(form("movieName"), Seq(title->title))
         @helper.inputText(form("comment"), '_label -> "Comment")
         @helper.inputRadioGroup(form("rating"),
-                               Seq("1" -> "One Star", "2" -> "Two Stars", "3" -> "Three Stars"),
-                               'label -> "Rating: "
-                               )
+            Seq("1" -> "One Star", "2" -> "Two Stars", "3" -> "Three Stars"),
+            'label -> "Rating: "
+        )
         <button class="btn btn-info" type="submit">Add comment</button>
     }
 }
