@@ -58,7 +58,7 @@ class PaymentController @Inject()(val reactiveMongoApi: ReactiveMongoApi,ws: WSC
 //add new document with orderID and purchased =true
 
     if (checkCapture(response)) {
-      addPurchase(orderID)
+      //addPurchase(orderID)
       Ok("Order completed!")
 
     } else {
@@ -66,11 +66,13 @@ class PaymentController @Inject()(val reactiveMongoApi: ReactiveMongoApi,ws: WSC
     }
   }
 
+
   def addPurchase(orderID:String): Unit ={
     val order= bought.apply(orderID, true)
     def collection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection]("bought"))
     collection.flatMap(_.insert.one(order))
   }
+
 
   def checkCapture(capturePaymentResponse:String) = { //returns true if the capture payment response was successful (payment taken)
     try {
@@ -81,7 +83,6 @@ class PaymentController @Inject()(val reactiveMongoApi: ReactiveMongoApi,ws: WSC
   }
 
   def index = Action { //does it all
-
     val tuple = createOrder(69f, "http://localhost:9000/capturePayment")
     val url = tuple._1
     val orderID = tuple._2

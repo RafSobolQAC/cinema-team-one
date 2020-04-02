@@ -159,5 +159,27 @@ button{
 }
 button:hover{
     background-color: grey;
+}
 
+.footer {
+    color: black;
+    background-color: #dddddd;
+}
+.footer-style:hover{
+   background-color: #4c4742;
+}
+
+.sticky {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+a{
+    color:black;
+}
+
+a:hover{
+    color:white;
 }
