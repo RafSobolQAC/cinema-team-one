@@ -1,39 +1,79 @@
-@(movie: ReleasedMovieWithID)
+@(movie: ReleasedMovieWithID)(implicit messagesProvider: MessagesProvider, flash: Flash)
+
+@functionIntoList(strings: List[String]) = {
+@strings.map { el =>
+    <div>DisplayFormats.screeningDisplay(el)</div>
+}
+
+}
+
 
 @main(movie.title) {
-   <div class="details container">
-        <div class="title container">
-            <div class="col-12">
-                <h1 class="title-tag">@movie.title</h1>
+    <div class="details container h-100" >
+        <div class="row justify-content-between">
+            <div class="col-md-5 w-50 bg-secondary p-2 rounded">
+                <img class="img-fluid rounded mx-auto d-block" src="@movie.image">
             </div>
-        </div>
-        <div class="description container row">
-            <div class="col-4">
-                <img width="150" height="200" src="@movie.image">
+            <div class="col-md-6" style="background-color: #aaa">
+                <div class="row" style="height: 10%">
+                    <div class="col-12" style="background-color: #fff">
+                        <h1 style="font-size: 3em" class="lead text-center ">@movie.title</h1>
+                    </div>
+                </div>
+                <div class="row " style="background-color: #aaa">
+                    <div class="col-12 h-100 ">
+                        <div class="description container row ">
+                            <div class="col-8">
+                                <p class="p-3">@movie.description</p>
+                            </div>
+                            <div class="col-4 film-details-button-container">
+                                <button class="btn btn-primary" onclick="showBooking()">Book Now</button>
+                            </div>
+
+                        </div>
+                        <div class="film-release-booking-container row">
+
+                            <div class="row col-12">
+                                <div class="col-12">
+                                    Screening   Times:
+                                </div>
+                                <ul>
+                                @for(scr <- movie.screenings) {
+                                    <li>@DisplayFormats.screeningDisplay(scr)</li>
+                                }
+                                </ul>
+                            </div>
+                            <br />
+                            <div class="row col-12">
+                                <p class="col-12">Main Actors:</p>
+                                <ul>
+                                @for(actor <- movie.actors) {
+                                    <li>@actor</li>
+                                }
+                                </ul>
+                            </div>
+
+
+                            <div id="bookingDiv" style="display: none">
+                            @booking(Booking.createBookingForm, movie.title, movie.screenings)
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-8">
-                <p>@movie.description</p>
-            </div>
-        </div>
-        <div class="film-release-booking-container row">
+        </div></div>
 
-                <div>Release Times: @movie.screenings</div>
-                <br />
-                <p>Main Actors:</p>
-                <ul>
-                @for(actor <- movie.actors) {
-                    <li>@actor</li>
-                }
-                </ul>
+    </div>
 
-
-@*//            <div class="col-4 film-details-button-container">*@
-@*//                <button class="btn btn-primary">Book Now</button>*@
-@*//            </div>*@
-@*//            <div class="col-4 film-details-button-container">*@
-@*//                <button class="btn btn-primary">Add to my List</button>*@
-@*//            </div>*@
-        </div>
-
-   </div>
 }
+
+<script>
+        function showBooking() {
+            var x = document.getElementById("bookingDiv");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+</script>

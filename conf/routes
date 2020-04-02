@@ -11,7 +11,7 @@ GET         /count                      controllers.CountController.count
 GET         /message                    controllers.AsyncController.message
 GET         /allmovies                  controllers.ReleasedController.getMovies
 
-GET         /makebooking                controllers.BookingController.submitSelectFilmFormSubmit
+# GET         /makebooking                controllers.BookingController.submitSelectFilmFormSubmit
 
 GET         /gallerymovies              controllers.ReleasedController.getMovies
 GET         /gallerymovies/:_id         controllers.ReleasedController.releasedMovieInfo(_id)
@@ -39,14 +39,12 @@ GET         /classifications            controllers.ClassificationController.cla
 
 GET         /screens                    controllers.ScreensController.screens
 
-GET         /adminEmail                 controllers.EmailController.index
-
 GET         /contact                    controllers.ContactController.contact
 
 #GET    /messageform                 controllers.MessageBoardController.showMessageForm
 
-GET     /commend                     controllers.CommendSectionController.getCommends
+GET         /commend                    controllers.CommendSectionController.getCommends
 
-POST    /commend                    controllers.CommendSectionController.submitCommend
+POST        /commend                    controllers.CommendSectionController.submitCommend
 
-GET     /aboutus                    controllers.AboutUsController.aboutUs
+GET         /aboutus                    controllers.AboutUsController.aboutUs
