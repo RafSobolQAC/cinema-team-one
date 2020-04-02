@@ -16,7 +16,7 @@ class ReleasedController @Inject()(
   with MongoController with ReactiveMongoComponents with play.api.i18n.I18nSupport {
 
   implicit def ec: ExecutionContext = components.executionContext
-  val pay: (String, String) = paymentController.createOrder(5, "http://localhost:9099/capturePayment")
+  val pay: (String, String) = paymentController.createOrder(5, "http://localhost:9000/capturePayment")
   val url: String = pay._1
 
   def getMovies = Action.async { implicit request: Request[AnyContent] =>
