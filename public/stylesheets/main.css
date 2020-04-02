@@ -170,7 +170,7 @@ button:hover{
 
 }
 .footer-style:hover{
-    background-color: #dddddd;
+    background-color: dimgrey;
 
 }
 
@@ -186,7 +186,7 @@ a{
 }
 
 a:hover{
-    color:dimgrey;
+    color:lightgray;
 }
 h1 {
     /*top: 20%;*/
