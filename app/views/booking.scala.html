@@ -2,7 +2,7 @@
 
 
 
-@(form: Form[Booking], title: String, screenings: List[String])(url: String = "http://localhost:9099/capturePayment")(implicit messagesProvider: MessagesProvider, flash: Flash)
+@(form: Form[Booking], title: String, screenings: List[String])(implicit messagesProvider: MessagesProvider, flash: Flash)
 
 
 @flash.get("success").getOrElse("Create!")
@@ -15,7 +15,7 @@
         @helper.inputText(tagField, '_label -> "Adult/child/concession")
     }
     <button class="btn btn-info" type="submit">Book now</button>
-    <a href="@routes.PaymentController.index">click me to buy ticket though paypal</a>
+@*    <a href="@url">click me to buy ticket though paypal</a>*@
 
 }
 

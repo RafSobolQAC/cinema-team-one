@@ -74,8 +74,8 @@ class PaymentController @Inject()(ws: WSClient, cc: ControllerComponents) extend
     val tuple = createOrder(69f, "http://localhost:9000/capturePayment")
     val url = tuple._1
     val orderID = tuple._2
-    capturePayment(orderID)
-    Ok(views.html.payment(url, orderID))
+    //capturePayment(orderID)
+    Ok(views.html.payment(url))
   }
 
 
