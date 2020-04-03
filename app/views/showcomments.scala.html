@@ -1,20 +1,21 @@
 @import models.Commends
 @(comments: List[Commends])
-<div class="overflow-auto">
+<div style="height: 200px;
+    overflow-y: scroll;
+    width: 100%">
     @for(comment <- comments) {
-        <div class="container">
-            <div class="container">
+        <div class="container border ">
                 <div class="row">
-                    <div class="col-12">Author: @comment.name</div>
+                    <div class="col-4">Author: @comment.name</div>
+                    <div class="col-4">E-mail: @comment.email</div>
+                    <div class="col-4">Rating: @comment.rating</div>
+
                 </div>
                 <div class="row">
-                    <div class="col-12">E-mail: @comment.email</div>
+                    <div class="col-12">Comment: @comment.comment</div>
                 </div>
-            </div>
-            <div class="container">
-                <div>Comment: @comment.comment</div>
-                <div>Rating: @comment.rating</div>
-            </div>
+
         </div>
-    </div>
-}
+
+    }
+</div>
