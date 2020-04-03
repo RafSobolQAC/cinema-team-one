@@ -20,23 +20,52 @@ class SearchController @Inject()(
 
   implicit def ec: ExecutionContext = components.executionContext
 
-  def allMovies = Future {
+  def allMovies = {
     val movies = new ListBuffer[Movie]
 
-    releasedServices.getMovies.map(el =>
-      movies ++= el
-    )
+    //    releasedServices.getMovies.flatMap { el1 =>
+    //
+    //      movies ++= el1
+    //
+    //    }
+    //    upcomingServices.getMovies.flatMap { el2 =>
+    //      movies ++= el2
+    //
+    //    }
 
-    upcomingServices.getMovies.map(el =>
-      movies ++= el
-    )
-
-    movies.toList
+    val combFut = (releasedServices.getMovies, upcomingServices.getMovies)
+    combFut
   }
 
   def getAllMovies = Action.async { implicit request: Request[AnyContent] =>
-    allMovies.map(movies =>
+    val combFut = allMovies
+    val relM = combFut._1
+    val upcM = combFut._2
+    val combList = joinFutureLists(relM, upcM)
+    combList.map { movies =>
       Ok(views.html.soughtmovies(movies))
+    }
+  }
+
+  def joinFutureLists[T](futureListOne: Future[List[T]], futureListTwo: Future[List[T]]) = {
+    for {
+      thisOne <- futureListOne
+      thisTwo <- futureListTwo
+    } yield thisOne ::: thisTwo
+  }
+
+  def getSelectedFilm = Action.async { implicit request: Request[AnyContent] =>
+    Movie.searchForFilm.bindFromRequest.fold(
+      {_ =>
+        Future.successful(BadRequest("Bad search!"))
+      },
+      {string =>
+        val combList = joinFutureLists(allMovies._1, allMovies._2)
+        combList.map { movies =>
+          Ok(views.html.soughtmovies(movies.filter(movie => movie.title.toLowerCase.contains(string.toLowerCase))))
+        }
+
+      }
     )
   }
 }

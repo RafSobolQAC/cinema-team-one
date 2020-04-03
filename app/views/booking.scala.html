@@ -10,12 +10,12 @@
 @helper.form(routes.BookingController.submitForm) {
     <div style="display:none">@helper.select(form("film"), Seq(title -> title))</div>
     @helper.select(form("screening"), screenings.map(screening =>  screening.toString -> DisplayFormats.screeningDisplay(screening)))
-    @helper.inputText(form("name"), '_label -> "Name")
-    @helper.repeat(form("seats"), min = 3) { tagField =>
-        @helper.inputText(tagField, '_label -> "Adult/child/concession")
-    }
-    <button class="btn btn-info" type="submit">Book now</button>
-    <a onclick="show()" href="@url" target="_blank">click me to buy ticket though paypal</a>
+    @helper.inputText(form("name"), '_label -> "Name", 'placeholder -> "Booker's name")
+    @helper.inputText(form("seats(0)"), '_label -> "Adults", 'type -> "number")
+    @helper.inputText(form("seats(1)"), '_label -> "Children", 'type -> "number")
+    @helper.inputText(form("seats(2)"), '_label -> "Concessions", 'type -> "number")
+    <button class="btn btn-info" type="submit" data-dismiss="modal">Book now</button>
+    <a class="btn btn-success" onclick="show()" href="@url" target="_blank">Pay via PayPal</a>
 
 
 }

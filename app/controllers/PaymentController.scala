@@ -17,7 +17,7 @@ import scala.sys.process._
  * application's home page.
  */
 @Singleton
-class PaymentController @Inject()(val reactiveMongoApi: ReactiveMongoApi,ws: WSClient, cc: ControllerComponents) extends AbstractController(cc) with ReactiveMongoComponents{
+class PaymentController @Inject()(val reactiveMongoApi: ReactiveMongoApi,ws: WSClient, cc: ControllerComponents) extends AbstractController(cc) with play.api.i18n.I18nSupport with ReactiveMongoComponents{
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -82,7 +82,7 @@ class PaymentController @Inject()(val reactiveMongoApi: ReactiveMongoApi,ws: WSC
     }
   }
 
-  def index = Action { //does it all
+  def index = Action { implicit request: Request[AnyContent] => //does it all
     val tuple = createOrder(69f, "http://localhost:9000/capturePayment")
     val url = tuple._1
     val orderID = tuple._2
