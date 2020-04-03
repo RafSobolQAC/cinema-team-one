@@ -3,10 +3,10 @@ import javax.inject._
 import play.api.mvc._
 
 
-class ScreensController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class ScreensController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with play.api.i18n.I18nSupport {
 
 
-  def screens() = Action {
+  def screens() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.screens("Screens"))
   }
 }

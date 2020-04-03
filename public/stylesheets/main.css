@@ -129,6 +129,7 @@ aside a[href^="http"]:after,.doc a[href^="http"]:after{content:url(/assets/image
 body{
     background-color: #222222;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .Movie-container {
@@ -141,7 +142,7 @@ body{
     opacity: 0.8;
     cursor: pointer;
 }
-.dimGreybg{
+.white-bg{
     background-color: white;
     color: black;
 }
@@ -157,7 +158,75 @@ button{
     padding: 10px;
     border-radius: 5px;
 }
+
 button:hover{
     background-color: grey;
+}
 
+.footer {
+    color: black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #4c4742;
+
+}
+
+table{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid black;
+    /*left: 30%;*/
+    top: 20%;
+    /*right: 20%;*/
+}
+th, td {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 3px solid black;
+}
+
+.classic {
+    width: 100px;
+    height: 100px;
+    alignment: left;
+}
+.footer-style:hover{
+    background-color: dimgrey;
+
+}
+
+.sticky {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+a{
+    color:white;
+}
+
+a:hover{
+    color:lightgray;
+}
+h1 {
+    /*top: 20%;*/
+    /*margin-left: 15px;*/
+    font-size: 40px;
+}
+h2 {
+    /*top: 20%;*/
+    /*margin-left: 15px;*/
+    font-size: 20px;
+}
+h3{
+    text-align: left;
+}
+p{
+    color: white;
+}
+.title-black{
+    color: black;
+    font-size: 40px;
 }

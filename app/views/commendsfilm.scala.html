@@ -1,0 +1,8 @@
+@(form: Form[String], films: List[(String, List[String])])(implicit messagesProvider: MessagesProvider)
+
+@main("Select a film to review") {
+    @helper.form(routes.CommendSectionController.submitSelectFilmForm) {
+        @helper.select(form("title"), films.map(film => film._1 -> film._1))
+        <button class="btn btn-info" type="submit"> Select Film </button>
+    }
+}

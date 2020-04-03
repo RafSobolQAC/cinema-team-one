@@ -11,3 +11,4 @@ case class MovieWithID(
                         actors: List[String],
                         var screenings: List[String]
                       )
+

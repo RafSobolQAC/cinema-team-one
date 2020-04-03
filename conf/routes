@@ -11,7 +11,7 @@ GET         /count                      controllers.CountController.count
 GET         /message                    controllers.AsyncController.message
 GET         /allmovies                  controllers.ReleasedController.getMovies
 
-GET         /makebooking                controllers.BookingController.submitSelectFilmFormSubmit
+# GET         /makebooking                controllers.BookingController.submitSelectFilmFormSubmit
 
 GET         /gallerymovies              controllers.ReleasedController.getMovies
 GET         /gallerymovies/:_id         controllers.ReleasedController.releasedMovieInfo(_id)
@@ -27,26 +27,24 @@ POST        /bookit                     controllers.BookingController.submitForm
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-
 GET         /payment                    controllers.PaymentController.index
 
 GET         /capturePayment             controllers.PaymentController.capturePayment(token)
 
 
-
+POST        /select                     controllers.SearchController.getSelectedFilm
 
 GET         /classifications            controllers.ClassificationController.classifications
 
 GET         /screens                    controllers.ScreensController.screens
 
-GET         /adminEmail                 controllers.EmailController.index
-
 GET         /contact                    controllers.ContactController.contact
 
-#GET    /messageform                 controllers.MessageBoardController.showMessageForm
+GET         /makecomment                controllers.CommendSectionController.submitSelectFilmForm
+GET         /comment                    controllers.CommendSectionController.showCommentForm
 
-GET     /commend                     controllers.CommendSectionController.getCommends
+POST        /comment                    controllers.CommendSectionController.submitCommend
 
-POST    /commend                    controllers.CommendSectionController.submitCommend
+GET         /aboutus                    controllers.AboutUsController.aboutUs
 
-GET     /aboutus                    controllers.AboutUsController.aboutUs
+GET         /alalalal                   controllers.SearchController.getAllMovies

@@ -2,27 +2,41 @@ package controllers
 import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.play._
 import play.api.libs.ws.{WSClient, WSResponse}
-import play.api.test.{Helpers, Injecting, WithApplication}
-class PayementControllerTest extends PlaySpec with MockitoSugar {
+import play.api.mvc._
+import play.api.test.Helpers._
+import play.api.test.{Helpers, Injecting, WithApplication, _}
 
-  val template = mock[views.html.payment]
+import scala.concurrent.Future
+
+class PayementControllerTest extends PlaySpec with MockitoSugar with Results{
+
+  val port=9099//change me when testing
   val wsr = mock[WSResponse]
   val ws = mock[WSClient]
-  val controller: PaymentController = new PaymentController(template, ws, Helpers.stubControllerComponents())
+  val controller: PaymentController = new PaymentController( ws, Helpers.stubControllerComponents())
   "Payment" should {
     "get access token" in {
       val token = controller.getAccessToken().getBytes()
-
       println(controller.getAccessToken())
       token must not be empty
-      token.toString must be mustEqual("ResultOfBeWordForAny(\"A21AAE2ID7hn7COosFr_WCMVGq8wqozqkKhPrcj2V4ijXeufe1A_aczwKvR3Bf4QZsjYmKN9vFW196FH26lTiAPVYg9AzyE0w\", true)")
 
     }
   }
   "capture payment" should{
     "capture the current payment" in{
-      val result=controller.capturePayment("this is an order ID XD")
-      result.toString() must not be empty
+      //val result=controller.capturePayment("3333333w")
+      val testID="heheLOLxDJAJAJ"
+      val result:Future[Result] = controller.capturePayment(testID).apply(FakeRequest())
+      status(result) mustEqual(200)
+
+    }
+  }
+  "Application" should {
+    "be reachable" in new WithServer {
+      val response = await(ws.url("http://localhost:" + port+"/capturePayment?token=penis").get()) //1
+
+     // response.status must equalTo(OK) //2
+      response.body must contain("") //3
     }
   }
 

@@ -1,97 +1,75 @@
-@(message: String)
+@(message: String)(implicit messagesProvider: MessagesProvider)
 @main("Screens"){
 
-    <style>
-            body {
-                background-color: #264653;
-            }
-
-            h1 {
-                color: #000000;
-                top: 20%;
-                margin-left: 15px;
-                font-size: 40px;
-            }
-            h2 {
-                color: #000000;
-                top: 20%;
-                margin-left: 15px;
-                font-size: 20px;
-            }
-
-            div {
-                color: #000000;
-                margin-left: 100px;
-            }
-
-            .color-box {
-                background-color: #ffeecd;
-                align:"center";
-                position: absolute;
-                height: 90%;
-                left: 10%;
-                top: 20%;
-                right: 20%;
-            }
-
-            img {
-                width: 720px;
-                height: 400px;
-
-            }
-            button {
-                align: left;
-            }
-    </style>
-
-     <div class="color-box" align="left" >
-        <h1 align="left"> Our Screens</h1>
-        <br>
+        <h2 align="center"> Our Screens</h2>
+    <body align="center" >
+    <br>
+        <p align="center">
         <button onclick="screen1()">Screen 1</button>
         <button onclick="screen2()">Screen 2</button>
-        <button onclick="deluxeBox()">Deluxe Box</button>
+        <button onclick="deluxeBox()">Deluxe Box </button>
+
         <br>
         <br>
-        <div  >
-            <img style="display:block;" id="cinema" src="https://cdn.pixabay.com/photo/2017/09/17/08/39/curtain-2757815_960_720.png" align="center" />
+            <img style="display:block;" id="cinema" src="https://cdn.pixabay.com/photo/2017/09/17/08/39/curtain-2757815_960_720.png"  />
             <img style="display:none;" id="screen1" src="https://p1.pxfuel.com/preview/503/160/2/cinema-hall-film-cinema-lovers-royalty-free-thumbnail.jpg" />
-            <img style="display:none;" id="screen2" src="https://p1.pxfuel.com/preview/503/160/2/cinema-hall-film-cinema-lovers-royalty-free-thumbnail.jpg" />
+            <img style="display:none;" id="screen2" src="https://www.theelectric.co.uk/images/carousel/landing1.jpg" />
             <img style="display:none;" id="deluxeBox" src= "https://www.caterlyst.com/Caterlyst/Images/news/N21735.jpg" />
-        </div>
+
          <script>
             function screen1() {
                 var cin = document.getElementById("cinema")
                 var img = document.getElementById("screen1")
+                var img2 =  document.getElementById("screen2")
+                var img3 = document.getElementById("deluxeBox")
                 if (img.style.display === "none") {
                     cin.style.display = "none"
+                    img2.style.display = "none"
+                    img3.style.display = "none"
                     img.style.display = "block";
                 } else {
-                    img.style.display = "none";
+                    img.style.display = "none"
+                    img2.style.display = "none"
+                    img3.style.display = "none"
                     cin.style.display = "block";
                 }
             }
             function screen2() {
                 var cin = document.getElementById("cinema")
-                var img = document.getElementById("screen2")
-                if (img.style.display === "none") {
+                var img = document.getElementById("screen1")
+                var img2 =  document.getElementById("screen2")
+                var img3 = document.getElementById("deluxeBox")
+                if (img2.style.display === "none") {
                     cin.style.display = "none"
-                    img.style.display = "block";
-                } else {
+                    img2.style.display = "block"
+                    img3.style.display = "none"
                     img.style.display = "none";
+                } else {
+                    img.style.display = "none"
+                    img2.style.display = "none"
+                    img3.style.display = "none"
                     cin.style.display = "block";
                 }
             }
             function deluxeBox() {
                 var cin = document.getElementById("cinema")
-                var img = document.getElementById("deluxeBox")
-                if (img.style.display === "none") {
+                var img = document.getElementById("screen1")
+                var img2 =  document.getElementById("screen2")
+                var img3 = document.getElementById("deluxeBox")
+                if (img3.style.display === "none") {
                     cin.style.display = "none"
-                    img.style.display = "block";
-                } else {
+                    img2.style.display = "none"
+                    img3.style.display = "block"
                     img.style.display = "none";
+                } else {
+                    img.style.display = "none"
+                    img2.style.display = "none"
+                    img3.style.display = "none"
                     cin.style.display = "block";
                 }
             }
-        </script>
-    </div>
+            </script>
+</div>
+        </p>
+    </body>
 }

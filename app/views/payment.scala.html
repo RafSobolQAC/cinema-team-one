@@ -3,8 +3,7 @@
 * email:    sb-4jqvb1247840@personal.example.com
 * password: 2b>j"B7l
 *@
-@this(args:String)
-@(authorizeUrl:String,orderId: String)
+@(authorizeUrl:String)(implicit messagesProvider: MessagesProvider)
 
 
 
@@ -18,6 +17,7 @@
 
     <body>
         <a href=@authorizeUrl target="_blank">click me to buy ticket though paypal</a>
+
 
 
 

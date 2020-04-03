@@ -1,38 +1,50 @@
 
-@(message: String)
+@(message: String)(implicit messagesProvider: MessagesProvider)
 
 @*
 * Call the `main` template with two arguments. The first
 * argument is a `String` with the title of the page, the second
 * argument is an `Html` object containing the body of the page.
 *@
-@main("Welcome to Play") {
-    <h2>Opening Times</h2>
-<br>
-<ul>
-    <li>Monday    : 9am - 8pm</li>
-    <li>Tuesday   : 9am - 8pm</li>
-    <li>Wednesday : 9am - 8pm</li>
-    <li>Thursday  : 9am - 8pm</li>
-    <li>Friday    : 9am - 8pm</li>
-    <li>Saturday  : 9am - 8pm</li>
-    <li>Sunday    : 9am - 6pm</li>
-</ul>
-<br>
-<div class="row">
-    <div class="col-8">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39754.369590787996!2d-0.030616986087344155!3d51.4829733318276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a81dcaaaaaab%3A0xb3ca4f4fde6ca073!2sCineworld!5e0!3m2!1sen!2suk!4v1585132699922!5m2!1sen!2suk" width="100%" height="300px" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+@main("Contact") {
+    <h1>Opening Times</h1>
+    <br>
+    <ul>
+        <li>Monday    : 9am - 8pm</li>
+        <li>Tuesday   : 9am - 8pm</li>
+        <li>Wednesday : 9am - 8pm</li>
+        <li>Thursday  : 9am - 8pm</li>
+        <li>Friday    : 9am - 8pm</li>
+        <li>Saturday  : 9am - 8pm</li>
+        <li>Sunday    : 9am - 6pm</li>
+    </ul>
+    <br>
+    <div class="row">
+        <div class="col-8">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39754.369590787996!2d-0.030616986087344155!3d51.4829733318276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a81dcaaaaaab%3A0xb3ca4f4fde6ca073!2sCineworld!5e0!3m2!1sen!2suk!4v1585132699922!5m2!1sen!2suk" width="100%" height="300px" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+        <div class="col-4 white-bg">
+            <h1>Visit Us</h1>
+                <p style="color: black">
+                    Peninsula Square,<br>
+                    Greenwich Peninsula,<br>
+                    London<br>
+                    SE10 0DX
+                </p>
+            <br>
+            <p style="color: black">Email: CinemaAdmin@@gmail.com</p>
+            <p style="color: black">Phone: 02086379538</p>
+        </div>
     </div>
-    <div class="col-4 dimGreybg">
-        <h2>Visit Us</h2>
-        <p>Peninsula Square,<br>
-            Greenwich Peninsula,<br>
-            London<br>
-            SE10 0DX
-            </p>
-        <br>
-        <p>Email: dummy@@email.com</p>
-        <p>Phone: 02086379538</p>
-    </div>
-</div>
+    <br>
+    <form action="mailto:CinemaAdmin@@gmail.com" method="post" enctype="text/plain">
+        Name:<br>
+        <input type="text" name="name"><br>
+        E-mail:<br>
+        <input type="text" name="mail"><br>
+        Comment:<br>
+        <textarea name="comment" cols="50" rows="7"></textarea><br>
+        <button><input style="border-style: none" type="submit" value="Send"></button>
+        <button><input style="border-style: none" type="reset" value="Reset"></button>
+    </form>
 }
