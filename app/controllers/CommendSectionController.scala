@@ -85,8 +85,7 @@ class CommendSectionController @Inject()(
       }
       else {
         serviceSubmitComment(commends).map(_ => {
-          val prevUrl = request.body.asFormUrlEncoded.get("previousURL").headOption.getOrElse("")
-          Redirect(Call("GET", prevUrl))
+          Redirect(Call("GET", request.headers("referer")))
           })
       }
     }
