@@ -8,7 +8,7 @@
     @helper.form(routes.CommendSectionController.submitCommend) {
         @helper.inputText(commForm("name"), '_label -> "Your Name")
         @helper.inputText(commForm("email"), '_label -> "Email")
-        @helper.select(commForm("movieName"), Seq(title -> title))
+        <div style="display: none">@helper.select(commForm("movieName"), Seq(title -> title))</div>
         @helper.inputText(commForm("comment"), '_label -> "Comment")
         @helper.inputRadioGroup(commForm("rating"),
             Seq("1" -> "One Star", "2" -> "Two Stars", "3" -> "Three Stars"),
