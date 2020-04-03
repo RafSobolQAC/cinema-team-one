@@ -1,8 +1,10 @@
 package controllers
 
 import javax.inject.Inject
+import models.ReleasedMovieWithID
 import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
+import reactivemongo.bson.BSONObjectID
 import services.ReleasedServices
 
 import scala.concurrent.{Await, ExecutionContext}
@@ -42,7 +44,7 @@ class ReleasedController @Inject()(
 
   def releasedMovieInfo(id: String) = Action.async { implicit request: Request[AnyContent] => {
     releasedServices.getMovies.map { movies =>
-      val theMovie = movies.filter(movie => id == movie._id.stringify).head
+      val theMovie = movies.find(movie => id == movie._id.stringify).getOrElse(ReleasedMovieWithID(BSONObjectID.generate, "", "","","",List(),List(),List()))
       val comments = Await.result(commentsController.getCommentsForFilm(theMovie.title), Duration.Inf)
 
       Ok(views.html.releasedmovieInfo(movies.filter(movie => id == movie._id.stringify).head)(url)(comments))
